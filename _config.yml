@@ -12,8 +12,9 @@ description: > # the ">" symbol means to ignore newlines until "footer_text:"
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
-  Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
-keywords: jekyll, jekyll-theme, academic-website, portfolio-website # add your own keywords or leave empty
+  Photos &copy; Yani Ioannou.
+keywords: jekyll, jekyll-theme, academic-website, portfolio-website  # add your own keywords or leave empty
+
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: 🔥 # the emoji used as the favicon
 logo: /assets/img/ucmllogo-text.svg
@@ -104,7 +105,9 @@ zotero_username: # your zotero username
 wechat_qr: # filename of your wechat qr-code saved as an image (e.g., wechat-qr.png if saved to assets/img/wechat-qr.png)
 
 contact_note: >
-  You can even add a little note about which of these is the best way to reach you.
+  <strong>Graduate Applicants</strong>: Please see <a href="https://grad.ucalgary.ca/future-students/supervisor/yani-ioannou">here for information on applying to the lab</a>.</br>
+  <strong>Potential Collaborators/Industry Partners</strong>: Please reach out to the lab director by e-mail directly.</br>
+  <strong>Media</strong>: Please reach out to the media contact listed <a href="https://profiles.ucalgary.ca/yani-ioannou">here</a>.
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
