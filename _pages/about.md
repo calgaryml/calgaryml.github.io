@@ -7,11 +7,7 @@ subtitle:
 profile:
   align: left
   image: ucmllogo-text.svg
-  # address: >
-  #   <p>ICT 402, University of Calgary</p>
-  #   <p>2500 University Ave N.W., </p>
-  #   <p>Calgary, AB</p>
-  #   <p>T2R 1N4 Canada</p>
+  name: Calgary Machine Learning Lab
 
 news: true # includes a list of news items
 latest_posts: true # includes a list of the newest posts
