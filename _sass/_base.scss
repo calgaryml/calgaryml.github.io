@@ -889,6 +889,9 @@ html.transition *:after {
       }
     }
   }
+  .post-title{
+    text-transform:capitalize;
+  }
 }
 
 progress {
