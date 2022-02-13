@@ -503,6 +503,14 @@ footer.sticky-bottom {
     max-width: 50%;
   }
 }
+.territorial-acknowledgement {
+  background-color: var(--global-background-highlight-color);
+  color: var(--global-fg-color);
+  text-align: justify;
+  border-color: var(--global-background-color);
+  border-width: 2pt;
+}
+
 
 // Blog
 
@@ -702,6 +710,10 @@ footer.sticky-bottom {
     .card-text {
       text-align: center;
       font-size: larger
+    }
+    .card-pronouns {
+      text-align: center;
+      font-size: larger;
     }
     .icon {
       font-size: larger;
