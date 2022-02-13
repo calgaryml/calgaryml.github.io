@@ -70,26 +70,26 @@ og_image: # The site-wide (default for all links) Open Graph preview image
 
 github_username: calgaryml # your GitHub user name
 gitlab_username: # your GitLab user name
-x_username: yaniioannou # your X handle
-mastodon_username: # your mastodon instance+username in the format instance.tld/@username
+x_username: UCalgaryML # your X handle
+# mastodon_username: # your mastodon instance+username in the format instance.tld/@username
 linkedin_username: yanii # your LinkedIn user name
-telegram_username: # your Telegram user name
+# telegram_username: # your Telegram user name
 scholar_userid: Qy9yv44AAAAJ qc6CJjYAAAAJ # your Google Scholar ID
-semanticscholar_id: # your Semantic Scholar ID
+# semanticscholar_id: # your Semantic Scholar ID
 whatsapp_number: # your WhatsApp number (full phone number in international format. Omit any zeroes, brackets, or dashes when adding the phone number in international format.)
 orcid_id: 0000-0002-9797-5888 # your ORCID ID
 medium_username: # your Medium username
 quora_username: # your Quora username
-publons_id: AAL-6029-2021 # your ID on Publons
+# publons_id: AAL-6029-2021 # your ID on Publons
 lattes_id: # your ID on Lattes (Brazilian Lattes CV)
 osf_id: # your OSF ID
 research_gate_profile: # your profile on ResearchGate
 scopus_id: # your profile on Scopus
 blogger_url: # your blogger URL
-work_url: https://schulich.ucalgary.ca/electrical-software # work page URL
+# work_url: https://schulich.ucalgary.ca/electrical-software # work page URL
 keybase_username: # your keybase user name
 wikidata_id: # your wikidata id
-wikipedia_id: # your wikipedia id (Case sensitive)
+# wikipedia_id: # your wikipedia id (Case sensitive)
 dblp_url: https://dblp.org/pid/119/5087 # your DBLP profile url
 stackoverflow_id: # your stackoverflow id
 kaggle_id: # your kaggle id
