@@ -837,11 +837,11 @@ footer.sticky-bottom {
         margin-bottom: 0.5rem;
 
         abbr {
+          width: 5em;
           display: inline-block;
           background-color: var(--global-theme-color);
-          padding-left: 1rem;
-          padding-right: 1rem;
-
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
           a {
             color: white;
 
