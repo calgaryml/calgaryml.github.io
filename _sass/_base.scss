@@ -727,7 +727,7 @@ footer.sticky-bottom {
   }
 
   h2.category {
-    color: var(--global-theme-color);
+    color: var(--global-text-color-light);
     border-bottom: 2px solid var(--global-divider-color);
     padding-top: 0.5rem;
     margin-top: 2rem;
@@ -889,9 +889,10 @@ footer.sticky-bottom {
       }
 
       .links {
+        text-align: right;
         a.btn {
           color: var(--global-text-color);
-          border: 1px solid var(--global-text-color);
+          border: 2px solid var(--global-text-color);
           padding-left: 1rem;
           padding-right: 1rem;
           padding-top: 0.25rem;
@@ -899,7 +900,8 @@ footer.sticky-bottom {
           margin-left: 0;
 
           &:hover {
-            color: var(--global-theme-color);
+            // color: var(--global-theme-color);
+            background-color: var(--global-theme-color);
             border-color: var(--global-theme-color);
           }
         }
