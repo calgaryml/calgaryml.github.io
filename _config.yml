@@ -179,9 +179,6 @@ collections:
       layout: post
     output: true
     permalink: /news/:path/
-  projects:
-    output: true
-    permalink: /projects/:path/
   people:
     output: true
     permalink: /people/:path/
@@ -234,6 +231,7 @@ exclude:
   - purgecss.config.js
   - README.md
   - vendor
+
 keep_files:
   - CNAME
   - .nojekyll
@@ -261,10 +259,10 @@ defaults:
   - scope:
       path: "assets"
     values:
-      sitemap: false
+      sitemap:         false
 
-sass:
-  style: compressed
+# Extras
+github: [metadata]
 
 # -----------------------------------------------------------------------------
 # Jekyll Minifier
@@ -298,12 +296,6 @@ jekyll-archives:
     tag: archive-tag
     category: archive-category
   permalinks:
-    year: "/blog/:year/"
-    tag: "/blog/tag/:name/"
-    category: "/blog/category/:name/"
-
-display_tags: ["formatting", "images", "links", "math", "code"] # these tags will be displayed on the front page of your blog
-display_categories: ["blockquotes"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
