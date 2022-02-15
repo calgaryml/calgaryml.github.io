@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Our paper, {% cite evci2022gradientflowsparse %}, has been accepted to be presented at the 2022 AAAI Conference!
+Our paper, {% cite evci2022gradientflowsparse %}, has been accepted to be presented as an **Oral** at the 2022 AAAI Conference! The conference had a 15% acceptance rate for posters alone.
