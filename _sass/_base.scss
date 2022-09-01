@@ -374,6 +374,7 @@ ul.task-list input[type="checkbox"] {
 
   &:hover {
     color: var(--global-hover-color);
+  min-width: 4em;
   }
 }
 
