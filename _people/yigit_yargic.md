@@ -8,6 +8,6 @@ description: Postdoctoral Fellow
 img: assets/img/people/yigit_yargic.jpg
 linkedin_username:  yigityargic
 github_username:  yyargic
-category: Postdoctoral Fellows
+category: Alumni
 show: true
 ---
