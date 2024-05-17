@@ -2,10 +2,11 @@
 layout: page
 firstname: Alireza
 lastname: Vafisani
-pronouns: He/Him
-description: Undergraduate summer intern
+description: Undergraduate Student<br/>
 img: assets/img/people/Alireza_vafisani.jpg
-redirect: https://github.com/alirezavafisani
-category: Undergraduates
+Github: https://github.com/alirezavafisani
+linkedin: https://www.linkedin.com/in/alireza-vafisani/
+github_username: alirezavafisani
+category: Undergraduate Students
 show: true
 ---
