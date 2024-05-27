@@ -2,11 +2,10 @@
 layout: page
 firstname: Alireza
 lastname: Vafisani
-description: Undergraduate Student<br/>
+description: Program for Undergraduate Research Experience (PURE) Undergraduate Research Intern (2024)
 img: assets/img/people/Alireza_vafisani.jpg
-Github: https://github.com/alirezavafisani
-linkedin: https://www.linkedin.com/in/alireza-vafisani/
+linkedin_username: alireza-vafisani
 github_username: alirezavafisani
-category: Undergraduate Students
+category: Undergraduates
 show: true
 ---
