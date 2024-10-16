@@ -135,11 +135,9 @@
 
     <script type="application/ld+json">
       {
-        "author":
-        {
-          "@type": "Organization",
-          "name": "{{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}"
-        },
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}"
         "url": "{{ page.url | prepend: site.baseurl | prepend: site.url }}",
         "logo": "{{ site.logo | absolute_url }}",
         "@type": "WebSite",
