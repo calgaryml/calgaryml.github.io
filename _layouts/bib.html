@@ -2,23 +2,9 @@
 ---
 <!-- _layouts/bib.html -->
       <div class="row">
-        <div class="col-sm-1 abbr">
-        {%- if entry.abbr -%}
-          {%- assign badgeitems = entry.abbr | split: " " -%}
-          {%- if site.data.venues[entry.abbr] -%}
-            {%- for badgeitem in badgeitems -%}
-              <abbr class="badge"><a href="{{site.data.venues[entry.abbr].url}}">{{badgeitem}}</a></abbr>
-            {%- endfor -%}
-          {%- else -%}
-            {%- for badgeitem in badgeitems -%}
-              <abbr class="badge">{{badgeitem}}</abbr>
-            {%- endfor -%}
-          {%- endif -%}
-        {%- endif -%}
-        </div>
 
         <!-- Entry bib key -->
-        <div id="{{entry.key}}" class="col-sm-9">
+        <div id="{{entry.key}}" class="col-sm-12">
         {% if entry.type == "thesis" -%}
           {{reference}}
         {%- else %}
@@ -165,4 +151,22 @@
           </div>
           {%- endif %}
         </div>
+
+        <div class="col-sm-12 abbr">
+          {%- if entry.abbr -%}
+            {%- assign badgeitems = entry.abbr | split: " " -%}
+            {%- if site.data.venues[entry.abbr] -%}
+              {%- for badgeitem in badgeitems -%}
+                <span> </span>
+                <abbr class="badge"><a href="{{site.data.venues[entry.abbr].url}}">{{badgeitem}}</a></abbr>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for badgeitem in badgeitems -%}
+              <span> </span>
+                <abbr class="badge">{{badgeitem}}</abbr>
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endif -%}
+        </div>
       </div>
+      <hr style="width:60%">
