@@ -4,8 +4,8 @@
     <div class="container">
       <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
         {%- if site.logo -%}
-            <img class="navbar" src="{{ site.logo | relative_url }}" alt="{{ site.title }}"></img>
-        {% else if site.title == 'blank' %}
+          <img class="navbar" src="{{ site.logo | relative_url }}" alt="{{ site.title }}"></img>
+        {% else %}
           {% if site.first_name %}
             <span class="font-weight-bold">
               {{- site.first_name -}}

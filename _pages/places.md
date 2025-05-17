@@ -25,8 +25,11 @@ horizontal: false
   {% endfor %}
 
 {%- else -%}
+
 <!-- Display places without categories -->
-  {%- assign sorted_places = site.places | sort: "importance" -%}
+
+{%- assign sorted_places = site.places | sort: "importance" -%}
+
   <!-- Generate cards for each project -->
   <div class="grid">
     {%- for place in sorted_places -%}

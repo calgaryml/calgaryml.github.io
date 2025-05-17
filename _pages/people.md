@@ -34,7 +34,6 @@ horizontal: false
     </div>
 </div>
 
-
 # Lab Members
 
 <!-- pages/people.md -->

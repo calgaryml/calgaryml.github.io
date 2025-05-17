@@ -25,7 +25,6 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-
 The **Calgary Machine Learning Lab**
 is a research group led by [Yani Ioannou](https://yani.ai) within the [Schulich School of Engineering](https://schulich.ucalgary.ca) at the [University of Calgary](https://www.ucalgary.ca). The lab has a research focus on improving Deep Neural Network (DNN) training and models. Topics of research include: Sparse Neural Network Training, Bias and Robustness of Efficient Deep Learning methods and Efficient Inference with Large Language Models.
 
