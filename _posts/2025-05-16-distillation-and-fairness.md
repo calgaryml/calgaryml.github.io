@@ -270,11 +270,7 @@ These metrics were evaluated on datasets with known demographic attributes:
 
 ### Investigating Individual Fairness
 
-Beyond group-level fairness, our study <d-cite key="Mohammadshahi2025distillation"></d-cite> also examined **individual fairness**: the principle that similar individuals should receive similar outcomes. This was quantified using a metric based on the Lipschitz condition proposed by Dwork et al. <d-cite key="Dwork2012fairness"></d-cite>, where smaller values indicate better individual fairness:
-
-$$ \mathcal{I}(f) = \mathbb{E}\_{(\mathbf{x},\mathbf{x}') \sim P} \left[ \frac{|f(\mathbf{x}) - f(\mathbf{x}')|}{d(\mathbf{x},\mathbf{x}')} \right] . $$
-
-Intuitively this metric captures whether a model provides consistent predictions for semantically similar inputs.
+Beyond group-level fairness, our study <d-cite key="Mohammadshahi2025distillation"></d-cite> also examined **individual fairness**: the principle that similar individuals should receive similar outcomes. This was quantified using a metric based on the Lipschitz condition proposed by Dwork et al. <d-cite key="Dwork2012fairness"></d-cite>, where smaller values indicate better individual fairness.
 
 ## Key Findings and Insights
 
