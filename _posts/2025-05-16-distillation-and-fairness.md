@@ -113,7 +113,11 @@ Trained models, especially large ones, learn much more than just how to map inpu
 
 In classification, the raw outputs of a neural network (logits, $z$) are typically converted into probabilities using the softmax function. Knowledge distillation introduces a "temperature" parameter ($T$) into this softmax calculation:
 
+<!-- prettier-ignore-start -->
+
 $$ p_i = \frac{\exp(z_i/T)}{\sum_j \exp(z_j/T)}. $$
+
+<!-- prettier-ignore-end -->
 
 When $T=1$ (standard softmax), the output probabilities are often very sharp, with the correct class having a probability close to 1 and others close to 0 (a "hard" distribution). As $T$ increases, the probability distribution becomes "softer," meaning the probabilities for incorrect classes become larger, revealing more of the teacher's "dark knowledge" about class similarities.
 
@@ -195,7 +199,7 @@ While in previous work the effect of $\alpha$ on fairness was studied <d-cite ke
 
 While knowledge distillation often maintains the overall generalization performance (test accuracy) of the teacher model <d-cite key="Hinton2015distilling"></d-cite>, a crucial question arises: Does this mean the student model has learned approximately the _same function_ as the teacher?.
 
-The answer is: not necessarily. Accuracy is an aggregate measure over many samples. It's possible for the student ($g(\mathbf{x})$) to learn a different function than the teacher ($f(\mathbf{x})$) while still achieving similar overall accuracy.
+The answer is: not necessarily. Accuracy is an aggregate measure over many samples. It's possible for the student $g(\mathbf{x})$ to learn a different function than the teacher $f(\mathbf{x})$ while still achieving similar overall accuracy.
 
 This divergence matters because if the student learns a different function, it may also learn different **algorithmic biases** than the teacher, even if the original teacher model was carefully analyzed for fairness.
 
@@ -221,7 +225,11 @@ This concern prompted the research questions behind our work <d-cite key="Mohamm
 
 To understand which classes are affected, we can compared model predictions across a dataset. They defined disagreement between two models, $f$ and $g$, for an input $\mathbf{x}_n$ using a comparison metric (CMP) similar to approaches in works like <d-cite key="Fort2019deepensembles"></d-cite>:
 
-$$ CMP(f(\mathbf{x}\_n), g(\mathbf{x}\_n)) = \begin{cases} 0 & \text{if } f(\mathbf{x}\_n) = g(\mathbf{x}\_n) \\ 1 & \text{if } f(\mathbf{x}\_n) \neq g(\mathbf{x}\_n) \end{cases} $$
+<!-- prettier-ignore-start -->
+
+$$ CMP(f(\mathbf{x}_n), g(\mathbf{x}_n)) = \begin{cases} 0 & \text{if } f(\mathbf{x}_n) = g(\mathbf{x}_n) \\ 1 & \text{if } f(\mathbf{x}_n) \neq g(\mathbf{x}_n) \end{cases} $$
+
+<!-- prettier-ignore-end -->
 
 This disagreement was analyzed on a per-class basis, comparing the (teacher vs. distilled student) and (non-distilled student vs. distilled student). A non-distilled student (trained from scratch on hard labels) served as a baseline.
 
@@ -253,9 +261,13 @@ A more direct concern is when changes in model behavior lead to unfair outcomes 
 
 - **Demographic Parity:** Aims for the probability of a positive outcome ($Y=1$) to be the same across different sensitive groups $A=a$ and $A=b$ (e.g., men vs. women being hired).
 
+<!-- prettier-ignore-start -->
+
   $$ P(\hat{Y}=1 | A=a) = P(\hat{Y}=1 | A=b) $$
 
-  This is often measured by the **Demographic Parity Difference (DPD)**, where DPD=0 indicates perfect fairness under this definition.
+<!-- prettier-ignore-end -->
+
+This is often measured by the **Demographic Parity Difference (DPD)**, where DPD=0 indicates perfect fairness under this definition.
 
 <!-- prettier-ignore-start -->
 
@@ -265,9 +277,13 @@ $$ DPD = \max_{a \in A} P(\hat{Y}=1 | A=a) - \min_{a \in A} P(\hat{Y}=1 | A=a) $
 
 - **Equalized Odds** <d-cite key="Hardt2016equality"></d-cite>: Aims for the true positive rate and false positive rate to be similar across different groups, given the true label $Y=y$ (e.g., qualified men and qualified women having equal hiring rates).
 
+<!-- prettier-ignore-start -->
+
   $$ P(\hat{Y}=1 | Y=y, A=a) = P(\hat{Y}=1 | Y=y, A=b) $$
 
-  This is measured by the **Equalized Odds Difference (EOD)**, where EOD=0 is ideal.
+<!-- prettier-ignore-end -->
+
+This is measured by the **Equalized Odds Difference (EOD)**, where EOD=0 is ideal.
 
 These metrics were evaluated on datasets with known demographic attributes:
 
