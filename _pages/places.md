@@ -4,7 +4,7 @@ title: calgary
 permalink: /places/
 description: Calgary & The Canadian Rockies
 nav: true
-nav_order: 5
+nav_order: 7
 display_categories: [Calgary, Canadian Rockies]
 horizontal: false
 ---
