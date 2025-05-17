@@ -306,6 +306,10 @@ The structured sparsity learned by SRigL (constant fan-in + ablated neurons) tra
 
 These speedups are achieved even with a straightforward PyTorch implementation, highlighting the practical benefits of the learned structure.
 
+## Applications
+
+Already, SRigL has been successfully applied to solve real-world problems, such as extreme classification, where the learned structured sparsity can be particularly beneficial in enabling the classification of millions of classes <d-cite key="Ullah2024NavigatingExtremes"></d-cite>, which would otherwise be infeasible with dense models.
+
 ## Conclusion and Future Horizons
 
 "Dynamic Sparse Training with Structured Sparsity" <d-cite key="Lasby2024SRigL"></d-cite> makes a significant stride towards practical sparse neural networks. SRigL demonstrates that it's possible to:
@@ -316,8 +320,6 @@ These speedups are achieved even with a straightforward PyTorch implementation, 
 - Realize significant real-world inference acceleration on both CPUs and GPUs due to this learned structure.
 
 The insight that successful DST methods at high sparsity inherently learn to reduce model width (neuron ablation) is key and SRigL formalizes this. This work underscores that much of the progress in deep learning comes from methods that better leverage hardware capabilities.
-
-Future directions include:
 
 - Improving the convergence speed of DST methods, which can take longer to train than dense models.
 - Exploring the potential of DST to learn novel, efficient architectures for new data domains beyond typical NLP/CV tasks, particularly in areas like "AI for Science."
