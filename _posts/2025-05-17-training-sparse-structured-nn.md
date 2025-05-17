@@ -306,9 +306,13 @@ The structured sparsity learned by SRigL (constant fan-in + ablated neurons) tra
 
 These speedups are achieved even with a straightforward PyTorch implementation, highlighting the practical benefits of the learned structure.
 
-## Applications
+### Not Only Efficiency: SRigL Enables New Applications of Neural Networks
 
-Already, SRigL has been successfully applied to solve real-world problems, such as extreme classification, where the learned structured sparsity can be particularly beneficial in enabling the classification of millions of classes <d-cite key="Ullah2024NavigatingExtremes"></d-cite>, which would otherwise be infeasible with dense models.
+SRigL's structured sparsity is not just about speed; it also opens up new avenues for neural networks. The ability to learn a combination of fine-grained constant fan-in and neuron-level structured sparsity enables otherwise infeasible applications with neural networks.
+
+One interesting use case is in **extreme classification**, where the number of classes can reach millions. Representing such a large number of classes with dense models is impractical due to the sheer size and complexity of the model. For instance, in a typical image classification task with 1 million classes, a dense model would require a weight matrix of size $1 \text{M} \times 1 \text{M}$, which is not only computationally expensive but also memory-intensive. Already, SRigL has been successfully applied to extreme classification in our follow-up NeurIPS 2024 work ["Navigating Extremes: Dynamic Sparsity in Large Output Spaces"](https://openreview.net/forum?id=RA6rzOJ2zI) in collaboration with Aalto University and the University of Bath <d-cite key="Ullah2024NavigatingExtremes"></d-cite>.
+
+The same problem applies to other tasks like natural language processing (NLP) and recommendation systems, where the number of classes can be extremely large, and SRigL's ability to learn structured sparsity can help in efficiently representing and processing these large output spaces.
 
 ## Conclusion and Future Horizons
 
