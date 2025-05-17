@@ -181,9 +181,9 @@ N:M fine-grained sparsity is a compromise where, within small contiguous blocks 
 
 The ideal scenario is to combine the high accuracy of unstructured DST with the hardware-friendliness of fine-grained structured sparsity.
 
-## DST That Learns Structured Sparse Representations
+## Dynamic Sparse Training for Learning Structured Sparse Representations
 
-The work "Dynamic Sparse Training with Structured Sparsity" <d-cite key="Lasby2024SRigL"></d-cite> proposes a novel DST method called Structured RigL (SRigL) to address this challenge. SRigL aims to learn sparse networks that are both highly accurate _and_ possess a structure amenable to real-world acceleration.
+Our work "Dynamic Sparse Training with Structured Sparsity" <d-cite key="Lasby2024SRigL"></d-cite> proposes a novel DST method called Structured RigL (SRigL) to address this challenge. SRigL aims to learn sparse networks that are both highly accurate _and_ possess a structure amenable to real-world acceleration.
 
 ### Constant Fan-in Sparsity
 
@@ -200,11 +200,20 @@ SRigL modifies the RigL algorithm to enforce a **constant fan-in** constraint. T
   <div class="caption">Figure: Neuron Ablation in DST. When a neuron has too few weight to learn useful representations, DST methods learn to ablate, or remove, the entire neuron &mdash; effectively reducing the width of the layer.</div>
 </div>
 
-A key empirical finding was that standard unstructured DST methods, like RigL, when pushed to very high sparsity levels (>90%), implicitly learn to **ablate neurons** &mdash; that is, it disconnects all incoming and outgoing connections to certain neurons, effectively reducing the width of layers.
+A key empirical finding was that standard unstructured DST methods, like RigL, when pushed to very high sparsity levels (>90%), implicitly learn to **ablate neurons** &mdash; that is, it they learn to remove neurons with very few weights, effectively reducing the width of layers.
 
 This neuron ablation appears crucial for maintaining generalization at extreme sparsities, but enforcing a naive constant fan-in constraint would prevent this, as it would force every neuron to maintain the same number of weights, even if those weights are not useful for learning.
 
 ### The SRigL Algorithm
+
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+      <div class="col-lg mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_constantfanin.svg"  title="Constant Fan-in Fine-grained Sparsity." class="img-fluid rounded z-depth-0" %}
+      </div>
+  </div>
+  <div class="caption">Figure: Constant Fan-in Fine-grained Sparsity. A form of N:M sparsity where every neuron on a layer is constained to have the same number of weights.</div>
+</div>
 
 SRigL integrates the constant fan-in objective with an explicit neuron ablation mechanism. The core steps, adapted from RigL, are:
 
