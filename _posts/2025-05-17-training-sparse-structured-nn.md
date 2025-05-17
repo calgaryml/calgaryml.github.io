@@ -6,7 +6,8 @@ tags: dynamic sparse training structured sparsity compression RigL SET
 toc: true
 related_posts: true
 pretty_table: true
-date: 2024-11-14
+date: 2024-05-07
+last_updated: 2025-05-17
 featured: false
 authors:
   - name: Mike Lasby

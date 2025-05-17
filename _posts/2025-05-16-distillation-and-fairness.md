@@ -4,7 +4,8 @@ title: "Beyond Compression: How Knowledge Distillation Impacts Fairness and Bias
 description: "A summary of our research exploring the effects of knowledge distillation on how deep neural networks make decisions, particularly in terms of fairness and bias."
 thumbnail: assets/img/publication_preview/fairness-distillation.png
 tags: distillation fairness bias ml compression
-date: 2025-05-16
+date: 2025-03-31
+last_updated: 2025-05-16
 featured: false
 toc: true
 related_posts: true
