@@ -2075,7 +2075,7 @@ d-appendix > distill-appendix {
   function paper_url_string(url) {
     var arxiv_match = /arxiv\.org\/abs\/([0-9\.]*)/.exec(url);
     if (arxiv_match != null) {
-      url = `http://arxiv.org/pdf/${arxiv_match[1]}.pdf`;
+      return "arXiv";
     }
 
     // https://openreview.net/pdf?id=xBbj46Y2fN
@@ -2090,11 +2090,11 @@ d-appendix > distill-appendix {
     }
 
     if (url.slice(-4) == ".pdf") {
-      var label = "PDF";
+      return "PDF";
     } else if (url.slice(-5) == ".html") {
-      var label = "HTML";
+      return "HTML";
     } else {
-      var label = "Link";
+      return "Link";
     }
     return label;
   }
