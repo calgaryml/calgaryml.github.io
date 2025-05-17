@@ -20,6 +20,11 @@ authors:
       name: University of Calgary
   - name: Yani Ioannou
     url: "https://yani.ai"
+    affiliations:
+      name: University of Calgary
+
+doi: 10.48550/arXiv.2410.08407
+paper_url: https://openreview.net/pdf?id=xBbj46Y2fN
 
 bibliography: 2025-05-16-distillation.bib
 

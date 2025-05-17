@@ -104,6 +104,9 @@
     if (source.doi) {
       target.doi = source.doi;
     }
+    if (source.url) {
+      target.url = source.url;
+    }
   }
 
   class FrontMatter {
@@ -884,9 +887,9 @@ ${math}
         var label = "HTML";
       }
       return ` &ensp;<a href="${url}">[${label || "link"}]</a>`;
-    } /* else if ("doi" in ent){
+    } else if ("doi" in ent){
       return ` &ensp;<a href="https://doi.org/${ent.doi}" >[DOI]</a>`;
-    }*/ else {
+    } else {
       return "";
     }
   }
@@ -2069,6 +2072,33 @@ d-appendix > distill-appendix {
 
   // import style from '../styles/d-byline.css';
 
+  function paper_url_string(url) {
+    var arxiv_match = /arxiv\.org\/abs\/([0-9\.]*)/.exec(url);
+    if (arxiv_match != null) {
+      url = `http://arxiv.org/pdf/${arxiv_match[1]}.pdf`;
+    }
+
+    // https://openreview.net/pdf?id=xBbj46Y2fN
+    var openreview_forum_match = /openreview\.net\/forum\?id=([A-Z0-9]*)/.exec(url);
+    if (openreview_forum_match != null) {
+      return 'OpenReview';
+    }
+
+    var openreview_pdf_match = /openreview\.net\/pdf\?id=([A-Z0-9]*)/.exec(url);
+    if (openreview_pdf_match != null) {
+      return 'PDF';
+    }
+
+    if (url.slice(-4) == ".pdf") {
+      var label = "PDF";
+    } else if (url.slice(-5) == ".html") {
+      var label = "HTML";
+    } else {
+      var label = "Link";
+    }
+    return label;
+  }
+
   function bylineTemplate(frontMatter) {
     return `
   <div class="byline grid">
@@ -2108,6 +2138,18 @@ d-appendix > distill-appendix {
         <p>${frontMatter.publishedMonth} ${frontMatter.publishedDay}, ${frontMatter.publishedYear}</p> `
           : `
         <p><em>Not published yet.</em></p>`
+      }
+    </div>
+    <div>
+      ${
+        frontMatter.doi
+          ? `<h3>DOI</h3><a class="doi" href="https://doi.org/${frontMatter.doi}">${frontMatter.doi}</a>`
+          : ``
+      }
+      ${
+        frontMatter.url
+          ? `<h3>Paper</h3><a class="doi" href="${frontMatter.url}"> ${paper_url_string(frontMatter.url)} </a>`
+          : ``
       }
     </div>
   </div>
