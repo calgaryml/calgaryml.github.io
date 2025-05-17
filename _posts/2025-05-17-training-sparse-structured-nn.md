@@ -271,8 +271,6 @@ SRigL was evaluated on image classification tasks using CIFAR-10 (ResNet-18, Wid
 
 SRigL with neuron ablation was shown to achieve generalization performance comparable to unstructured RigL and often close to the dense training baseline, even at high sparsities (e.g., 90-95%) across various architectures. Extended training further improved performance, similar to RigL.
 
-<!-- [Placeholder for Figure 6: Graphs showing Test Accuracy vs. Sparsity for SRigL (with and without ablation) compared to RigL and a dense benchmark on ImageNet/ResNet-50 and ViT-B/16. (Based on Paper Figure 3a, Table 4  and PPT Slides 31, 35, 37)] -->
-
 ### The Importance of Neuron Ablation
 
 <div class="container">
@@ -290,26 +288,6 @@ SRigL with neuron ablation was shown to achieve generalization performance compa
 The neuron ablation component was critical. Without it, SRigL's performance lagged behind unstructured RigL at very high sparsities (>90%) and with Vision Transformers. Enabling SRigL to ablate neurons restored performance to RigL levels. The percentage of active neurons (not ablated) learned by SRigL dynamically adapted with sparsity, mirroring RigL's behavior. For Vision Transformers, SRigL's performance was particularly sensitive to the ablation threshold $\gamma_{sal}$, with higher thresholds performing best, suggesting that aggressively ablating neurons to maintain sufficient density in the remaining ones is beneficial for ViTs.
 
 ### Real-World Speedups
-
-<!-- \begin{block}{Benchmarks}
-\vspace{-0.5em}
-\begin{itemize}
-    \item To benchmark our method, we extracted a linear layer from a \gls{vit} model trained with \gls{srigl} and compared it to structured (i.e.\ the same layer accelerated using only the ablated neurons without exploiting the fine-grained sparsity), and unstructured (i.e.\ CSR) representations.
-    \item The increased timings for the 95 \& 99\% sparse structured representations is due to \gls{srigl} ablating relatively fewer neurons at these sparsities compared to 80 and 90\%.
-\end{itemize}
-
-\begin{figure}
-    \includegraphics[width=\colwidth]{fig/grouped-bar-threads-4.pdf}
-    \captionsetup{width=\colwidth}
-    \caption{\textbf{Online CPU inference} on an Intel Xeon W-2145. For online (single input) inference, our condensed representation at 90\% is \emph{3.4$\times$ faster than dense} and \emph{2.5 $\times$ faster than unstructured sparsity}}.\label{fig:online-inference-timings}
-\end{figure}
-\vspace{-0.5em}
-\begin{figure}
-        \includegraphics[width=\colwidth]{fig/grouped-bar-threads-4-device-gpu-batch_size-2048-broken-y.pdf}
-        \captionsetup{width=\colwidth}
-        \caption{\textbf{Batched GPU inference with batch size of 2048} on an NVIDIA Titan V. At 90\% sparsity, our condensed representation is \emph{1.7$\times$ faster than dense} and \emph{13.0$\times$ faster than unstructured (CSR)} sparse layers. Note y-axis is log-scaled.}\label{fig:gpu-accel-bs-2048}
-\end{figure}
-\end{block} -->
 
 <div class="container">
   <div class="row align-items-center justify-content-center">
@@ -329,19 +307,6 @@ The structured sparsity learned by SRigL (constant fan-in + ablated neurons) tra
 - **GPU (Batched Inference, batch size 256):** At 90% sparsity, it was **1.7x faster than dense** and 13.0x faster than unstructured (CSR) sparse layers on an NVIDIA Titan V GPU.
 
 These speedups are achieved even with a straightforward PyTorch implementation, highlighting the practical benefits of the learned structure.
-
-<!-- [Placeholder for Figure 8: Bar charts comparing inference timings (CPU and GPU) for SRigL (condensed), structured-only, unstructured CSR, and dense layers at various sparsities. (Based on Paper Figure 4  and PPT Slide 40 (bottom charts))] -->
-
-## Under the Hood: Gradient Flow and Initialization
-
-Earlier work <d-cite key="Evci2022GradientFlow"></d-cite> (also from the Calgary ML Lab, ) investigated _why_ training sparse networks from random initializations is so challenging. Key findings included:
-
-- Sparse networks often suffer from poor **gradient flow** at initialization and during early training compared to dense networks.
-- Sparsity-aware initializations that account for the actual fan-in of each neuron can improve gradient flow at initialization.
-- Dynamic Sparse Training methods like RigL appear to mitigate some of these gradient flow issues during training.
-- The success of Lottery Ticket initializations (especially with weight rewinding) seems less about fundamentally better gradient flow and more about "nudging" the optimization towards re-learning the (good) pruned solution from which the ticket was derived.
-
-SRigL builds upon these understandings by using a robust DST backbone (RigL) which inherently handles some of these dynamic optimization challenges, while focusing on imparting a hardware-friendly structure.
 
 ## Conclusion and Future Horizons
 
