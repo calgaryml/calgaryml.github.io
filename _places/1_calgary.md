@@ -6,6 +6,7 @@ img: assets/img/calgaryphotos/calgaryskylineclose.jpg
 importance: 1
 category: Calgary
 ---
+
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/calgaryphotos/calgaryskylineveryclose.jpg" title="Calgary Skyline" class="img-fluid rounded z-depth-1" %}
@@ -36,7 +37,7 @@ category: Calgary
     </div>
 </div>
 
-Canada's **3rd most diverse** and **4th largest population centre**, [Calgary](https://www.lifeincalgary.ca) is a uniquely livable city &mdash; ranked by [The Economist Intelligence Unit](http://www.eiu.com/topic/liveability) as the *most livable city in North America 2018-19*, and within the top-5 for most of the last decade. Set in the foothills of the [Canadian Rocky Mountains](https://en.wikipedia.org/wiki/Canadian_Rockies), recognized as [UNESCO World Heritage Area](https://whc.unesco.org/en/list/304/) for it's outstanding natural landscapes, and only an 1.5 hours drive from [Banff National Park](https://www.pc.gc.ca/en/pn-np/ab/banff), Calgarians enjoy an unrivalled hiking/skiing destination on the weekends, while enjoying the food and culture one of North America's most multi-cultural cities during the week.
+Canada's **3rd most diverse** and **4th largest population centre**, [Calgary](https://www.lifeincalgary.ca) is a uniquely livable city &mdash; ranked by [The Economist Intelligence Unit](http://www.eiu.com/topic/liveability) as the _most livable city in North America 2018-19_, and within the top-5 for most of the last decade. Set in the foothills of the [Canadian Rocky Mountains](https://en.wikipedia.org/wiki/Canadian_Rockies), recognized as [UNESCO World Heritage Area](https://whc.unesco.org/en/list/304/) for it's outstanding natural landscapes, and only an 1.5 hours drive from [Banff National Park](https://www.pc.gc.ca/en/pn-np/ab/banff), Calgarians enjoy an unrivalled hiking/skiing destination on the weekends, while enjoying the food and culture one of North America's most multi-cultural cities during the week.
 
 <div id="map" class="col-sm mt-2 mb-2" style="width: auto; height: 400px;"></div>
 <script>
