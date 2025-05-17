@@ -178,7 +178,7 @@ While in previous work the effect of $\alpha$ on fairness was studied <d-cite ke
 
 ## Beyond Accuracy: Does the Student Learn the Same Function?
 
-<div class="row  bg-white">
+<div class="row bg-white">
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/img/distillation_teachertostudentfunctions.svg" title="Distillation of a smaller student from a larger teacher model can learn different functions." class="img-fluid rounded z-depth-0" %}
     </div>
@@ -203,11 +203,11 @@ This concern prompted the research questions behind our work <d-cite key="Mohamm
 
 ### Analyzing Class-wise Bias
 
-<div class="row align-items-center justify-content-center text-center bg-white">
-    <div class="col-lg mt-3 mt-md-0">
+<div class="row align-items-center justify-content-center text-center">
+    <div class="col-lg mt-3 mt-md-0 bg-white">
         {% include figure.liquid loading="eager" path="assets/img/distillation_distilledvsnondistilledstudent.svg"  title="Student vs. Non-Distilled Student" class="img-fluid rounded z-depth-0" %}
-        <div class="caption">Figure: In order to better understand the effect of Knowledge Distillation, and to control effects on bias/fairness of model size, we compared a Distilled Student (DS) to a Non-Distilled Student (NDS), i.e. a student trained with distillation from a teacher compared to a student model trained from random initialization with the same dataset.</div>
     </div>
+    <div class="caption">Figure: In order to better understand the effect of Knowledge Distillation, and to control effects on bias/fairness of model size, we compared a Distilled Student (DS) to a Non-Distilled Student (NDS), i.e. a student trained with distillation from a teacher compared to a student model trained from random initialization with the same dataset.</div>
 </div>
 
 To understand which classes are affected, we can compared model predictions across a dataset. They defined disagreement between two models, $f$ and $g$, for an input $\mathbf{x}_n$ using a comparison metric (CMP) similar to approaches in works like <d-cite key="Fort2019deepensembles"></d-cite>:
@@ -218,14 +218,20 @@ This disagreement was analyzed on a per-class basis, comparing the (teacher vs. 
 
 ### Probing Group Fairness
 
-<div class="container align-items-center justify-content-center text-center bg-white">
-    <div class="row">
-        <div class="col-lg mt-3 mt-md-0">
+<div class="container">
+    <div class="row align-items-center justify-content-center text-center bg-white">
+        <div class="col-lg mt-3 mt-md-0 align-items-center">
             {% include figure.liquid loading="eager" path="assets/img/distillation_demographicparity.svg"  title="Demographic Parity" class="img-fluid rounded z-depth-0" %}
+        </div>
+        <div class="col-lg mt-3 mt-md-0 align-items-center">
+            {% include figure.liquid loading="eager" path="assets/img/distillation_equalizedodds.svg" title="Equalized Odds" class="img-fluid rounded z-depth-0" %}
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-lg mt-3 mt-md-0">
             <div class="caption">Demographic Partity</div>
         </div>
         <div class="col-lg mt-3 mt-md-0">
-            {% include figure.liquid loading="eager" path="assets/img/distillation_equalizedodds.svg" title="Equalized Odds" class="img-fluid rounded z-depth-0" %}
             <div class="caption">Equalized Odds</div>
         </div>
     </div>
@@ -314,7 +320,7 @@ Our study <d-cite key="Mohammadshahi2025distillation"></d-cite> found that a cha
 
 ### Group Fairness: Temperature Matters
 
-<div class="container">
+<div class="container bg-white">
     <div class="row">
         <div class="col-xl mt-3 mt-md-0">
             {% include figure.liquid loading="eager" path="assets/img/distillation_fairness_celeba_gender.svg"  class="img-fluid rounded z-depth-0" %}
@@ -330,12 +336,12 @@ Our study <d-cite key="Mohammadshahi2025distillation"></d-cite> found that a cha
             {% include figure.liquid loading="eager" path="assets/img/distillation_fairness_legend.svg" class="img-fluid rounded z-depth-0" %}
         </div>
     </div>
-    <div class="caption">
-        Figure: Combined graphs showing EOD/DPD decreasing with increasing temperature for CelebA image dataset. 
-    </div>
+</div>
+<div class="caption">
+    Figure: Combined graphs showing EOD/DPD decreasing with increasing temperature for CelebA image dataset. 
 </div>
 
-<div class="container">
+<div class="container bg-white">
     <div class="row">
         <div class="col-xl mt-3 mt-md-0">
             {% include figure.liquid loading="eager" path="assets/img/distillation_fairness_hatexplain.svg" class="img-fluid rounded z-depth-0" %}
@@ -346,9 +352,9 @@ Our study <d-cite key="Mohammadshahi2025distillation"></d-cite> found that a cha
             {% include figure.liquid loading="eager" path="assets/img/distillation_fairness_legend.svg" class="img-fluid rounded z-depth-0" %}
         </div>
     </div>
-    <div class="caption">
-        Figure: Combined graphs showing EOD/DPD decreasing with increasing temperature for the HateXplain language dataset. 
-    </div>
+</div>
+<div class="caption">
+    Figure: Combined graphs showing EOD/DPD decreasing with increasing temperature for the HateXplain language dataset. 
 </div>
 
 Across all three datasets (CelebA, Trifeature, HateXplain) and for both computer vision and NLP tasks, a consistent trend emerged <d-cite key="Mohammadshahi2025distillation"></d-cite>:
@@ -358,7 +364,7 @@ Across all three datasets (CelebA, Trifeature, HateXplain) and for both computer
 
 #### Very High Temperatures
 
-<div class="container">
+<div class="container bg-white">
     <div class="row">
         <div class="col-xl mt-3 mt-md-0">
             {% include figure.liquid loading="eager" path="assets/img/distillation_fairness_hatexplain_all.svg" class="img-fluid rounded z-depth-0" %}
@@ -369,9 +375,9 @@ Across all three datasets (CelebA, Trifeature, HateXplain) and for both computer
             {% include figure.liquid loading="eager" path="assets/img/distillation_fairness_legend.svg" class="img-fluid rounded z-depth-0" %}
         </div>
     </div>
-    <div class="caption">
-        Figure: Combined/representative graphs showing EOD/DPD decreasing with very high temperatures for HateXplain. 
-    </div>
+</div>
+<div class="caption">
+    Figure: Combined/representative graphs showing EOD/DPD decreasing with very high temperatures for HateXplain. 
 </div>
 
 Of course at higher levels of temperature, the model's predictions become more uniform, which can lead to a loss of accuracy. Our study found that while distillation a moderately high temperature (e.g., $T=10$) can lead to improved fairness, very high temperatures (e.g. $T>10$) can lead to a significant drop in accuracy and fairness.
