@@ -181,7 +181,7 @@ The ideal scenario is to combine the high accuracy of unstructured DST with the 
 
 ## Dynamic Sparse Training for Learning Structured Sparse Representations
 
-Our work "Dynamic Sparse Training with Structured Sparsity" <d-cite key="LasbyLasby2024SRigL"></d-cite> proposes a novel DST method called Structured RigL (SRigL) to address this challenge. SRigL aims to learn sparse networks that are both highly accurate _and_ possess a structure amenable to real-world acceleration.
+Our work "Dynamic Sparse Training with Structured Sparsity" <d-cite key="Lasby2024SRigL"></d-cite> proposes a novel DST method called Structured RigL (SRigL) to address this challenge. SRigL aims to learn sparse networks that are both highly accurate _and_ possess a structure amenable to real-world acceleration.
 
 ### Constant Fan-in Sparsity
 
