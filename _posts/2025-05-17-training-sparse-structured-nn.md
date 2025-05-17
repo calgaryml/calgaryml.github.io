@@ -1,7 +1,7 @@
 ---
 layout: distill
-title: "Dynamic Sparse Training with Structured Sparsity: Sparse Training for Real-World Hardware Acceleration"
-description: "Exploring how Dynamic Sparse Training can learn neural networks that are not only highly sparse and accurate but also structured for real-world hardware acceleration, based on the SRigL method."
+title: "Dynamic Sparse Training with Structured Sparsity"
+description: "Learning Performant and Efficient Representations suitable for Hardware Acceleration"
 tags: dynamic sparse training structured sparsity compression RigL SET
 toc: true
 related_posts: true
@@ -54,7 +54,7 @@ Our International Conference in Learning Representations (ICLR) 2024 paper, ["Dy
 
 ## The Quest for More Efficient Neural Networks
 
-State-of-the-art deep neural networks (DNNs) have achieved remarkable feats, but their ever-increasing size brings ballooning training costs, often outstripping Moore's Law. This trend makes cutting-edge AI research less accessible. While techniques exist to prune trained dense models, effectively reducing their parameter count by 85-95% without sacrificing generalization, the initial dense training phase remains a significant burden. Can we train these sparse, efficient networks from scratch?
+State-of-the-art deep neural networks (DNNs) have achieved remarkable feats, but their ever-increasing size brings ballooning training costs, often outstripping Moore's Law. This trend makes cutting-edge AI research less accessible. While techniques exist to prune trained dense models, effectively reducing their parameter count by 85-95% without sacrificing generalization, they relay on dense pre-training. Can we train these sparse, efficient networks without dense training?
 
 ### Why Sparse Neural Networks?
 
@@ -76,7 +76,7 @@ State-of-the-art deep neural networks (DNNs) have achieved remarkable feats, but
 
 ## Paths to Sparsity: Pruning, Lottery Tickets, and Dynamic Sparse Training
 
-Several approaches have been developed to tackle the challenge of obtaining efficient sparse networks.
+Several approaches have been developed to tackle the challenge of obtaining sparse networks, these include:
 
 ### Traditional Pruning: Effective but Costly
 
@@ -91,7 +91,7 @@ Several approaches have been developed to tackle the challenge of obtaining effi
 
 Standard pruning techniques involve training a full, dense network and then removing (pruning) weights deemed less important, typically those with the smallest magnitude. This can be done once ("one-shot pruning") or iteratively. While effective at finding highly sparse subnetworks that retain accuracy, this still necessitates the expensive initial dense training.
 
-### The Sparse Training Problem
+### The Sparse Training Problem: Training with a Fixed Sparse Mask
 
 <div class="container">
   <div class="row align-items-center">
@@ -121,7 +121,7 @@ Dynamic Sparse Training (DST) methods offer a more direct approach to training s
 
 <!-- [Placeholder for Figure 3: Diagram illustrating the Dynamic Sparse Training process with grow/prune mask updates. (Based on PPT Slide 18)] -->
 
-## The Bottleneck: Unstructured vs. Structured Sparsity
+## Unstructured vs. Structured Sparsity
 
 <div class="container">
   <div class="row align-items-center">
