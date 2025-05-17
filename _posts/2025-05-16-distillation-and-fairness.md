@@ -57,7 +57,7 @@ _styles: >
 
 Knowledge Distillation (or distillation) is a technique used to compress large AI models into smaller, more efficient versions. For example, DeepSeek R1 with 671 billion parameters <d-cite key="DeepSeek2024v3"></d-cite>, was distilled into smaller, more manageable versions that are easier to deploy in real-world applications.
 
-While distillation often succeeds in maintaining overall accuracy, our recently accepted Transactions in Machine Learning Research (TMLR) paper, "[What's Left After Distillation? How Knowledge Transfer Impacts Fairness and Bias](https://openreview.net/forum?id=xBbj46Y2fN)" <d-cite key="Mohammadshahi2025distillation"></d-cite> explores how the distillation process affects model decisions, particularly in terms of fairness and bias. We found that:
+While distillation often succeeds in maintaining overall accuracy, our recently accepted Transactions in Machine Learning Research (TMLR) paper, "[What's Left After Distillation? How Knowledge Transfer Impacts Fairness and Bias](https://openreview.net/pdf?id=xBbj46Y2fN)" <d-cite key="Mohammadshahi2025distillation"></d-cite> explores how the distillation process affects model decisions, particularly in terms of fairness and bias. We found that:
 
 - The distillation temperature significantly influences the biases of the student model relative to the teacher model, and a smaller student model trained from scratch.
 - Higher distillation temperatures generally lead distilled models that make more fair decisions, i.e. improved group fairness and individual fairness metrics.
