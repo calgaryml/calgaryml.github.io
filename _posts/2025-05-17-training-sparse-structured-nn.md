@@ -226,11 +226,48 @@ SRigL integrates the constant fan-in objective with an explicit neuron ablation 
 
 This allows SRigL to learn both fine-grained constant fan-in sparsity _within_ active neurons and coarser neuron-level structured sparsity.
 
+<!--
+**Algorithm 1: "Condensed" linear layer with constant fan-in sparsity forward pass**
+
+1.  **Input:**
+    - `x`: the input matrix of shape (`batch_size`, `num_features`)
+    - `w`: the condensed weight matrix of shape (`active_neurons`, `constant_fan_in`)
+    - `indx`: indices of non-zero dense weights of shape (`active_neurons`, `constant_fan_in`)
+2.  `output` <- `torch.zeros(size=(batch_size, neurons))`
+3.  **For** `b in range(batch_size)`: // For each sample in mini-batch
+4.  &nbsp;&nbsp;&nbsp;&nbsp;**For** `n in range(neurons)`: // For each active neuron in layer
+5.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**For** `k in range(constant_fan_in)`: // For each non-zero weight
+6.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`source_idx` <- `idx[n, k]`
+7.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`feature` <- `x[b, source_idx]`
+8.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`output[b, n]` += `feature * w[n, k]`
+9.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**EndFor**
+10. &nbsp;&nbsp;&nbsp;&nbsp;**EndFor**
+11. **EndFor**
+12. **Return** `output` -->
+
 ## Key Results: Performance and Acceleration
 
 SRigL was evaluated on image classification tasks using CIFAR-10 (ResNet-18, Wide ResNet-22) and ImageNet (ResNet-50, MobileNet-V3, ViT-B/16) <d-cite key="Lasby2024SRigL"></d-cite>.
 
 ### Matching Dense Accuracy with Structured Sparsity
+
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+      <div class="col-md-6 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_resnet18.svg"  title="ResNet-18/CIFAR-10" class="img-fluid rounded z-depth-0" %}
+      </div>
+      <div class="col-md-6 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_wide_resnet22.svg"  title="Wide ResNet 22/CIFAR-10" class="img-fluid rounded z-depth-0" %}
+      </div>
+      <div class="col-md-6 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_resnet50.svg"  title="ResNet-50/ImageNet" class="img-fluid rounded z-depth-0" %}
+      </div>
+      <div class="col-md-6 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_vit.svg"  title="ViT/ImageNet" class="img-fluid rounded z-depth-0" %}
+      </div>
+  </div>
+  <div class="caption">Figure: (a) Percentage active neurons (i.e., not ablated) following RigL/SRigL training on ResNet-50/ImageNet (b) Sparse Fan-In vs. ViT layer index at the end of training with RigL at 90% sparsity.</div>
+</div>
 
 SRigL with neuron ablation was shown to achieve generalization performance comparable to unstructured RigL and often close to the dense training baseline, even at high sparsities (e.g., 90-95%) across various architectures. Extended training further improved performance, similar to RigL.
 
@@ -238,11 +275,53 @@ SRigL with neuron ablation was shown to achieve generalization performance compa
 
 ### The Importance of Neuron Ablation
 
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+      <div class="col-md-6 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_imagenet_perc_active.svg"  title="ResNet-50/ImageNet." class="img-fluid rounded z-depth-0" %}
+      </div>
+      <div class="col-md-6 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_vit_rigl_fan_in.svg"  title="Sparse Fan-in vs VIT layer index." class="img-fluid rounded z-depth-0" %}
+      </div>
+  </div>
+  <div class="caption">Figure: (a) Percentage active neurons (i.e., not ablated) following RigL/SRigL training on ResNet-50/ImageNet (b) Sparse Fan-in vs. ViT layer index at the end of training with RigL at 90% sparsity.</div>
+</div>
+
 The neuron ablation component was critical. Without it, SRigL's performance lagged behind unstructured RigL at very high sparsities (>90%) and with Vision Transformers. Enabling SRigL to ablate neurons restored performance to RigL levels. The percentage of active neurons (not ablated) learned by SRigL dynamically adapted with sparsity, mirroring RigL's behavior. For Vision Transformers, SRigL's performance was particularly sensitive to the ablation threshold $\gamma_{sal}$, with higher thresholds performing best, suggesting that aggressively ablating neurons to maintain sufficient density in the remaining ones is beneficial for ViTs.
 
-<!-- [Placeholder for Figure 7: Graph showing Percentage of Active Neurons vs. Sparsity for SRigL and RigL. (Based on Paper Figure 3b  and PPT Slides 32, 34)] -->
-
 ### Real-World Speedups
+
+<!-- \begin{block}{Benchmarks}
+\vspace{-0.5em}
+\begin{itemize}
+    \item To benchmark our method, we extracted a linear layer from a \gls{vit} model trained with \gls{srigl} and compared it to structured (i.e.\ the same layer accelerated using only the ablated neurons without exploiting the fine-grained sparsity), and unstructured (i.e.\ CSR) representations.
+    \item The increased timings for the 95 \& 99\% sparse structured representations is due to \gls{srigl} ablating relatively fewer neurons at these sparsities compared to 80 and 90\%.
+\end{itemize}
+
+\begin{figure}
+    \includegraphics[width=\colwidth]{fig/grouped-bar-threads-4.pdf}
+    \captionsetup{width=\colwidth}
+    \caption{\textbf{Online CPU inference} on an Intel Xeon W-2145. For online (single input) inference, our condensed representation at 90\% is \emph{3.4$\times$ faster than dense} and \emph{2.5 $\times$ faster than unstructured sparsity}}.\label{fig:online-inference-timings}
+\end{figure}
+\vspace{-0.5em}
+\begin{figure}
+        \includegraphics[width=\colwidth]{fig/grouped-bar-threads-4-device-gpu-batch_size-2048-broken-y.pdf}
+        \captionsetup{width=\colwidth}
+        \caption{\textbf{Batched GPU inference with batch size of 2048} on an NVIDIA Titan V. At 90\% sparsity, our condensed representation is \emph{1.7$\times$ faster than dense} and \emph{13.0$\times$ faster than unstructured (CSR)} sparse layers. Note y-axis is log-scaled.}\label{fig:gpu-accel-bs-2048}
+\end{figure}
+\end{block} -->
+
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+      <div class="col-md-12 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_grouped-bar-threads-4.svg"  title="ResNet-50/ImageNet." class="img-fluid rounded z-depth-0" %}
+      </div>
+      <div class="col-md-12 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_grouped-bar-threads-4-device-gpu-batch_size-2048-broken-y.svg"  title="Sparse Fan-in vs VIT layer index." class="img-fluid rounded z-depth-0" %}
+      </div>
+  </div>
+  <div class="caption">Figure: (a) Percentage active neurons (i.e., not ablated) following RigL/SRigL training on ResNet-50/ImageNet (b) Batched GPU inference with batch size of 2048 on an NVIDIA Titan V. At 90% sparsity, our condensed representation is 1.7$\times$ faster than dense and 13.0$\times$ faster than unstructured (CSR) sparse layers. Note y-axis is log-scaled..</div>
+</div>
 
 The structured sparsity learned by SRigL (constant fan-in + ablated neurons) translates into tangible inference speedups. The paper demonstrates a "condensed" matrix multiplication method (Algorithm 1 in the paper ) that leverages this structure.
 
