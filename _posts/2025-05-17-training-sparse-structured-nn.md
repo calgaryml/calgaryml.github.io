@@ -116,7 +116,7 @@ The Lottery Ticket Hypothesis (LTH) <d-cite key="Frankle2019LTH"></d-cite> propo
           {% include figure.liquid loading="eager" path="assets/img/srigl_sparsetraining_dst.svg"  title="Dynamic Sparse Training (DST) methods are an alternative sparse training method that work well." class="img-fluid rounded z-depth-0" %}
       </div>
   </div>
-  <div class="caption">Figure: Sparse Training Problem: Training a sparse mask from random initialization doesn't recover the generalization of a pruned dense model, even for a known good mask.</div>
+  <div class="caption">Figure: Dynamic Sparse Training (DST) methods are an alternative sparse training, where the mask is changed over the course of training. DST methods can match the generalization performance of standard dense training.</div>
 </div>
 
 Dynamic Sparse Training (DST) methods offer a more direct approach to training sparse networks. Techniques like Sparse Evolutionary Training (SET) <d-cite key="Mocanu2018SET"></d-cite> and Rigging the Lottery Ticket (RigL) <d-cite key="Evci2020RigL"></d-cite> train networks that are sparse from initialization to the final solution ("sparse-to-sparse"). They achieve this by dynamically changing the sparse connectivity during training: periodically pruning less salient connections (e.g., small magnitude weights) and growing new ones (e.g., where the gradient magnitude is large). DST can achieve generalization comparable to dense training at high sparsity levels.
@@ -125,22 +125,61 @@ Dynamic Sparse Training (DST) methods offer a more direct approach to training s
 
 ## The Bottleneck: Unstructured vs. Structured Sparsity
 
+<div class="container">
+  <div class="row align-items-center">
+      <div class="col-lg mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_unstructuredvsstructured.svg"  title="Unstructured vs. Structured Sparsity." class="img-fluid rounded z-depth-0" %}
+      </div>
+  </div>
+  <div class="caption">Figure: Unstructured vs. Structured sparsity. Unstructured sparsity is difficult to use efficiently on current computational hardware, such as CPUs and GPUs.</div>
+</div>
+
+### Unstructured Sparsity
+
 A significant challenge with many DST methods like RigL is that they typically produce **unstructured sparsity**. This means individual weights are zeroed out irregularly across the weight matrices.
 
-- **Unstructured Sparsity:**
-  - **Pros:** Can achieve excellent generalization at very high sparsities (85-95%); fewer theoretical FLOPs.
-  - **Cons:** Poorly supported by standard hardware (CPUs/GPUs) and acceleration libraries, meaning theoretical speedups often don't translate into real-world gains.
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+      <div class="col-8 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_sparsetraining_unstructuredwmatrix.svg"  title="Untructured Sparsity." class="img-fluid rounded z-depth-0" %}
+      </div>
+  </div>
+  <div class="caption">Figure: Unstructured Sparsity. A neural network with unstructured sparse weights, and the corresponding weight matrix.</div>
+</div>
+
+- **Pros:** Can achieve excellent generalization at very high sparsities (85-95%); fewer theoretical FLOPs.
+- **Cons:** Poorly supported by standard hardware (CPUs/GPUs) and acceleration libraries, meaning theoretical speedups often don't translate into real-world gains.
+
+### Structured Sparsity (e.g., removing neurons/blocks)
+
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+      <div class="col-8 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_sparsetraining_structuredwmatrix.svg"  title="Structured Sparsity." class="img-fluid rounded z-depth-0" %}
+      </div>
+  </div>
+  <div class="caption">Figure: Structured Sparsity. A neural network with structured sparse weights, and the corresponding weight matrix.</div>
+</div>
 
 In contrast, **structured sparsity** involves removing entire blocks of weights, such as channels, filters, or even neurons.
 
-- **Structured Sparsity (e.g., removing neurons/blocks):**
-  - **Pros:** Much better hardware support, leading to practical speedups as it often results in effectively smaller dense operations.
-  - **Cons:** Often leads to poorer generalization compared to unstructured sparsity at the same overall sparsity level, as it's a coarser form of pruning.
-- **N:M Fine-grained Structured Sparsity:** A compromise where, within small contiguous blocks of M weights, exactly N weights are non-zero. NVIDIA's Ampere GPUs support 2:4 sparsity, offering some acceleration <d-cite key="Mishra2021Accelerating, Nvidia2020Ampere"></d-cite>.
+- **Pros:** Much better hardware support, leading to practical speedups as it often results in effectively smaller dense operations.
+- **Cons:** Often leads to poorer generalization compared to unstructured sparsity at the same overall sparsity level, as it's a coarser form of pruning.
 
-The ideal scenario is to combine the high accuracy of unstructured DST with the hardware-friendliness of structured sparsity.
+### N:M Fine-grained Structured Sparsity
 
-<!-- [Placeholder for Figure 4: Visual comparison of unstructured, block-structured, and N:M structured sparsity patterns. (Based on PPT Slides 25, 26)] -->
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+      <div class="col-8 mt-3 mt-md-0 bg-white">
+          {% include figure.liquid loading="eager" path="assets/img/srigl_sparsetraining_nmwmatrix.svg"  title="N:M Structured Sparsity." class="img-fluid rounded z-depth-0" %}
+      </div>
+  </div>
+  <div class="caption">Figure: N:M Structured Sparsity. A neural network with N:M structured sparse weights, and the corresponding weight matrix.</div>
+</div>
+
+N:M fine-grained sparsity is a compromise where, within small contiguous blocks of M weights, exactly N weights are non-zero. NVIDIA's Ampere GPUs support 2:4 sparsity, offering some acceleration <d-cite key="Mishra2021Accelerating, Nvidia2020Ampere"></d-cite>.
+
+The ideal scenario is to combine the high accuracy of unstructured DST with the hardware-friendliness of fine-grained structured sparsity.
 
 ## Introducing Structured RigL (SRigL): DST Meets Structure
 
