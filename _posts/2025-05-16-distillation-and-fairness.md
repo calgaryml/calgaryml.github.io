@@ -175,9 +175,13 @@ In standard training, a student model learns by minimizing a cross-entropy loss 
 
 These two losses are typically combined using a weighting hyperparameter $\alpha$:
 
-$$ L*{KD} = \alpha L*{hard} + (1 - \alpha) L\_{soft}, $$
+<!-- prettier-ignore-start -->
 
-where $L_{hard}$ is the cross-entropy loss with hard labels and $L_{soft}$ is the distillation loss with soft labels.
+$$ L_{KD} = \alpha L_{\textrm{distillation}} + (1 - \alpha) L_{\textrm{classification}}, $$
+
+<!-- prettier-ignore-end -->
+
+where $L_{\textrm{classification}}$ is the cross-entropy loss with hard labels and $L_{\textrm{distillation}}$ is the distillation loss with soft labels.
 
 While in previous work the effect of $\alpha$ on fairness was studied <d-cite key="Chai2022fairness"></d-cite>, this work focuses on the effect of the distillation temperature $T$ on bias and fairness.
 
@@ -253,8 +257,11 @@ A more direct concern is when changes in model behavior lead to unfair outcomes 
 
   This is often measured by the **Demographic Parity Difference (DPD)**, where DPD=0 indicates perfect fairness under this definition.
 
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+
 $$ DPD = \max_{a \in A} P(\hat{Y}=1 | A=a) - \min_{a \in A} P(\hat{Y}=1 | A=a) $$
+
+<!-- prettier-ignore-end -->
 
 - **Equalized Odds** <d-cite key="Hardt2016equality"></d-cite>: Aims for the true positive rate and false positive rate to be similar across different groups, given the true label $Y=y$ (e.g., qualified men and qualified women having equal hiring rates).
 
