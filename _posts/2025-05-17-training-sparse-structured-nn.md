@@ -45,7 +45,7 @@ _styles: >
 
 The challenge in training sparse neural networks is to achieve both high accuracy and practical hardware acceleration. Unstructured sparsity often yields good performance but is hard to speed up, while traditional structured sparsity can hurt performance.
 
-Our International Conference in Learning Representations (ICLR) 2024 paper, ["Dynamic Sparse Training with Structured Sparsity"](https://openreview.net/forum?id=kOBkxFRKTA) <d-cite key="LasbyLasby2024SRigL"></d-cite> introduces Structured RigL (SRigL) to addresses this by dynamically learning hardware-friendly sparse weight representations without sacrificing accuracy. Key findings of the work include:
+Our International Conference in Learning Representations (ICLR) 2024 paper, ["Dynamic Sparse Training with Structured Sparsity"](https://openreview.net/forum?id=kOBkxFRKTA) <d-cite key="Lasby2024SRigL"></d-cite> introduces Structured RigL (SRigL) to addresses this by dynamically learning hardware-friendly sparse weight representations without sacrificing accuracy. Key findings of the work include:
 
 - SRigL successfully learns a combination of fine-grained N:M structured sparsity (constant fan-in) and neuron-level sparsity (neuron ablation) dynamically from a sparse initialization.
 - The explicit integration of neuron ablation, a behavior implicitly learned by unstructured DST methods at high sparsities, is crucial for SRigL to match the generalization performance of dense and unstructured sparse models, even at extreme sparsities (up to 99%).
@@ -175,13 +175,13 @@ In contrast, **structured sparsity** involves removing entire blocks of weights,
   <div class="caption">Figure: N:M Structured Sparsity. A neural network with N:M structured sparse weights, and the corresponding weight matrix.</div>
 </div>
 
-N:M fine-grained sparsity is a compromise where, within small contiguous blocks of M weights, exactly N weights are non-zero. NVIDIA's Ampere GPUs support 2:4 sparsity, offering some acceleration <d-cite key="Mishra2021Accelerating, Nvidia2020Ampere"></d-cite>.
+N:M fine-grained sparsity is a compromise where, within small contiguous blocks of M weights, exactly N weights are non-zero. NVIDIA's Ampere GPUs support 2:4 sparsity, offering some acceleration <d-cite key="Mishra2021Accelerating,Nvidia2020Ampere"></d-cite>.
 
 The ideal scenario is to combine the high accuracy of unstructured DST with the hardware-friendliness of fine-grained structured sparsity.
 
 ## Dynamic Sparse Training for Learning Structured Sparse Representations
 
-Our work "Dynamic Sparse Training with Structured Sparsity" <d-cite key="Lasby2024SRigL"></d-cite> proposes a novel DST method called Structured RigL (SRigL) to address this challenge. SRigL aims to learn sparse networks that are both highly accurate _and_ possess a structure amenable to real-world acceleration.
+Our work "Dynamic Sparse Training with Structured Sparsity" <d-cite key="LasbyLasby2024SRigL"></d-cite> proposes a novel DST method called Structured RigL (SRigL) to address this challenge. SRigL aims to learn sparse networks that are both highly accurate _and_ possess a structure amenable to real-world acceleration.
 
 ### Constant Fan-in Sparsity
 
