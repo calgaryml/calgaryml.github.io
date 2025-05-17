@@ -10,6 +10,7 @@ lighthouse_results/**
 _posts/2015-10-20-math.md
 _sass/font-awesome/*.scss
 assets/css/jwarby-jekyll-pygments-themes/*.css
+assets/css/jwarby-jekyll-pygments-themes/README.md
 _includes/people.liquid
 _includes/places.liquid
 assets/favicon/site.webmanifest
