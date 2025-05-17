@@ -248,7 +248,8 @@ A more direct concern is when changes in model behavior lead to unfair outcomes 
 
   This is often measured by the **Demographic Parity Difference (DPD)**, where DPD=0 indicates perfect fairness under this definition.
 
-  $$ DPD = \max_{a \in A} P(\hat{Y}=1 | A=a) - \min_{a \in A} P(\hat{Y}=1 | A=a) $$
+<!-- prettier-ignore -->
+$$ DPD = \max_{a \in A} P(\hat{Y}=1 | A=a) - \min_{a \in A} P(\hat{Y}=1 | A=a) $$
 
 - **Equalized Odds** <d-cite key="Hardt2016equality"></d-cite>: Aims for the true positive rate and false positive rate to be similar across different groups, given the true label $Y=y$ (e.g., qualified men and qualified women having equal hiring rates).
 
