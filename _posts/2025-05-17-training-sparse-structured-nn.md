@@ -2,6 +2,7 @@
 layout: distill
 title: "Dynamic Sparse Training with Structured Sparsity"
 description: "Learning Performant and Efficient Representations suitable for Hardware Acceleration"
+thumbnail: assets/img/srigl_sparsetraining_dst.svg
 tags: dynamic sparse training structured sparsity compression RigL SET
 toc: true
 related_posts: true
@@ -9,6 +10,7 @@ pretty_table: true
 date: 2024-05-07
 last_updated: 2025-05-17
 featured: false
+
 authors:
   - name: Mike Lasby
     url: "https://github.com/mklasby"
