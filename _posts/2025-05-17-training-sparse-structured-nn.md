@@ -332,3 +332,5 @@ The insight that successful DST methods at high sparsity inherently learn to red
 - Exploring the potential of DST to learn novel, efficient architectures for new data domains beyond typical NLP/CV tasks, particularly in areas like "AI for Science."
 
 SRigL paves the way for deploying highly efficient and accurate sparse models in a wider range of applications, making powerful AI more accessible and sustainable.
+
+{% twitter https://x.com/mikelasby/status/1749622255339094128 %}
