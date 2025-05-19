@@ -1,0 +1,71 @@
+@article{Evci2022GradientFlow,
+  title={Gradient Flow in Sparse Neural Networks and How Lottery Tickets Win},
+  author={Evci, Utku and Ioannou, Yani and Keskin, Cem and Dauphin, Yann},
+  journal={arXiv preprint arXiv:2010.03533v2},
+  year={2022},
+  note={Originally presented 2020/2021. Published in Proceedings of the AAAI Conference on Artificial Intelligence, 36(6), 6729-6737},
+  eprint={2010.03533},
+  archivePrefix={arXiv},
+  doi={10.1609/aaai.v36i6.20611},
+  url={https://ojs.aaai.org/index.php/AAAI/article/view/20611}
+}
+
+@inproceedings{Frankle2019LTH,
+  title={The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks},
+  author={Frankle, Jonathan and Carbin, Michael},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2019},
+  eprint={1803.03635},
+  archivePrefix={arXiv},
+  doi={10.48550/arXiv.1803.03635},
+  url={https://arxiv.org/abs/1803.03635}
+}
+
+@inproceedings{Evci2020RigL,
+  title={Rigging the Lottery: Making All Tickets Winners},
+  author={Evci, Utku and Gale, Trevor and Menick, Jacob and Castro, Pablo Samuel and Elsen, Erich},
+  booktitle={Proceedings of Machine Learning and Systems (MLSys)},
+  year={2020},
+  eprint={1911.11134},
+  archivePrefix={arXiv},
+  url={https://proceedings.mlsys.org/paper/2020/file/303ed4c69846ab36c2904d3ba8573050-Paper.pdf},
+  note={MLSys 2020. While an arXiv version exists (1911.11134), the official proceedings link is provided. A common DOI for MLSys papers from this year might be harder to find directly without specific publisher databases, but the arXiv and proceedings URLs are key.}
+}
+
+@inproceedings{Glorot2010Understanding,
+  title={Understanding the difficulty of training deep feedforward neural networks},
+  author={Glorot, Xavier and Bengio, Yoshua},
+  booktitle={Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics (AISTATS)},
+  pages={249--256},
+  year={2010},
+  editor={Teh, Yee Whye and Titterington, Mike},
+  volume={9},
+  series={Proceedings of Machine Learning Research},
+  address={Chia Laguna Resort, Sardinia, Italy},
+  month={13--15 May},
+  publisher={PMLR},
+  url={http://proceedings.mlr.press/v9/glorot10a.html}
+}
+
+@inproceedings{He2015Delving,
+  title={Delving Deep into Rectifiers: Surpassing Human-Level Performance on {ImageNet} Classification},
+  author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  booktitle={Proceedings of the IEEE International Conference on Computer Vision (ICCV)},
+  pages={1026--1034},
+  year={2015},
+  eprint={1502.01852},
+  archivePrefix={arXiv},
+  doi={10.1109/ICCV.2015.123},
+  url={https://doi.org/10.1109/ICCV.2015.123}
+}
+
+@inproceedings{Liu2019Rethinking,
+  title={Rethinking the Value of Network Pruning},
+  author={Liu, Zhuang and Sun, Mingjie and Zhou, Tinghui and Huang, Gao and Darrell, Trevor},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2019},
+  eprint={1810.05270},
+  archivePrefix={arXiv},
+  doi={10.48550/arXiv.1810.05270},
+  url={https://arxiv.org/abs/1810.05270}
+}
