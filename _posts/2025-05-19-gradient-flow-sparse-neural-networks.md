@@ -186,3 +186,5 @@ This investigation into gradient flow in sparse neural networks reveals:
 Understanding gradient flow provides valuable insights into the challenges of training sparse neural networks. While sparsity-aware initializations and Dynamic Sparse Training offer promising avenues for improving how we train sparse models from scratch, the success of Lottery Tickets seems more about "remembering" a good solution than fundamentally solving the optimization difficulties in sparse landscapes.
 
 The journey towards efficiently training sparse neural networks that are as performant as their dense counterparts, without relying on dense pre-training or specific "winning ticket" initializations, continues. Methods that can robustly navigate the complex loss landscapes of sparse models and maintain healthy gradient flow are key to unlocking the full potential of sparse AI.
+
+{% twitter https://x.com/yanii/status/1496532190682927107 %}
