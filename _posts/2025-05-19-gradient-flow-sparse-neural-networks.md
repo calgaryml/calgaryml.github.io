@@ -161,7 +161,7 @@ The Lottery Ticket Hypothesis (LTH) <d-cite key="Frankle2019LTH"></d-cite> propo
 </div>
 
 This was exciting because it suggested a way to find highly sparse, trainable networks. However, the paper <d-cite key="Evci2022GradientFlow"></d-cite> finds something intriguing:
-**Lottery Tickets also exhibit poor gradient flow, similar to naively trained sparse networks!** (See "Lottery" lines in Figure 4).
+**Lottery Tickets also exhibit poor gradient flow, similar to naively trained sparse networks!** (see Figure 4).
 
 So, if LTs don't fix the gradient flow problem, why do they work so well? The paper's central argument is that LTs succeed because they essentially **re-learn the pruning solution** they were derived from.
 
@@ -169,7 +169,7 @@ So, if LTs don't fix the gradient flow problem, why do they work so well? The pa
 
 <div class="container">
   <div class="row justify-content-center align-items-center">
-      <div class="col-10 mt-3 mt-md-0 bg-white">
+      <div class="col-9 mt-3 mt-md-0 bg-white">
           <img src="/assets/img/gradientflow/mnist_mds.svg" alt="MDS Plot of Solutions: 2D projection of solution distances for LeNet5." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
