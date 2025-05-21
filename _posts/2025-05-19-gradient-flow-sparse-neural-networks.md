@@ -58,45 +58,51 @@ Many advancements in training dense DNNs have come from understanding and improv
 
 ## Problem 1: Off to a Bad Start &mdash; Poor Gradient Flow at Initialization
 
+### Dense Initialization and Sparse Fan-in
+
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+      <div class="col-6 mt-3 mt-md-0">
+          <img src="/assets/img/gradientflow_dense_fanin.svg" alt="Dense fan-in in a neural network." class="img-fluid rounded z-depth-0" loading="eager" />
+          <div class="caption">(a) Dense layer, every neuron has the same number of incoming connections</div>
+      </div>
+      <div class="col-6 mt-3 mt-md-0">
+          <img src="/assets/img/gradientflow_sparse_fanin.svg" alt="Heterogeneous sparse fan-in in a neural network." class="img-fluid rounded z-depth-0" loading="eager" />
+          <div class="caption">(b) Sparse layer, every neuron can have a different number of incoming connections</div>
+      </div>
+  </div>
+  <!-- Dense vs Sparse Fan-in: Illustrating differing fan-in for dense and sparse layers -->
+  <div class="caption">Figure: (a) In a dense layer, each neuron has the same fan-in, (b) However, in a general unstructured sparse layer, the fan-in can vary significantly from neuron to neuron &mdash; we propose an initialization that accounts for this.</div>
+</div>
+
+Standard weight initialization methods like Glorot/He <d-cite key="Glorot2010Understanding,He2015Delving"></d-cite> are designed with dense networks in mind. They assume that all neurons in a layer have the same number of incoming (fan-in) and outgoing (fan-out) connections.
+
+For example, for a layer using a ReLU activation function, the weights are initialized from a distribution with variance inversely proportional to the largest number of incoming connections (fan-in):
+
+$$w_{ij}^{[l]} \sim \mathcal{N}(0, \frac{2}{\text{fan-in}}), $$
+
+where $\textbf{fan-in}$ is the number of incoming connections for the layer, and $w_{ij}^{[l]}$ is the weight connecting neuron $i$ in layer $l-1$ to neuron $j$ in layer $l$. This ensures that the variance of the output of the layer is roughly equal to the variance of its input, which helps maintain a healthy signal flow through the network.
+
+### A Sparsity-Aware Initialization to Fix Gradient Flow at Initialization
+
 <div class="container">
   <div class="row align-items-center justify-content-center">
       <div class="col-6 mt-3 mt-md-0">
           <img src="/assets/img/gradientflow_sparse_fanin_unequalout.svg" alt="Sparse neural network with dense init." class="img-fluid rounded z-depth-0" loading="eager" />
-          <div class="caption">(a) Dense Initialization.</div>
+          <div class="caption">(a) Dense initialization assumes every neuron has same number of connections, and on average, uses weights that are too small</div>
       </div>
       <div class="col-6 mt-3 mt-md-0">
           <img src="/assets/img/gradientflow_sparse_fanin_equalout.svg" alt="Sparse neural network with sparse init.." class="img-fluid rounded z-depth-0" loading="eager" />
-          <div class="caption">(b) Sparse Initialization.</div>
+          <div class="caption">(b) Sparse initialization calculates the correct weight variance for each neuron based on the number of incoming connections</div>
       </div>
   </div>
   <!-- Dense vs Sparse Fan-in: Illustrating differing fan-in for dense and sparse layers -->
   <div class="caption">Figure: (a) Using a dense initialization for a sparse layer causes vanishing gradients as neurons with few connections are initialized incorrectly, however in (b) the sparse initialization accounts for the fact that fan-in can vary significantly from neuron to neuron &mdash; ensuring better behaved gradients at initialization.</div>
 </div>
 
-<div class="container">
-  <div class="row align-items-center justify-content-center">
-      <div class="col-6 mt-3 mt-md-0">
-          <img src="/assets/img/gradientflow_dense_fanin.svg" alt="Dense fan-in in a neural network." class="img-fluid rounded z-depth-0" loading="eager" />
-          <div class="caption">(a) Dense NN Layer</div>
-      </div>
-      <div class="col-6 mt-3 mt-md-0">
-          <img src="/assets/img/gradientflow_scaled_fanin.svg" alt="Homogeneous sparse fan-in in a neural network." class="img-fluid rounded z-depth-0" loading="eager" />
-          <div class="caption">(b) Homogeneous Sparse NN Layer</div>
-      </div>
-      <div class="col-6 mt-3 mt-md-0">
-          <img src="/assets/img/gradientflow_sparse_fanin.svg" alt="Heterogeneous sparse fan-in in a neural network." class="img-fluid rounded z-depth-0" loading="eager" />
-          <div class="caption">(c) Heterogeneous Sparse NN Layer</div>
-      </div>
-  </div>
-  <!-- Dense vs Sparse Fan-in: Illustrating differing fan-in for dense and sparse layers -->
-  <div class="caption">Figure: (a) In a dense layer, each neuron has the same fan-in, (b) in a sparse layer where neurons have the same fan-in, simply scaling the dense initialization is efffective <d-cite key="Liu2019Rethinking"></d-cite>. (b) However, in a general unstructured sparse layer, the fan-in can vary significantly from neuron to neuron &mdash; we propose an initialization that accounts for this.</div>
-</div>
+In a sparse neural network, the assumption that every neuron has the same number of connections breaks down. Rather, the number of connections per neuron can be highly variable. Using dense initializations directly in sparse networks often causes the signal to vanish rapidly as it propagates through the layers. This is because neurons with fewer incoming connections are initialized with weights that are too small, leading to a weak signal. This can cause the gradients to vanish, especially in deeper networks, making it hard for the model to learn effectively.
 
-Standard weight initialization methods like Glorot/He <d-cite key="Glorot2010Understanding"></d-cite> <d-cite key="He2015Delving"></d-cite> are designed with dense networks in mind. They assume that all neurons in a layer have the same number of incoming (fan-in) and outgoing (fan-out) connections.
-
-In an unstructured sparse network, this assumption breaks down. The number of connections per neuron can be highly variable. Using dense initializations directly in sparse networks often causes the signal to vanish rapidly as it propagates through the layers.
-
-The paper proposes a **sparsity-aware initialization** that adjusts the variance of the initial weights for each neuron based on its _actual_ fan-in within the sparse structure, for example for a layer with a ReLU activation function:
+Our work <d-cite key="Evci2022GradientFlow"></d-cite> proposes a **sparsity-aware initialization** that adjusts the variance of the initial weights for each neuron based on its _actual_ fan-in within the sparse structure, for example for a layer with a ReLU activation function:
 
 $$w_{ij}^{[l]} \sim \mathcal{N}(0, \frac{2}{\text{fan-in}_i^{[l]}}), $$
 
