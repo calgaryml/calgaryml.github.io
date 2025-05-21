@@ -32,6 +32,8 @@
             "title": "{{ page.title }}",
             "description": "{{ page.description }}",
             "published": "{{ page.date | date: '%B %d, %Y' }}",
+            "updatedDate": "{{ page.last_updated | date: '%B %d, %Y' }}",
+            "postAuthor": "{{ page.post_author }}",
             "authors": [
               {% for author in page.authors %}
               {

@@ -13,6 +13,7 @@ pretty_table: true
 chart:
   echarts: false
   plotly: false
+post_author: Yani Ioannou
 
 authors:
   - name: Aida Mohammadshahi

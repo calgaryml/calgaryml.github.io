@@ -3,6 +3,8 @@ layout: distill
 title: "Gradient Flow in Sparse Neural Networks & Why Lottery Tickets Win"
 description: "An exploration of why sparse neural networks are hard to train and how understanding gradient flow sheds light on Lottery Tickets and Dynamic Sparse Training."
 date: 2022-02-24
+last_updated: 2025-05-21
+post_author: Yani Ioannou
 authors:
   - name: Utku Evci
     url: "https://www.utkuevci.com"

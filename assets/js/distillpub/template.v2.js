@@ -88,6 +88,15 @@
         target.publishedDate = new Date(source.published);
       }
     }
+    if (source.updatedDate) {
+      if (source.updatedDate instanceof Date) {
+        target.updatedDate = source.updatedDate;
+      } else if (source.updatedDate.constructor === String) {
+        target.updatedDate = new Date(source.updatedDate);
+      } else {
+        console.error("Don't know what to do with updated date: " + source.updatedDate);
+      }
+    }
     if (source.publishedDate) {
       if (source.publishedDate instanceof Date) {
         target.publishedDate = source.publishedDate;
@@ -98,6 +107,7 @@
       }
     }
     target.description = source.description;
+    target.postAuthor = source.postAuthor;
     target.authors = source.authors.map((authorObject) => new Author(authorObject));
     target.katex = source.katex;
     target.password = source.password;
@@ -229,6 +239,21 @@
     // 'Thu, 08 Sep 2016 00:00:00 -0700',
     get updatedDateRFC() {
       return RFC(this.updatedDate);
+    }
+
+    // 2016,
+    get updatedYear() {
+      return this.updatedDate.getFullYear();
+    }
+
+    // 'Sept',
+    get updatedMonth() {
+      return months[this.updatedDate.getMonth()];
+    }
+
+    // 8,
+    get updatedDay() {
+      return this.updatedDate.getDate();
     }
 
     // 2016,
@@ -2137,7 +2162,20 @@ d-appendix > distill-appendix {
           ? `
         <p>${frontMatter.publishedMonth} ${frontMatter.publishedDay}, ${frontMatter.publishedYear}</p> `
           : `
-        <p><em>Not published yet.</em></p>`
+        <p><em>Pre-print.</em></p>`
+      }
+      <br/>
+      <h3>Blog Post By:</h3>
+      ${
+        frontMatter.postAuthor
+          ? `<p>${frontMatter.postAuthor}</p>`
+          : ``
+      }
+      ${
+        frontMatter.updatedDate
+          ? `
+        <p>${frontMatter.updatedMonth} ${frontMatter.updatedDay}, ${frontMatter.updatedYear}</p> `
+          : ``
       }
     </div>
     <div>
