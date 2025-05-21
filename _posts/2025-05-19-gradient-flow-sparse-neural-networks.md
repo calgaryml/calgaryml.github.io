@@ -44,7 +44,7 @@ A common way to obtain a sparse network is by **pruning** a large, trained dense
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="placeholder_figure_training_outcomes.png" alt="Training Outcomes: Pruning pipeline vs. sparse training problem." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="/assets/img/gradientflow/sparsetrainingproblem.svg" alt="Training Outcomes: Pruning pipeline vs. sparse training problem." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Figure 1: (Left) The standard pruning pipeline: train a dense model, prune it, and optionally fine-tune to get a good sparse model. (Right) The sparse training problem: initializing a sparse network randomly and training it often leads to poor performance compared to the pruned model.</div>
@@ -154,7 +154,7 @@ The Lottery Ticket Hypothesis (LTH) <d-cite key="Frankle2019LTH"></d-cite> propo
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="placeholder_figure_lth_concept.png" alt="Lottery Ticket Hypothesis Concept: Diagram illustrating the LTH process." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="/assets/img/gradientflow/lotterticketsolution.svg" alt="Lottery Ticket Hypothesis Concept: Diagram illustrating the LTH process." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Figure 5: The Lottery Ticket Hypothesis: A dense network is trained (obtaining a dense solution), then pruned. The "winning ticket" uses the *initial weights* ($\Theta_{t=0}$ or an early snapshot $\Theta_{0<t \ll T}$) corresponding to the pruned mask and is then trained.</div>
