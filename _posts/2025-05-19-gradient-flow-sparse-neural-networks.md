@@ -60,11 +60,11 @@ Many advancements in training dense DNNs have come from understanding and improv
 
 <div class="container">
   <div class="row align-items-center justify-content-center">
-      <div class="col-6 mt-3 mt-md-0 bg-white">
+      <div class="col-6 mt-3 mt-md-0">
           <img src="/assets/img/gradientflow_sparse_fanin_unequalout.svg" alt="Sparse neural network with dense init." class="img-fluid rounded z-depth-0" loading="eager" />
           <div class="caption">(a) Dense Initialization.</div>
       </div>
-      <div class="col-6 mt-3 mt-md-0 bg-white">
+      <div class="col-6 mt-3 mt-md-0">
           <img src="/assets/img/gradientflow_sparse_fanin_equalout.svg" alt="Sparse neural network with sparse init.." class="img-fluid rounded z-depth-0" loading="eager" />
           <div class="caption">(b) Sparse Initialization.</div>
       </div>
@@ -75,15 +75,15 @@ Many advancements in training dense DNNs have come from understanding and improv
 
 <div class="container">
   <div class="row align-items-center justify-content-center">
-      <div class="col-6 mt-3 mt-md-0 bg-white">
+      <div class="col-6 mt-3 mt-md-0">
           <img src="/assets/img/gradientflow_dense_fanin.svg" alt="Dense fan-in in a neural network." class="img-fluid rounded z-depth-0" loading="eager" />
           <div class="caption">(a) Dense NN Layer</div>
       </div>
-      <div class="col-6 mt-3 mt-md-0 bg-white">
+      <div class="col-6 mt-3 mt-md-0">
           <img src="/assets/img/gradientflow_scaled_fanin.svg" alt="Homogeneous sparse fan-in in a neural network." class="img-fluid rounded z-depth-0" loading="eager" />
           <div class="caption">(b) Homogeneous Sparse NN Layer</div>
       </div>
-      <div class="col-6 mt-3 mt-md-0 bg-white">
+      <div class="col-6 mt-3 mt-md-0">
           <img src="/assets/img/gradientflow_sparse_fanin.svg" alt="Heterogeneous sparse fan-in in a neural network." class="img-fluid rounded z-depth-0" loading="eager" />
           <div class="caption">(c) Heterogeneous Sparse NN Layer</div>
       </div>
