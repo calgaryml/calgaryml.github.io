@@ -2165,16 +2165,16 @@ d-appendix > distill-appendix {
         <p><em>Pre-print.</em></p>`
       }
       <br/>
-      <h3>Blog Post By:</h3>
+      <h3>Blog Post:</h3>
       ${
         frontMatter.postAuthor
-          ? `<p>${frontMatter.postAuthor}</p>`
+          ? `<p class="author">${frontMatter.postAuthor}</p>`
           : ``
       }
       ${
         frontMatter.updatedDate
           ? `
-        <p>${frontMatter.updatedMonth} ${frontMatter.updatedDay}, ${frontMatter.updatedYear}</p> `
+        <p class="affiliation">${frontMatter.updatedMonth} ${frontMatter.updatedDay}, ${frontMatter.updatedYear}</p> `
           : ``
       }
     </div>
