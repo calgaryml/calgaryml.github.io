@@ -47,7 +47,7 @@ A common way to obtain a sparse network is by **pruning** a large, trained dense
           <img src="placeholder_figure_training_outcomes.png" alt="Training Outcomes: Pruning pipeline vs. sparse training problem." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
-  <div class="caption">Figure 1: (Left) The standard pruning pipeline: train a dense model, prune it, and optionally fine-tune to get a good sparse model. (Right) The sparse training problem: initializing a sparse network randomly and training it often leads to poor performance compared to the pruned model. (Adapted from Slide 2/3 of the presentation)</div>
+  <div class="caption">Figure 1: (Left) The standard pruning pipeline: train a dense model, prune it, and optionally fine-tune to get a good sparse model. (Right) The sparse training problem: initializing a sparse network randomly and training it often leads to poor performance compared to the pruned model.</div>
 </div>
 
 However, what if we want to train a sparse network from the get-go, without the costly pre-training of a dense model? This is where things get tricky. Naively initializing a network with a sparse structure and training it from scratch (the "sparse training problem") usually leads to significantly worse performance. This begs the question: why is training sparse networks so hard, and what can we learn from the exceptions?
@@ -108,13 +108,15 @@ $$w_{ij}^{[l]} \sim \mathcal{N}(0, \frac{2}{\text{fan-in}_i^{[l]}}), $$
 
 where $\text{fan-in}_i^{[l]}$ is the number of incoming connections for neuron $i$ in layer $l$.
 
+### Signal Propagation at Initialization with Different Initializations
+
 <div class="container">
   <div class="row justify-content-center align-items-center">
-      <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="placeholder_figure_signal_propagation_init.png" alt="Signal Propagation at Initialization: Graph showing standard deviation of output vs. sparsity." class="img-fluid rounded z-depth-0" loading="eager" />
+      <div class="col-8 mt-3 mt-md-0 bg-white">
+          <img src="/assets/img/gradientflow/sparseinit_signalprop.svg" alt="Signal Propagation at Initialization: Graph showing standard deviation of output vs. sparsity." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
-  <div class="caption">Figure 3: Standard deviation of the pre-softmax output ($\sigma(f(x))$) in LeNet-5 vs. sparsity level. Dense initialization (blue) shows signal vanishing with increasing sparsity. Sparsity-aware initializations (Liu et al. <d-cite key="Liu2019Rethinking"></d-cite> and "Ours" - the paper's proposal) maintain signal strength. (Adapted from Slide 10 of the presentation / Fig 1c of the paper)</div>
+  <div class="caption">Figure 3: Standard deviation of the pre-softmax output ($\sigma(f(x))$) in LeNet-5 vs. sparsity level. Dense initialization (blue) shows signal vanishing with increasing sparsity. Sparsity-aware initializations (Liu et al. <d-cite key="Liu2019Rethinking"></d-cite> and "Ours" - the paper's proposal) maintain signal strength.</div>
 </div>
 
 This sparsity-aware initialization leads to better signal propagation at the start of training and can improve the final generalization performance, especially for networks without normalization layers like BatchNorm (e.g., LeNet5, VGG16). For models with BatchNorm (e.g., ResNet-50), the effect of initialization is less pronounced, as BatchNorm itself helps regulate signal propagation.
@@ -135,7 +137,7 @@ While a good initialization helps, it's not the whole story. Sparse networks can
           <img src="/assets/img/gradientflow/resnet_gradnorm.svg" alt="Gradient Norm During Training: Graphs for LeNet-5, VGG-16, and ResNet-50." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
-  <div class="caption">Figure 4: Gradient norm during training for LeNet-5 (left), VGG-16 (center), and ResNet-50 (right) under different setups. 'Scratch' (training a sparse mask from random dense initialization) often shows very low gradient norm initially. 'Scratch+' (with sparsity-aware initialization) improves this. 'RigL+' (a DST method with sparsity-aware init) often shows stronger gradient flow. (Adapted from Slide 11 of the presentation / Fig 2 of the paper)</div>
+  <div class="caption">Figure 4: Gradient norm during training for LeNet-5 (left), VGG-16 (center), and ResNet-50 (right) under different setups. 'Scratch' (training a sparse mask from random dense initialization) often shows very low gradient norm initially. 'Scratch+' (with sparsity-aware initialization) improves this. 'RigL+' (a DST method with sparsity-aware init) often shows stronger gradient flow.</div>
 </div>
 
 This is where **Dynamic Sparse Training (DST)** methods come in. DST techniques, like RigL <d-cite key="Evci2020RigL"></d-cite>, don't keep the sparse connectivity fixed. Instead, they periodically update the mask during training:
@@ -155,7 +157,7 @@ The Lottery Ticket Hypothesis (LTH) <d-cite key="Frankle2019LTH"></d-cite> propo
           <img src="placeholder_figure_lth_concept.png" alt="Lottery Ticket Hypothesis Concept: Diagram illustrating the LTH process." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
-  <div class="caption">Figure 5: The Lottery Ticket Hypothesis: A dense network is trained (obtaining a dense solution), then pruned. The "winning ticket" uses the *initial weights* ($\Theta_{t=0}$ or an early snapshot $\Theta_{0<t \ll T}$) corresponding to the pruned mask and is then trained. (Adapted from Slide 16/17 of the presentation)</div>
+  <div class="caption">Figure 5: The Lottery Ticket Hypothesis: A dense network is trained (obtaining a dense solution), then pruned. The "winning ticket" uses the *initial weights* ($\Theta_{t=0}$ or an early snapshot $\Theta_{0<t \ll T}$) corresponding to the pruned mask and is then trained.</div>
 </div>
 
 This was exciting because it suggested a way to find highly sparse, trainable networks. However, the paper <d-cite key="Evci2022GradientFlow"></d-cite> finds something intriguing:
@@ -170,12 +172,14 @@ So, if LTs don't fix the gradient flow problem, why do they work so well? The pa
 
 <div class="container">
   <div class="row justify-content-center align-items-center">
-      <div class="col-lg mt-3 mt-md-0 bg-white">
+      <div class="col-10 mt-3 mt-md-0 bg-white">
           <img src="/assets/img/gradientflow/mnist_mds.svg" alt="MDS Plot of Solutions: 2D projection of solution distances for LeNet5." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Figure 6: A 2D MDS projection showing the relative distances between different solutions for LeNet5. 'Lottery-start' is closer to 'Prune-end' than 'Scratch-start'. 'Lottery-end' converges very close to 'Prune-end', while 'Scratch-end' solutions are more dispersed and further away.</div>
 </div>
+
+{:start="2"}
 
 1.  **Same Basin of Attraction:**
     By interpolating between the LT solution/initialization and the pruned solution, the paper shows that they lie within the same low-loss basin of attraction. In contrast, scratch solutions often have a high loss barrier separating them from the pruned solution's basin.
@@ -197,6 +201,8 @@ So, if LTs don't fix the gradient flow problem, why do they work so well? The pa
   </div>
   <div class="caption">Figure 8: An intuitive illustration. A Lottery Ticket initialization (blue circle) is already positioned within the basin of attraction of the good Pruning Solution (green circle). Random (Scratch) initializations (red circles) are more likely to fall into different, potentially suboptimal, basins.</div>
 </div>
+
+{:start="3"}
 
 1.  **Functional Similarity:**
     LT solutions are not only close in weight space but also learn very similar functions to the pruned solution they originated from. This is measured by low "disagreement" (fraction of test images classified differently) between the LT solution and the pruned solution. Ensembles of LTs derived from the same pruning process show little performance gain, further suggesting they converge to nearly identical functions.
