@@ -151,8 +151,6 @@ The paper shows that DST methods, particularly RigL, significantly improve gradi
 
 ## The Curious Case of Lottery Tickets (LTs)
 
-The Lottery Ticket Hypothesis (LTH) <d-cite key="Frankle2019LTH"></d-cite> proposed that within a large, randomly initialized dense network, there exist smaller subnetworks (the "winning tickets"). If these winning tickets are trained in isolation from their _original initialization weights_ (or weights from very early in the dense model's training, known as "late rewinding"), they can achieve accuracy comparable to the full dense network.
-
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
@@ -161,6 +159,8 @@ The Lottery Ticket Hypothesis (LTH) <d-cite key="Frankle2019LTH"></d-cite> propo
   </div>
   <div class="caption">Figure 5: The Lottery Ticket Hypothesis: A dense network is trained (obtaining a dense solution), then pruned. The "winning ticket" uses the *initial weights* ($\Theta_{t=0}$ or an early snapshot $\Theta_{0<t \ll T}$) corresponding to the pruned mask and is then trained.</div>
 </div>
+
+The Lottery Ticket Hypothesis (LTH) <d-cite key="Frankle2019LTH"></d-cite> proposed that within a large, randomly initialized dense network, there exist smaller subnetworks (the "winning tickets"). If these winning tickets are trained in isolation from their _original initialization weights_ (or weights from very early in the dense model's training, known as "late rewinding"), they can achieve accuracy comparable to the full dense network.
 
 This was exciting because it suggested a way to find highly sparse, trainable networks. However, the paper <d-cite key="Evci2022GradientFlow"></d-cite> finds something intriguing:
 **Lottery Tickets also exhibit poor gradient flow, similar to naively trained sparse networks!** (see Figure 4).
