@@ -5,7 +5,7 @@ description: "An exploration of why sparse neural networks are hard to train and
 date: 2022-02-24
 authors:
   - name: Utku Evci
-    url: "https://scholar.google.com/citations?user=SpM0R6AAAAAJ"
+    url: "https://www.utkuevci.com"
     affiliations:
       name: Google
   - name: Yani Ioannou
@@ -13,11 +13,11 @@ authors:
     affiliations:
       name: University of Calgary
   - name: Cem Keskin
-    url: "https://scholar.google.com/citations?user=L4t47LAAAAAJ"
+    url: "https://scholar.google.com/citations?user=9HoiYnYAAAAJ&hl=en"
     affiliations:
-      name: Facebook
+      name: Meta
   - name: Yann Dauphin
-    url: "https://scholar.google.com/citations?user=dM0qAN4AAAAAJ"
+    url: "https://www.dauphin.io"
     affiliations:
       name: Google
 paper_url: https://arxiv.org/abs/2010.03533
