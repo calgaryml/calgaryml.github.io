@@ -22,6 +22,7 @@ authors:
       name: Google
 paper_url: https://arxiv.org/abs/2010.03533
 bibliography: 2025-05-19-gradient-flow-sparse-neural-networks.bib
+thumbnail: assets/img/gradientflow/sparse_fanin_equalout.svg
 
 toc: true
 related_posts: true
