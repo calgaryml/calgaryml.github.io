@@ -21,7 +21,10 @@ authors:
     affiliations:
       name: Google
 paper_url: https://arxiv.org/abs/2010.03533
-bibliography: 2025-05-19-gradient-flow-sparse-neural-networks
+bibliography: 2025-05-19-gradient-flow-sparse-neural-networks.bib
+
+toc: true
+related_posts: true
 ---
 
 ## TL;DR
@@ -58,6 +61,21 @@ Many advancements in training dense DNNs have come from understanding and improv
 <div class="container">
   <div class="row align-items-center justify-content-center">
       <div class="col-6 mt-3 mt-md-0 bg-white">
+          <img src="/assets/img/gradientflow_sparse_fanin_unequalout.svg" alt="Sparse neural network with dense init." class="img-fluid rounded z-depth-0" loading="eager" />
+          <div class="caption">(a) Dense Initialization.</div>
+      </div>
+      <div class="col-6 mt-3 mt-md-0 bg-white">
+          <img src="/assets/img/gradientflow_sparse_fanin_equalout.svg" alt="Sparse neural network with sparse init.." class="img-fluid rounded z-depth-0" loading="eager" />
+          <div class="caption">(b) Sparse Initialization.</div>
+      </div>
+  </div>
+  <!-- Dense vs Sparse Fan-in: Illustrating differing fan-in for dense and sparse layers -->
+  <div class="caption">Figure: (a) Using a dense initialization for a sparse layer causes vanishing gradients as neurons with few connections are initialized incorrectly, however in (b) the sparse initialization accounts for the fact that fan-in can vary significantly from neuron to neuron &mdash; ensuring better behaved gradients at initialization.</div>
+</div>
+
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+      <div class="col-6 mt-3 mt-md-0 bg-white">
           <img src="/assets/img/gradientflow_dense_fanin.svg" alt="Dense fan-in in a neural network." class="img-fluid rounded z-depth-0" loading="eager" />
           <div class="caption">(a) Dense NN Layer</div>
       </div>
@@ -71,7 +89,7 @@ Many advancements in training dense DNNs have come from understanding and improv
       </div>
   </div>
   <!-- Dense vs Sparse Fan-in: Illustrating differing fan-in for dense and sparse layers -->
-  <div class="caption">Figure: (a) In a dense layer, each neuron has the same fan-in, (b) in a sparse layer where neurons have the same fan-in, simply scaling the dense initialization is efffective <d-cite key="Liu2019Rethinking"></d-cite>. (b) However, in a general unstructured sparse layer, where the fan-in can vary significantly from neuron to neuron &mdash; we propose an initialization to account for this.</div>
+  <div class="caption">Figure: (a) In a dense layer, each neuron has the same fan-in, (b) in a sparse layer where neurons have the same fan-in, simply scaling the dense initialization is efffective <d-cite key="Liu2019Rethinking"></d-cite>. (b) However, in a general unstructured sparse layer, the fan-in can vary significantly from neuron to neuron &mdash; we propose an initialization that accounts for this.</div>
 </div>
 
 Standard weight initialization methods like Glorot/He <d-cite key="Glorot2010Understanding"></d-cite> <d-cite key="He2015Delving"></d-cite> are designed with dense networks in mind. They assume that all neurons in a layer have the same number of incoming (fan-in) and outgoing (fan-out) connections.
