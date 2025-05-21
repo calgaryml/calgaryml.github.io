@@ -430,4 +430,20 @@ These findings <d-cite key="Mohammadshahi2025distillation"></d-cite> open up sev
 
 Understanding these aspects will be crucial for the responsible development and deployment of distilled AI models.
 
+## Citing our work
+
+If you find this work useful, please consider citing it using the following BibTeX entry:
+
+```bibtex
+@article{mohammadshahi2025leftafterdistillation,
+  author = {Mohammadshahi, Aida and Ioannou, Yani},
+  title = {What is Left After Distillation? How Knowledge Transfer Impacts Fairness and Bias},
+  journal = {Transactions on Machine Learning Research (TMLR)},
+  year = {2025},
+  arxivid = {2410.08407},
+  eprint = {2410.08407},
+  eprinttype = {arXiv}
+}
+```
+
 {% twitter https://x.com/Aidamo27/status/1912626418867196160 %}

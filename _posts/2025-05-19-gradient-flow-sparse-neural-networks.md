@@ -257,4 +257,24 @@ Understanding gradient flow provides valuable insights into the challenges of tr
 
 The journey towards efficiently training sparse neural networks that are as performant as their dense counterparts, without relying on dense pre-training or specific "winning ticket" initializations, continues. Methods that can robustly navigate the complex loss landscapes of sparse models and maintain healthy gradient flow are key to unlocking the full potential of sparse training of neural networks.
 
+## Citing our work
+
+If you find this work useful, please consider citing it using the following BibTeX entry:
+
+```bibtex
+@inproceedings{evci2022gradientflowsparse,
+  author = {Evci, Utku and Ioannou, Yani A. and Keskin, Cem and Dauphin, Yann},
+  title = {Gradient Flow in Sparse Neural Networks and How Lottery Tickets Win},
+  year = {2022},
+  booktitle = {Proceedings of the 36th AAAI Conference on Artificial Intelligence},
+  venue = {Vancouver, BC, Canada},
+  eventdate = {2022-02-22/2022-03-1},
+  month = feb,
+  arxivid = {2010.03533},
+  eprint = {2010.03533},
+  eprinttype = {arXiv},
+  doi = {10.1609/aaai.v36i6.20611}
+}
+```
+
 {% twitter https://x.com/yanii/status/1496532190682927107 %}

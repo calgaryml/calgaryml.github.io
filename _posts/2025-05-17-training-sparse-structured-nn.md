@@ -333,4 +333,22 @@ The insight that successful DST methods at high sparsity inherently learn to red
 
 SRigL paves the way for deploying highly efficient and accurate sparse models in a wider range of applications, making powerful AI more accessible and sustainable.
 
+## Citing our work
+
+If you find this work useful, please consider citing it using the following BibTeX entry:
+
+```bibtex
+@inproceedings{lasby2024srigl,
+  author = {Lasby, Mike and Golubeva, Anna and Evci, Utku and Nica, Mihai and Ioannou, Yani},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  venue = {Vienna, Austria},
+  eventdate = {2024-05-07/2024-05-11},
+  title = {Dynamic Sparse Training with Structured Sparsity},
+  year = {2024},
+  arxivid = {2305.02299},
+  eprint = {2305.02299},
+  eprinttype = {arXiv}
+}
+```
+
 {% twitter https://x.com/mikelasby/status/1749622255339094128 %}
