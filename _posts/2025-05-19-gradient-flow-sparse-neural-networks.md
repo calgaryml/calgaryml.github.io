@@ -23,6 +23,7 @@ authors:
 paper_url: https://arxiv.org/abs/2010.03533
 bibliography: 2025-05-19-gradient-flow-sparse-neural-networks.bib
 thumbnail: assets/img/gradientflow/sparse_fanin_equalout.svg
+pretty_table: true
 
 toc: true
 related_posts: true
@@ -197,6 +198,35 @@ So, if LTs don't fix the gradient flow problem, why do they work so well? The pa
 1.  **Same Basin of Attraction:**
     By interpolating between the LT solution/initialization and the pruned solution, the paper shows that they lie within the same low-loss basin of attraction. In contrast, scratch solutions often have a high loss barrier separating them from the pruned solution's basin.
 
+<div class="container text-center align-items-center justify-content-center mx-auto" markdown=1>
+<div class="caption">
+Table 1: Ensemble & Prediction Disagreement. We compare the function similarity <d-cite key="Fort2020deep"></d-cite> with the original pruning solution and ensemble generalization over 5 sparse models, trained from random initializations and LTs (lottery tickets). As a baseline, we also show results for 5 pruned models trained from different random initializations.
+</div>
+
+#### LeNet5 MNIST
+
+| **Initialization**    | **(Top-1) Test Accuracy** | **Ensemble** | **Disagreement** | **Disagreement w/ Pruned** |
+| :-------------------- | ------------------------- | ------------ | ---------------- | -------------------------- |
+| LT                    | 98.52 ± 0.02              | 98.58        | 0.0043 ± 0.0006  | 0.0089 ± 0.0002            |
+| Scratch               | 97.04 ± 0.15              | 98.00        | 0.0316 ± 0.0023  | 0.0278 ± 0.0020            |
+| Scratch (Diff. Init.) | 97.19 ± 0.33              | 98.43        | 0.0352 ± 0.0037  | 0.0278 ± 0.0032            |
+| Prune Restart         | 98.60 ± 0.01              | 98.63        | 0.0027 ± 0.0003  | 0.0077 ± 0.0003            |
+| Pruned Soln.          | 98.53                     | --           | --               | --                         |
+| 5 Diff. Pruned        | 98.30 ± 0.23              | 99.07        | 0.0214 ± 0.0023  | 0.0197 ± 0.0019\*          |
+
+#### ResNet50 ImageNet
+
+| **Initialization** | **(Top-1) Test Accuracy** | **Ensemble** | **Disagreement** | **Disagreement w/ Pruned** |
+| :----------------- | ------------------------- | ------------ | ---------------- | -------------------------- |
+| LT                 | 75.73 ± 0.08              | 76.27        | 0.0894 ± 0.0009  | 0.0941 ± 0.0009            |
+| Scratch            | 71.16 ± 0.13              | 74.05        | 0.2039 ± 0.0013  | 0.2033 ± 0.0012            |
+| Pruned Soln.       | 75.60                     | --           | --               | --                         |
+| 5 Diff. Pruned     | 75.65 ± 0.13              | 77.80        | 0.1620 ± 0.0008  | 0.1623 ± 0.0011\*          |
+
+[*] Here we compare 4 different pruned models with the pruning solution LT/Scratch are derived from.
+
+</div>
+
 {:start="3"}
 
 1.  **Functional Similarity:**
@@ -226,6 +256,6 @@ This investigation into gradient flow in sparse neural networks reveals:
 
 Understanding gradient flow provides valuable insights into the challenges of training sparse neural networks. While sparsity-aware initializations and Dynamic Sparse Training offer promising avenues for improving how we train sparse models from scratch, the success of Lottery Tickets seems more about "remembering" a good solution than fundamentally solving the optimization difficulties in sparse landscapes.
 
-The journey towards efficiently training sparse neural networks that are as performant as their dense counterparts, without relying on dense pre-training or specific "winning ticket" initializations, continues. Methods that can robustly navigate the complex loss landscapes of sparse models and maintain healthy gradient flow are key to unlocking the full potential of sparse AI.
+The journey towards efficiently training sparse neural networks that are as performant as their dense counterparts, without relying on dense pre-training or specific "winning ticket" initializations, continues. Methods that can robustly navigate the complex loss landscapes of sparse models and maintain healthy gradient flow are key to unlocking the full potential of sparse training of neural networks.
 
 {% twitter https://x.com/yanii/status/1496532190682927107 %}
