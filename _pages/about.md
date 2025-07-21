@@ -30,9 +30,9 @@ is a research group led by [Yani Ioannou](https://yani.ai) within the [Schulich 
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/labphotos/neurips2024.jpg" title="NeurIPS 2024" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/labphotos/icml2025.jpg" title="ICML 2025" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    CML had <a href="https://www.calgaryml.com/assets/pdf/cml_neurips_2024.pdf">5 different works being presented by 6 students</a> at the premier machine learning conference, <a href="https://neurips.cc/Conferences/2024">Neural Information Processing Systems (NeurIPS) 2024</a>, across the workshops and main conference.
+    CML had <a href="https://www.calgaryml.com/assets/pdf/cml_icml_2025.pdf">6 different works being presented by 5 students</a> at one of the top machine learning conferences, <a href="https://icml.cc/Conferences/2025">International Conference on Machine Learning (ICML) 2025</a>, across the workshops and main conference.
 </div>
