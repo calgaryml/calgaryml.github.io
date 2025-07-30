@@ -7,7 +7,7 @@
 
 "CVPR":
   url: https://openaccess.thecvf.com/menu
-  color: "#ffcd00"
+  color: "#ff671f"
 "NeurIPS":
   url: https://proceedings.neurips.cc
   color: "#ff671f"
@@ -41,6 +41,12 @@
 "CPAL Spotlight":
   url: https://cpal.cc
   color: "#9c0534"
+"COLM Workshops":
+  url: https://cpal.cc
+  color: "#9c0534"
+"SEGAN":
+  url: https://www.sciencedirect.com/journal/sustainable-energy-grids-and-networks
+  color: "#ffcd00"
 "arXiv preprint":
   url: https://arxiv.org
   color: "#d6001c"
