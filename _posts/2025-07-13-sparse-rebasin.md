@@ -4,7 +4,7 @@ title: "Winning the Other Lottery: Aligning Masks for Sparse Training"
 description: "An exploration of why Lottery Ticket masks fail on new random initializations and how understanding weight symmetry allows us to successfully reuse them."
 date: 2025-07-14
 last_updated: 2025-07-14
-post_author: Rohan Jain
+post_author: Yani Ioannou
 authors:
   - name: Mohammed Adnan
     url: "https://www.linkedin.com/in/adnan-mohammed-/" # Placeholder URL
@@ -29,7 +29,7 @@ authors:
 paper_url: https://arxiv.org/abs/2505.05143
 doi: # To be added upon publication
 bibliography: 2025-07-13-sparse-rebasin.bib
-thumbnail: assets/img/aligning-masks/method_overview.png
+thumbnail: assets/img/sparse-rebasin/sparsebasin_sparsetrainingproblem.svg
 pretty_table: true
 
 toc: true
@@ -38,7 +38,7 @@ related_posts: true
 
 ## TL;DR
 
-The Lottery Ticket Hypothesis (LTH) provides a recipe for finding remarkably sparse "winning ticket" networks that can be trained to match the performance of their dense counterparts. However, there's a catch: a winning ticket's sparse mask is tightly coupled to the _original weight initialization_ used to find it <d-cite key="frankle2019lth"></d-cite>. Using the same mask with a new random initialization (the "sparse training problem") results in a significant drop in performance, making LTH a costly procedure. This paper, "Sparse Training from Random Initialization: Aligning Lottery Ticket Masks using Weight Symmetry" <d-cite key="adnan2025sparse"></d-cite>, recently accepted to **ICML 2025**, investigates this from a weight-space symmetry perspective and finds:
+The Lottery Ticket Hypothesis (LTH) provides a recipe for finding remarkably sparse "winning ticket" networks that can be trained to match the performance of their dense counterparts. However, there's a catch: a winning ticket's sparse mask is tightly coupled to the _original weight initialization_ used to find it <d-cite key="frankle2019lth"></d-cite>. Using the same mask with a new random initialization (the "sparse training problem") results in a significant drop in performance, making LTH a costly procedure. Our **ICML 2025** paper "Sparse Training from Random Initialization: Aligning Lottery Ticket Masks using Weight Symmetry" <d-cite key="adnan2025sparse"></d-cite> investigates this from a weight-space symmetry perspective and finds:
 
 - **The Problem is Misalignment:** The reason LTH masks don't generalize to new initializations is a misalignment of optimization basins in the loss landscape, which arises from the inherent permutation symmetries of neural networks. A mask found in one basin won't work well if the new initialization starts in a different, symmetrically equivalent basin <d-cite key="adnan2025sparse"></d-cite>.
 - **The Solution is Alignment:** We can fix this! By finding the permutation that aligns the basins of two different models and applying that same permutation to the LTH mask, we can successfully train a sparse network from a _new_ random initialization <d-cite key="adnan2025sparse"></d-cite>.
@@ -60,7 +60,7 @@ This process can produce sparse models that match the performance of the origina
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="assets/img/aligning-masks/lth_problem.png" alt="Diagram showing the sparse training problem where a pruned mask applied to a new initialization performs poorly." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="/assets/img/sparse-rebasin/sparsetrainingproblem2.svg" alt="Diagram showing the sparse training problem where a pruned mask applied to a new initialization performs poorly." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Figure 1: (Left) The standard pruning pipeline creates a good pruned solution. (Right) The sparse training problem: applying the mask from the pruned solution to a new, different random initialization results in poor performance.</div>
@@ -75,7 +75,7 @@ The answer lies in a fundamental property of neural networks: **weight symmetry*
 <div class="container">
   <div class="row align-items-center justify-content-center">
       <div class="col-10 mt-3 mt-md-0">
-          <img src="assets/img/aligning-masks/weight_symmetry.png" alt="Diagram illustrating that swapping two neurons results in a functionally identical network." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="/assets/img/sparse-rebasin/weightsymmetry3.svg" alt="Diagram illustrating that swapping two neurons results in a functionally identical network." class="img-fluid rounded z-depth-0" loading="eager" />
           <div class="caption">Figure 2: Swapping neurons $h_1$ and $h_2$ (along with their corresponding weights) results in a different point in weight space, but the network's output is unchanged.</div>
       </div>
   </div>
@@ -93,7 +93,7 @@ The optimization process is essentially starting in the wrong valley for the map
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="assets/img/aligning-masks/hypothesis_viz.png" alt="Loss landscape showing how a naive mask application fails, while a permuted mask succeeds." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="/assets/img/sparse-rebasin/sparsebasin_sparsetrainingproblem.svg" alt="Loss landscape showing how a naive mask application fails, while a permuted mask succeeds." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Figure 3: An illustration of our hypothesis <d-cite key="adnan2025sparse"></d-cite>. (a) A dense model A is trained and pruned, defining a mask $m_A$. (b) Training model B from a new initialization with mask $m_A$ (red path) fails. Our solution is to permute the mask to $\pi(m_A)$, which aligns with model B's basin and enables successful sparse training (green path).</div>
@@ -116,7 +116,7 @@ Our method leverages recent advances in model merging, like Git Re-Basin <d-cite
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="assets/img/aligning-masks/method_overview.png" alt="Diagram of the training paradigm, from training dense models to permutation matching and final sparse training." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="assets/img/sparse-rebasin/method_overview.png" alt="Diagram of the training paradigm, from training dense models to permutation matching and final sparse training." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Figure 4: The overall framework of our training procedure <d-cite key="adnan2025sparse"></d-cite>. We use two trained dense models to find a permutation `π`. This permutation is then applied to the mask from Model A, allowing it to be successfully used to train Model B from a random initialization.</div>
@@ -135,7 +135,7 @@ When we compare the performance of the standard `LTH` solution, the `Naive` solu
 <div class="container">
   <div class="row justify-content-center align-items-center bg-white">
       <div class="col-10 mt-3 mt-md-0">
-          <img src="assets/img/aligning-masks/results_resnet_cifar10.png" alt="Graphs showing test accuracy vs rewind points for ResNet20 on CIFAR-10 at different sparsity levels and widths." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="assets/img/sparse-rebasin/results_resnet_cifar10.png" alt="Graphs showing test accuracy vs rewind points for ResNet20 on CIFAR-10 at different sparsity levels and widths." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Figure 5: Test accuracy on CIFAR-10 for ResNet20 of varying widths (`w`) and sparsities. The permuted solution (blue) consistently outperforms the naive one (orange) and gets closer to the LTH baseline (green), especially as model width increases <d-cite key="adnan2025sparse"></d-cite>.</div>
@@ -148,7 +148,7 @@ We found that our method works even better on wider models. Wider networks have 
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-10 mt-3 mt-md-0 bg-white">
-          <img src="assets/img/aligning-masks/diversity_table.png" alt="Table showing ensemble diversity metrics for different sparse models." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="assets/img/sparse-rebasin/diversity_table.png" alt="Table showing ensemble diversity metrics for different sparse models." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Table 1: Functional diversity analysis on CIFAR-100 <d-cite key="adnan2025sparse"></d-cite>. An ensemble of `permuted` models is far more diverse (higher disagreement, KL, JS) than an `LTH` ensemble. This increased diversity leads to a much larger boost in ensemble accuracy, similar to ensembles of independently pruned (IMP) models.</div>
