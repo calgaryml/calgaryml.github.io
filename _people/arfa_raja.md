@@ -7,6 +7,6 @@ img: assets/img/people/arfa_raja.jpg
 redirect: https://github.com/arfaraja
 linkedin_username: arfaraja
 github_username: arfaraja
-category: Undergraduates
+category: Alumni
 show: true
 ---
