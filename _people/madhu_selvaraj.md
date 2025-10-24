@@ -3,7 +3,7 @@ layout: page
 firstname: Madhu
 lastname: Selvaraj
 pronouns: she/her
-description: MSc Student co-supervised with <a href="https://lib.engineer">Geoffrey Messier</a> (Fall 2023 - Present) 
+description: MSc Student co-supervised with <a href="https://lib.engineer">Geoffrey Messier</a> (Fall 2023 - Present)
 img: assets/img/people/madhu_selvaraj.jpg
 redirect: https://github.com/madhuselvarajj
 linkedin_username: madhu-selvaraj
