@@ -1,7 +1,7 @@
 ---
 layout: distill
-title: "Winning the Other Lottery: Aligning Masks for Sparse Training"
-description: "An exploration of why Lottery Ticket masks fail on new random initializations and how understanding weight symmetry allows us to successfully reuse them."
+title: "Sparse Training from Random Initialization: Aligning Lottery Ticket Masks using Weight Symmetry"
+description: "An exploration of why Lottery Ticket masks fail on new random initializations and how understanding weight symmetry in neural networks allows us to successfully reuse them."
 date: 2025-07-14
 last_updated: 2025-07-14
 post_author: Yani Ioannou
@@ -26,8 +26,8 @@ authors:
     url: "https://yani.ai/"
     affiliations:
       name: University of Calgary
-paper_url: https://arxiv.org/abs/2505.05143
-doi: # To be added upon publication
+paper_url: https://proceedings.mlr.press/v267/adnan25a.html
+doi: 10.48550/arXiv.2505.05143
 bibliography: 2025-07-13-sparse-rebasin.bib
 thumbnail: assets/img/sparse-rebasin/sparsebasin_sparsetrainingproblem.svg
 pretty_table: true
@@ -38,12 +38,14 @@ related_posts: true
 
 ## TL;DR
 
-The Lottery Ticket Hypothesis (LTH) provides a recipe for finding remarkably sparse "winning ticket" networks that can be trained to match the performance of their dense counterparts. However, there's a catch: a winning ticket's sparse mask is tightly coupled to the _original weight initialization_ used to find it <d-cite key="frankle2019lth"></d-cite>. Using the same mask with a new random initialization (the "sparse training problem") results in a significant drop in performance, making LTH a costly procedure. Our **ICML 2025** paper "Sparse Training from Random Initialization: Aligning Lottery Ticket Masks using Weight Symmetry" <d-cite key="adnan2025sparse"></d-cite> investigates this from a weight-space symmetry perspective and finds:
+The Lottery Ticket Hypothesis (LTH) demonstrates that remarkably sparse "winning ticket" neural network models can be trained to match the performance of their dense counterparts. However, there's a catch: a winning ticket's sparse mask is tightly coupled to the _original weight initialization_ used to find it <d-cite key="frankle2019lth"></d-cite>. Using the same mask with any other random initialization results in a significant drop in performance &mdash; also known as the "sparse training problem".
 
-- **The Problem is Misalignment:** The reason LTH masks don't generalize to new initializations is a misalignment of optimization basins in the loss landscape, which arises from the inherent permutation symmetries of neural networks. A mask found in one basin won't work well if the new initialization starts in a different, symmetrically equivalent basin <d-cite key="adnan2025sparse"></d-cite>.
-- **The Solution is Alignment:** We can fix this! By finding the permutation that aligns the basins of two different models and applying that same permutation to the LTH mask, we can successfully train a sparse network from a _new_ random initialization <d-cite key="adnan2025sparse"></d-cite>.
-- **Bridging the Performance Gap:** Training with this **permuted mask** significantly improves generalization compared to naively using the original mask, nearly matching the performance of the original LTH solution across various models (VGG, ResNet) and datasets (CIFAR-10/100, ImageNet) <d-cite key="adnan2025sparse"></d-cite>.
-- **Unlocking Diversity:** Unlike standard LTH, which consistently relearns the same solution <d-cite key="evci2022gradientflow"></d-cite>, our permutation-based method can train more diverse solutions when starting from different random initializations. This leads to better-performing ensembles <d-cite key="adnan2025sparse"></d-cite>.
+Our **ICML 2025** paper "Sparse Training from Random Initialization: Aligning Lottery Ticket Masks using Weight Symmetry" <d-cite key="adnan2025sparse"></d-cite> investigates the sparse training problem from a weight-space symmetry perspective and finds:
+
+- **The Problem is Misalignment:** The reason LTH masks don't generalize to new initializations is a misalignment of optimization basins in the loss landscape, which arises from the inherent geometry and permutation symmetries of neural networks. A mask found in one basin won't work well if the new initialization starts in a different, symmetrically equivalent basin.
+- **The Solution is Alignment:** We can approximate the permutation that aligns the basins of two different models<d-cite key="ainsworth2023git,jordan2023repair"></d-cite>, and applying this same permutation to the LTH mask, we can successfully train a sparse neural network from a _new_ random initialization. The better the approximation of the permutation, the better the performance.
+- **Bridging the Performance Gap:** Training with this **permuted mask** significantly improves generalization compared to naively using the original mask, nearly matching the performance of the original LTH solution across various models and datasets when the models are wide enough to allow accurate permutation matching.
+- **Unlocking Diversity:** Unlike standard LTH, which consistently relearns the same solution <d-cite key="evci2022gradientflow"></d-cite>, our permutation-based method can train more diverse solutions when starting from different random initializations.
 
 ---
 
@@ -70,7 +72,7 @@ This process can produce sparse models that match the performance of the origina
 
 ## It's All About Symmetry
 
-The answer lies in a fundamental property of neural networks: **weight symmetry**. If you take a hidden layer in a network and swap two of its neurons—including their incoming and outgoing weights—the function the network computes remains identical <d-cite key="entezari2022role"></d-cite>. However, in the high-dimensional space of all possible weights, these two networks are at completely different locations.
+The answer lies in a fundamental property of neural networks: **weight symmetry**. If you take a layer in a neural network model and swap two of its neurons — including their incoming and outgoing weights — the function the network computes remains identical <d-cite key="nielsen1990,entezari2022role"></d-cite>. However, in the high-dimensional space of all possible weights, these two neural network models are at completely different locations.
 
 <div class="container">
   <div class="row align-items-center justify-content-center">
@@ -116,7 +118,7 @@ Our method leverages recent advances in model merging, like Git Re-Basin <d-cite
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="assets/img/sparse-rebasin/method_overview.png" alt="Diagram of the training paradigm, from training dense models to permutation matching and final sparse training." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="assets/img/sparse-rebasin/methodology.svg" alt="Diagram of the training paradigm, from training dense models to permutation matching and final sparse training." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Figure 4: The overall framework of our training procedure <d-cite key="adnan2025sparse"></d-cite>. We use two trained dense models to find a permutation `π`. This permutation is then applied to the mask from Model A, allowing it to be successfully used to train Model B from a random initialization.</div>
