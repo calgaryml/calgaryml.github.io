@@ -68,25 +68,44 @@ The quest for smaller, faster, and more efficient neural networks has led to exc
 
 This process can produce sparse models that match the performance of the original dense one <d-cite key="frankle2019lth"></d-cite>, however requires expensive dense pre-training from many early training checkpoints in practice to identify a "winning ticket". What if we could just use a winning ticket mask to train a sparse model from a _new_ random initialization? This is the heart of the **sparse training problem**. Unfortunately, naively applying this doesn't work well; the performance drops dramatically <d-cite key="frankle2019lth,adnan2025sparse"></d-cite>.
 
-### Understanding the Sparse Training Problem via a 2D Loss Landscape
+## It's All About Symmetry
+
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+      <div class="col-10 mt-3 mt-md-0">
+          <img src="/assets/img/sparse-rebasin/weightsymmetry3.svg" alt="Diagram illustrating that swapping two neurons results in a functionally identical network." class="img-fluid rounded z-depth-0" loading="eager" />
+      </div>
+  </div>
+  <div class="caption">Figure 2: Swapping two neurons (and their incoming and outgoing weights) results in a functionally identical network, illustrating permutation or  weight symmetry.</div>
+</div>
+
+The answer lies in a fundamental property of neural networks: permutation or **weight symmetry**. If you take a layer in a neural network model and swap two of its neurons — including their incoming and outgoing weights — the function the neural network represents remains identical <d-cite key="nielsen1990,entezari2022role"></d-cite>. However, in the high-dimensional space of weight space where we optimize, these two neural network models are at completely different locations.
+
+This symmetry means the loss landscape is filled with many identical, mirrored **loss basins**. When we train a model from a random initialization, it descends into one of these basins. Recent work suggests that most solutions found by SGD lie in a _single_ basin, once you account for these permutations <d-cite key="entezari2022role,ainsworth2023git"></d-cite>.
+
+### The Geometry of the Sparse Training Problem
 
 <div class="container l-screen">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
           <img src="/assets/img/sparse-rebasin/sparsebasin_densepruning.svg" alt="Loss landscape showing dense training and weight magnitude-based pruning." class="img-fluid rounded z-depth-0" loading="eager" />
-        <div class="caption">(a): Dense neural network training and weight magnitude-based pruning results in performant neural network for inference with a sparse mask $\mathbf{m}_A$.</div>
+        <div class="caption">(a): Dense neural network training and pruning.</div>
       </div>
       <div class="col-lg mt-3 mt-md-0 bg-white">
         <img src="/assets/img/sparse-rebasin/sparsebasin_lth.svg" alt="Loss landscape showing Lottery Ticket Hypothesis methodology." class="img-fluid rounded z-depth-0" loading="eager" />
-        <div class="caption">(b): The Lottery Ticket Hypothesis (LTH) suggests the sparse mask $\mathbf{m}_A$ can be trained using the same training procedure as the original model, but with the mask applied from almost the start, achieving sparse training.</div>
+        <div class="caption">(b): The Lottery Ticket Hypothesis (LTH).</div>
       </div>
   </div>
-  <div class="caption">Figure 2: A dense neural network model of only two neurons, each with a single weight $w_0$ and $w_1$ respectively can illustrate the geometry of loss landscapes, and the sparse training problem.</div>
+  <div class="caption">Figure 3: A dense neural network model of only two neurons, each with a single weight $w_0$ and $w_1$ respectively can illustrate the geometry of loss landscapes, and the sparse training problem. (a) Dense neural network training and weight magnitude-based pruning results in performant neural network for inference with a sparse mask $\mathbf{m}_A$. (b): The Lottery Ticket Hypothesis (LTH) suggests the sparse mask $\mathbf{m}_A$ can be trained using the same training procedure as the original model, but with the mask applied from almost the start, achieving sparse training. </div>
 </div>
 
-Here we show the loss landscape of a neural network model of only two neurons, each with a single weight $w_0$ and $w_1$ respectively. This simple model can illustrate the geometry of loss landscapes, and convey our intuition about the sparse training problem.
+Here we show the loss landscape of a neural network model of only two neurons, each with a single weight $w_0$ and $w_1$ respectively. The model has two symmetric loss basins/local minima, corresponding to the two possible permutations of the neurons. This simple model can illustrate the geometry of loss landscapes, and convey our intuition about the sparse training problem.
 
-In Figure 2(a) a neural network $A$ is trained from random initialization $\mathbf{w}^{t=0}_A$ to a good solution $\mathbf{w}^{t=T}_A$, and pruned to remove the smallest magnitude weight, defining a mask $m_A$ and sparse neural network model $\mathbf{w}^{t=T}_A \odot m_A$. In general such dense training and pruning works well, and maintains good generalization (e.g. test accuracy).
+#### Pruning and the Lottery Ticket Hypothesis
+
+In Figure 3(a) a neural network $A$ is trained from random initialization $\mathbf{w}^{t=0}_A$ to a good solution $\mathbf{w}^{t=T}_A$, and pruned to remove the smallest magnitude weight, defining a mask $m_A$ and sparse neural network model $\mathbf{w}^{t=T}_A \odot m_A$. In general such dense training and pruning works well, and maintains good generalization (e.g. test accuracy).
+
+#### The Sparse Training Problem
 
 <div class="container">
   <div class="row justify-content-center align-items-center">
@@ -105,22 +124,6 @@ In Figure 2(a) a neural network $A$ is trained from random initialization $\math
   </div>
   <div class="caption">Figure 5: Our solution is to permute the mask to $\pi(m_A)$, which aligns with model B's basin and enables successful sparse training (green path).The permuted mask $\pi(m_A)$ aligns with model B's basin, enabling successful sparse training (green path).</div>
 </div>
-
-## It's All About Symmetry
-
-<div class="container">
-  <div class="row align-items-center justify-content-center">
-      <div class="col-10 mt-3 mt-md-0">
-          <img src="/assets/img/sparse-rebasin/weightsymmetry3.svg" alt="Diagram illustrating that swapping two neurons results in a functionally identical network." class="img-fluid rounded z-depth-0" loading="eager" />
-          
-      </div>
-  </div>
-  
-</div>
-
-The answer lies in a fundamental property of neural networks: permutation or **weight symmetry**. If you take a layer in a neural network model and swap two of its neurons — including their incoming and outgoing weights — the function the neural network represents remains identical <d-cite key="nielsen1990,entezari2022role"></d-cite>. However, in the high-dimensional space of weight space where we optimize, these two neural network models are at completely different locations.
-
-This symmetry means the loss landscape is filled with many identical, mirrored **loss basins**. When we train a model from a random initialization, it descends into one of these basins. Recent work suggests that most solutions found by SGD lie in a _single_ basin, once you account for these permutations <d-cite key="entezari2022role,ainsworth2023git"></d-cite>.
 
 ### The Hypothesis: A Tale of Two Basins
 
