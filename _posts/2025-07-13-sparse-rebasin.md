@@ -51,11 +51,11 @@ Our **ICML 2025** paper "Sparse Training from Random Initialization: Aligning Lo
 
 ## The Lottery Ticket Puzzle
 
-The quest for smaller, faster, and more efficient neural networks has led to exciting breakthroughs in network **sparsity**. One of the most influential ideas in this area is the **Lottery Ticket Hypothesis (LTH)** <d-cite key="frankle2019lth"></d-cite>. LTH suggests that within a large, dense network, there are sparse subnetworks (the "winning tickets") that are exceptionally good at training. The standard recipe is:
+The quest for smaller, faster, and more efficient neural networks has led to exciting breakthroughs in neural network **sparsity**. One of the most influential ideas in this area is the **Lottery Ticket Hypothesis (LTH)** <d-cite key="frankle2019lth"></d-cite>. LTH suggests that within a large, dense neural network, there are sparse subnetworks (the "winning tickets") that are exceptionally good at training. The standard recipe is:
 
-1.  Train a full, dense network.
+1.  Train a full, dense neural network.
 2.  Prune the connections with the smallest magnitude weights to get a sparse mask.
-3.  "Rewind" the weights of the remaining connections to their values from very early in training and train the sparse network again.
+3.  "Rewind" the weights of the remaining connections to their values from very early in training and train the sparse neural network again.
 
 This process can produce sparse models that match the performance of the original dense one <d-cite key="frankle2019lth"></d-cite>. But what if we want to skip the expensive dense pre-training and just use a winning ticket mask to train a sparse model from a _new_ random start? This is the heart of the **sparse training problem**. Unfortunately, this doesn't work well; the performance drops dramatically <d-cite key="frankle2019lth,adnan2025sparse"></d-cite>. A winning ticket seems to be valid for one lottery drawing only. Why?
 
