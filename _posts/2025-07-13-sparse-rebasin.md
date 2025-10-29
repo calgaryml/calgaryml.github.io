@@ -70,14 +70,18 @@ This process can produce sparse models that match the performance of the origina
 
 ### Understanding the Sparse Training Problem via a 2D Loss Landscape
 
+Here we show the loss landscape of a neural network model of only two neurons, each with a single weight $w_0$ and $w_1$ respectively. This simple model can illustrate the geometry of loss landscapes, and convey our intuition about the sparse training problem.
+
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
           <img src="/assets/img/sparse-rebasin/sparsebasin_densepruning.svg" alt="Loss landscape showing dense training and weight magnitude-based pruning." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
-  <div class="caption">Figure 2: A dense neural network model of only two neurons, each with a single weight $w_0$ and $w_1$ respectively can illustrate the geometry of loss landscapes, and the sparse training problem. A neural network $A$ is trained from random initialization $\mathbf{w}^{t=0}_A$ to a good solution $\mathbf{w}^{t=T}_A$, and pruned to remove the smallest magnitude weight, defining a mask $m_A$ and sparse neural network model $\mathbf{w}^{t=T}_A \odot m_A$. (b) Training model B from a new initialization with mask $m_A$ (red path) fails. Our solution is to permute the mask to $\pi(m_A)$, which aligns with model B's basin and enables successful sparse training (green path).</div>
+  <div class="caption">Figure 2: A dense neural network model of only two neurons, each with a single weight $w_0$ and $w_1$ respectively can illustrate the geometry of loss landscapes, and the sparse training problem.</div>
 </div>
+
+In Figure 2 a neural network $A$ is trained from random initialization $\mathbf{w}^{t=0}_A$ to a good solution $\mathbf{w}^{t=T}_A$, and pruned to remove the smallest magnitude weight, defining a mask $m_A$ and sparse neural network model $\mathbf{w}^{t=T}_A \odot m_A$. In general such dense training and pruning works well, and maintains good generalization (e.g. test accuracy).
 
 <div class="container">
   <div class="row justify-content-center align-items-center">
