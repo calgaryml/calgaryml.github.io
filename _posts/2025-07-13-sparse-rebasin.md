@@ -1,7 +1,7 @@
 ---
 layout: distill
 title: "Sparse Training from Random Initialization: Aligning Lottery Ticket Masks using Weight Symmetry"
-description: "An exploration of why Lottery Ticket masks fail on new random initializations and how understanding weight symmetry in neural networks allows us to successfully reuse them."
+description: "An exploration of why Lottery Ticket Hypothesis masks fail on new random initializations and how understanding weight symmetry in neural networks allows us to successfully reuse them."
 date: 2025-07-14
 last_updated: 2025-11-01
 post_author: Yani Ioannou
@@ -130,6 +130,15 @@ Finally, in Figure 3(c) we illustrate the sparse training problem. Here we attem
 
 ### The Hypothesis: A Tale of Two Basins
 
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+      <div class="col-lg mt-3 mt-md-0 bg-white">
+          <img src="/assets/img/sparse-rebasin/sparsebasin_permuted.svg" alt="Loss landscape showing dense training and weight magnitude-based pruning." class="img-fluid rounded z-depth-0" loading="eager" />
+      </div>
+  </div>
+  <div class="caption">Figure 3(d): Our solution is to permute the mask to $\pi(m_A)$, which aligns with model B's basin and enables successful sparse training (green path).The permuted mask $\pi(m_A)$ aligns with model B's basin, enabling successful sparse training (green path).</div>
+</div>
+
 This brings us to our core hypothesis <d-cite key="adnan2025sparse"></d-cite>:
 **An LTH mask fails on a new initialization because the mask is aligned to one basin, while the new random initialization has landed in another.**
 
@@ -141,27 +150,52 @@ The optimization process is essentially starting in the wrong valley for the map
 
 ## The Method: Aligning Masks with Permutations
 
-<div class="container">
-  <div class="row justify-content-center align-items-center">
-      <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="/assets/img/sparse-rebasin/sparsebasin_permuted.svg" alt="Loss landscape showing dense training and weight magnitude-based pruning." class="img-fluid rounded z-depth-0" loading="eager" />
-      </div>
-  </div>
-  <div class="caption">Figure 3(d): Our solution is to permute the mask to $\pi(m_A)$, which aligns with model B's basin and enables successful sparse training (green path).The permuted mask $\pi(m_A)$ aligns with model B's basin, enabling successful sparse training (green path).</div>
-</div>
-
 Our method leverages recent advances in model merging, like Git Re-Basin <d-cite key="ainsworth2023git"></d-cite>, which find the permutation that aligns the neurons of two separately trained models. Our training paradigm is as follows <d-cite key="adnan2025sparse"></d-cite>:
 
 1.  **Train Two Dense Models:** Start with two different random initializations, $\mathbf{w}_A^{t=0}$ and $\mathbf{w}_B^{t=0}$, and train them to convergence to get two dense models, $\mathbf{w}_A^{t=T}$ and $\mathbf{w}_B^{t=T}$, or `Model A` and `Model B`.
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg mt-3 mt-md-0 bg-white">
+            <img src="/assets/img/sparse-rebasin/method_step1.svg" alt="Method Step 1: Dense Training of Two models." class="img-fluid rounded z-depth-0" loading="eager" />
+        </div>
+      </div>
+    </div>
 2.  **Get the LTH Mask:** Prune `Model A` using standard iterative magnitude pruning (IMP) to get a sparse "winning ticket" mask, $\mathbf{m}_A$.
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg mt-3 mt-md-0 bg-white">
+            <img src="/assets/img/sparse-rebasin/method_step2.svg" alt="Method Step 1: Dense Training of Two models." class="img-fluid rounded z-depth-0" loading="eager" />
+        </div>
+      </div>
+    </div>
 3.  **Find the Permutation relating the Models:** Use an **activation matching** algorithm <d-cite key="jordan2023repair"></d-cite> to find the permutation, $\pi$, that best aligns the neurons of `Model A` with `Model B`, i.e. $\mathbf{w}_B^{t=T} = \pi(\mathbf{w}_A^{t=T})$. This essentially finds the "rotation" or permutation needed to map one solution basin onto the other.
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg mt-3 mt-md-0 bg-white">
+            <img src="/assets/img/sparse-rebasin/method_step3.svg" alt="Method Step 1: Dense Training of Two models." class="img-fluid rounded z-depth-0" loading="eager" />
+        </div>
+      </div>
+    </div>
 4.  **Permute the Mask:** Apply the permutation $\pi$ to the mask $\pi(\mathbf{m}_A)$ for `Model A` to get a new, aligned mask: $\mathbf{m}_B = \pi(\mathbf{m}_A)$ for `Model B`.
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg mt-3 mt-md-0 bg-white">
+          <img src="/assets/img/sparse-rebasin/method_step4.svg" alt="Method Step 1: Dense Training of Two models." class="img-fluid rounded z-depth-0" loading="eager" />
+        </div>
+      </div>
+    </div>
 5.  **Train from Scratch (Almost)!** Train a new sparse model starting from the $\mathbf{w}_B$ initialization (rewound to an early checkpoint, $k$), but using the **permuted mask** $\pi(\mathbf{m}_A)$.
-
 <div class="container">
+<div class="row justify-content-center align-items-center">
+<div class="col-lg mt-3 mt-md-0 bg-white">
+<img src="/assets/img/sparse-rebasin/method_step5.svg" alt="Method Step 1: Dense Training of Two models." class="img-fluid rounded z-depth-0" loading="eager" />
+</div>
+</div>
+</div>
+<div class="container l-screen">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="assets/img/sparse-rebasin/methodology.svg" alt="Diagram of the training paradigm, from training dense models to permutation matching and final sparse training." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="/assets/img/sparse-rebasin/methodology.svg" alt="Diagram of the training paradigm, from training dense models to permutation matching and final sparse training." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Figure 4: The overall framework of our training procedure <d-cite key="adnan2025sparse"></d-cite>. We use two trained dense models to find a permutation $\pi$. This permutation is then applied to the mask from Model A, allowing it to be successfully used to train Model B from a random initialization.</div>
