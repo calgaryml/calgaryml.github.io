@@ -85,6 +85,8 @@ This symmetry means the loss landscape is filled with many identical, mirrored *
 
 ### The Geometry of the Sparse Training Problem
 
+#### Dense Training and Pruning
+
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
@@ -98,7 +100,7 @@ Here we show the loss landscape of a neural network model of only two neurons, e
 
 In Figure 3(a) a neural network $A$ is trained from random initialization $\mathbf{w}^{t=0}_A$ to a good solution $\mathbf{w}^{t=T}_A$, and pruned to remove the smallest magnitude weight, defining a mask $\mathbf{m}_A$ and sparse neural network model $\mathbf{w}^{t=T}_A \odot m_A$. In general such dense training and pruning works well, and maintains good generalization (e.g. test accuracy).
 
-#### Pruning and the Lottery Ticket Hypothesis
+#### The Lottery Ticket Hypothesis
 
 <div class="container">
   <div class="row justify-content-center align-items-center">
@@ -124,6 +126,10 @@ This is what the Lottery Ticket Hypothesis (LTH) suggests: that the sparse mask 
   <div class="caption">Figure 3(c): The sparse training problem is illustrated by attempting to train model $B$ from a new random initialization, $\mathbf{w}^{t=0}_B$, while re-using the sparse mask $m_A$ discovered from pruning. Sparse training of model $B$ fails with the original mask, as one of the most important weights is not preserved.</div>
 </div>
 
+Finally, in Figure 3(c) we illustrate the sparse training problem. Here we attempt to train a new neural network $B$ from a new random initialization, $\mathbf{w}^{t=0}_B$, while re-using the sparse mask $\mathbf{m}_A$ discovered from pruning neural network $A$. Sparse training of neural network $B$ fails with the original mask, as one of the most important weights is not preserved when we project using $\mathbf{m}_A$, projecting our weight instead to a location far from the solution basin, andleading to poor generalization (e.g. test accuracy).
+
+### The Hypothesis: A Tale of Two Basins
+
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
@@ -133,23 +139,12 @@ This is what the Lottery Ticket Hypothesis (LTH) suggests: that the sparse mask 
   <div class="caption">Figure 3(d): Our solution is to permute the mask to $\pi(m_A)$, which aligns with model B's basin and enables successful sparse training (green path).The permuted mask $\pi(m_A)$ aligns with model B's basin, enabling successful sparse training (green path).</div>
 </div>
 
-### The Hypothesis: A Tale of Two Basins
-
 This brings us to our core hypothesis <d-cite key="adnan2025sparse"></d-cite>:
 **An LTH mask fails on a new initialization because the mask is aligned to one basin, while the new random initialization has landed in another.**
 
 The optimization process is essentially starting in the wrong valley for the map it's been given. Naively applying the mask pulls the new initialization far away from a good solution path, leading to poor performance <d-cite key="adnan2025sparse"></d-cite>.
 
-<div class="container">
-  <div class="row justify-content-center align-items-center">
-      <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="/assets/img/sparse-rebasin/sparsebasin_sparsetrainingproblem.svg" alt="Loss landscape showing how a naive mask application fails, while a permuted mask succeeds." class="img-fluid rounded z-depth-0" loading="eager" />
-      </div>
-  </div>
-  <div class="caption">Figure 3: An illustration of our hypothesis <d-cite key="adnan2025sparse"></d-cite>. (a) A dense model A is trained and pruned, defining a mask $m_A$. (b) Training model B from a new initialization with mask $m_A$ (red path) fails. Our solution is to permute the mask to $\pi(m_A)$, which aligns with model B's basin and enables successful sparse training (green path).</div>
-</div>
-
-But what if we could "rotate" the mask to match the orientation of the new basin? This is exactly what we propose.
+**But what if we could "rotate" the mask to match the orientation of the new basin?** This is exactly what we propose.
 
 ---
 
