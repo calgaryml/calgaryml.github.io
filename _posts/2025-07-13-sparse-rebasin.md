@@ -3,7 +3,7 @@ layout: distill
 title: "Sparse Training from Random Initialization: Aligning Lottery Ticket Masks using Weight Symmetry"
 description: "An exploration of why Lottery Ticket masks fail on new random initializations and how understanding weight symmetry in neural networks allows us to successfully reuse them."
 date: 2025-07-14
-last_updated: 2025-07-14
+last_updated: 2025-11-01
 post_author: Yani Ioannou
 authors:
   - name: Mohammed Adnan
@@ -126,18 +126,9 @@ This is what the Lottery Ticket Hypothesis (LTH) suggests: that the sparse mask 
   <div class="caption">Figure 3(c): The sparse training problem is illustrated by attempting to train model $B$ from a new random initialization, $\mathbf{w}^{t=0}_B$, while re-using the sparse mask $m_A$ discovered from pruning. Sparse training of model $B$ fails with the original mask, as one of the most important weights is not preserved.</div>
 </div>
 
-Finally, in Figure 3(c) we illustrate the sparse training problem. Here we attempt to train a new neural network $B$ from a new random initialization, $\mathbf{w}^{t=0}_B$, while re-using the sparse mask $\mathbf{m}_A$ discovered from pruning neural network $A$. Sparse training of neural network $B$ fails with the original mask, as one of the most important weights is not preserved when we project using $\mathbf{m}_A$, projecting our weight instead to a location far from the solution basin, andleading to poor generalization (e.g. test accuracy).
+Finally, in Figure 3(c) we illustrate the sparse training problem. Here we attempt to train a new neural network $B$ from a new random initialization, $\mathbf{w}^{t=0}_B$, while re-using the sparse mask $\mathbf{m}_A$ discovered from pruning neural network $A$. Sparse training of neural network $B$ fails with the original mask, as one of the most important weights is not preserved when we project using $\mathbf{m}_A$, projecting our weight instead to a location far from the solution basin, and leading to poor generalization (e.g. test accuracy).
 
 ### The Hypothesis: A Tale of Two Basins
-
-<div class="container">
-  <div class="row justify-content-center align-items-center">
-      <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="/assets/img/sparse-rebasin/sparsebasin_permuted.svg" alt="Loss landscape showing dense training and weight magnitude-based pruning." class="img-fluid rounded z-depth-0" loading="eager" />
-      </div>
-  </div>
-  <div class="caption">Figure 3(d): Our solution is to permute the mask to $\pi(m_A)$, which aligns with model B's basin and enables successful sparse training (green path).The permuted mask $\pi(m_A)$ aligns with model B's basin, enabling successful sparse training (green path).</div>
-</div>
 
 This brings us to our core hypothesis <d-cite key="adnan2025sparse"></d-cite>:
 **An LTH mask fails on a new initialization because the mask is aligned to one basin, while the new random initialization has landed in another.**
@@ -150,13 +141,22 @@ The optimization process is essentially starting in the wrong valley for the map
 
 ## The Method: Aligning Masks with Permutations
 
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+      <div class="col-lg mt-3 mt-md-0 bg-white">
+          <img src="/assets/img/sparse-rebasin/sparsebasin_permuted.svg" alt="Loss landscape showing dense training and weight magnitude-based pruning." class="img-fluid rounded z-depth-0" loading="eager" />
+      </div>
+  </div>
+  <div class="caption">Figure 3(d): Our solution is to permute the mask to $\pi(m_A)$, which aligns with model B's basin and enables successful sparse training (green path).The permuted mask $\pi(m_A)$ aligns with model B's basin, enabling successful sparse training (green path).</div>
+</div>
+
 Our method leverages recent advances in model merging, like Git Re-Basin <d-cite key="ainsworth2023git"></d-cite>, which find the permutation that aligns the neurons of two separately trained models. Our training paradigm is as follows <d-cite key="adnan2025sparse"></d-cite>:
 
-1.  **Train Two Dense Models:** Start with two different random initializations, `w_A` and `w_B`, and train them to convergence to get two dense models, `Model A` and `Model B`.
-2.  **Find the Permutation:** Use an **activation matching** algorithm <d-cite key="jordan2023repair"></d-cite> to find the permutation, `π`, that best aligns the neurons of `Model A` with `Model B`. This essentially finds the "rotation" needed to map one solution basin onto the other.
-3.  **Get the LTH Mask:** Prune `Model A` using standard iterative magnitude pruning (IMP) to get a sparse "winning ticket" mask, `m_A`.
-4.  **Permute the Mask:** Apply the permutation `π` to the mask to get a new, aligned mask: `π(m_A)`.
-5.  **Train from Scratch (Almost)!** Train a new sparse model starting from the `w_B` initialization (rewound to an early checkpoint, `k`), but using the **permuted mask** `π(m_A)`.
+1.  **Train Two Dense Models:** Start with two different random initializations, $\mathbf{w}_A^{t=0}$ and $\mathbf{w}_B^{t=0}$, and train them to convergence to get two dense models, $\mathbf{w}_A^{t=T}$ and $\mathbf{w}_B^{t=T}$, or `Model A` and `Model B`.
+2.  **Get the LTH Mask:** Prune `Model A` using standard iterative magnitude pruning (IMP) to get a sparse "winning ticket" mask, $\mathbf{m}_A$.
+3.  **Find the Permutation relating the Models:** Use an **activation matching** algorithm <d-cite key="jordan2023repair"></d-cite> to find the permutation, $\pi$, that best aligns the neurons of `Model A` with `Model B`, i.e. $\mathbf{w}_B^{t=T} = \pi(\mathbf{w}_A^{t=T})$. This essentially finds the "rotation" or permutation needed to map one solution basin onto the other.
+4.  **Permute the Mask:** Apply the permutation $\pi$ to the mask $\pi(\mathbf{m}_A)$ for `Model A` to get a new, aligned mask: $\mathbf{m}_B = \pi(\mathbf{m}_A)$ for `Model B`.
+5.  **Train from Scratch (Almost)!** Train a new sparse model starting from the $\mathbf{w}_B$ initialization (rewound to an early checkpoint, $k$), but using the **permuted mask** $\pi(\mathbf{m}_A)$.
 
 <div class="container">
   <div class="row justify-content-center align-items-center">
@@ -164,14 +164,14 @@ Our method leverages recent advances in model merging, like Git Re-Basin <d-cite
           <img src="assets/img/sparse-rebasin/methodology.svg" alt="Diagram of the training paradigm, from training dense models to permutation matching and final sparse training." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
-  <div class="caption">Figure 4: The overall framework of our training procedure <d-cite key="adnan2025sparse"></d-cite>. We use two trained dense models to find a permutation `π`. This permutation is then applied to the mask from Model A, allowing it to be successfully used to train Model B from a random initialization.</div>
+  <div class="caption">Figure 4: The overall framework of our training procedure <d-cite key="adnan2025sparse"></d-cite>. We use two trained dense models to find a permutation $\pi$. This permutation is then applied to the mask from Model A, allowing it to be successfully used to train Model B from a random initialization.</div>
 </div>
 
 ---
 
-## The Results: It Works!
+## The Result: It Works (Approximately!)
 
-Across a wide range of experiments, our method demonstrates that aligning the mask is the key to solving the sparse training problem for LTH masks <d-cite key="adnan2025sparse"></d-cite>.
+Across a wide range of experiments, our method demonstrates that aligning the mask is the key to solving the sparse training problem for LTH masks <d-cite key="adnan2025sparse"></d-cite>. Of course the permutation matching is only approximate, and so the performance doesn't perfectly match the original LTH solution, but it comes remarkably close, especially as model width increases which has been shown to improve permutation matching quality <d-cite key="ainsworth2023git,jordan2023repair"></d-cite>.
 
 ### Closing the Performance Gap
 
