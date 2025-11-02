@@ -192,6 +192,9 @@ Our method leverages recent advances in model merging, like Git Re-Basin <d-cite
 </div>
 </div>
 </div>
+
+### Permutated vs. the LTH and Naive Baselines
+
 <div class="container l-screen">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
@@ -200,6 +203,12 @@ Our method leverages recent advances in model merging, like Git Re-Basin <d-cite
   </div>
   <div class="caption">Figure 4: The overall framework of our training procedure <d-cite key="adnan2025sparse"></d-cite>. We use two trained dense models to find a permutation $\pi$. This permutation is then applied to the mask from Model A, allowing it to be successfully used to train Model B from a random initialization.</div>
 </div>
+
+We present the methodology of the three different training paradigms we compare in our results here in Figure 4:
+
+1. **LTH**: The original Lottery Ticket Hypothesis approach, which trains a dense model and then prunes it.
+2. **Naive**: A straightforward application of the pruned mask from Model A to Model B without any permutation, this is the standard sparse training problem setup, and performs poorly.
+3. **Permuted**: Our proposed method, which finds a permutation of the weights to better align the two models.
 
 ---
 
