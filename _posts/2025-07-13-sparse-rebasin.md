@@ -49,24 +49,52 @@ Our **ICML 2025** paper "Sparse Training from Random Initialization: Aligning Lo
 
 ---
 
-## The Lottery Ticket Hypothesis and the Sparse Training Problem
+## The Sparse Training Problem and the Lottery Ticket Hypothesis
+
+### The Sparse Training Problem
 
 <div class="container">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="/assets/img/sparse-rebasin/sparsetrainingproblem2.svg" alt="Diagram showing the sparse training problem where a pruned mask applied to a new initialization performs poorly." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="/assets/img/sparse-rebasin/sparsetraining_pruned.svg" alt="Diagram showing standard training and pruning with a dense model." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
-  <div class="caption">Figure 1: (Left) The standard pruning pipeline creates a good pruned solution. (Right) The sparse training problem: applying the mask from the pruned solution to a new, different random initialization results in poor performance.</div>
+  <div class="caption">Figure 1(a): The standard dense training and pruning pipeline creates a good pruned solution.</div>
 </div>
 
-The quest for smaller, faster, and more efficient neural networks has led to exciting breakthroughs in neural network **sparsity**. One of the most influential ideas in this area is the **Lottery Ticket Hypothesis (LTH)** <d-cite key="frankle2019lth"></d-cite>. LTH suggests that within a large, dense neural network, there are sparse subnetworks (the "winning tickets") that are exceptionally good at training. The standard LTH methodology is:
+Dense neural network training followed by pruning is a well-established method for obtaining smaller, efficient models for inference, we can train a dense neural network to convergence, and then prune it to obtain a sparse mask. The resulting sparse model can often match the performance of the original dense model <d-cite key="han2015deep,frankle2019lth"></d-cite>.
+
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+      <div class="col-lg mt-3 mt-md-0 bg-white">
+          <img src="/assets/img/sparse-rebasin/sparsetraining_sparsetraining.svg" alt="Diagram showing the sparse training problem." class="img-fluid rounded z-depth-0" loading="eager" />
+      </div>
+  </div>
+  <div class="caption">Figure 1(b): The sparse training problem: applying the mask from the pruned solution to a new, different random initialization results in poor performance.</div>
+</div>
+
+If we can use a sparse neural network at test/inference time, why can't we train the model sparse from the beginning? The sparse training problem arises when we try to reuse the sparse mask obtained from pruning to train a new model from a different random initialization. Naively applying the mask to this new initialization leads to a significant drop in performance. This phenomenon has been observed across various architectures and datasets <d-cite key="frankle2019lth"></d-cite>.
+
+### The Lottery Ticket Hypothesis
+
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+      <div class="col-lg mt-3 mt-md-0 bg-white">
+          <img src="/assets/img/sparse-rebasin/sparsetraining_lth_revised.svg" alt="Diagram showing the original Lottery Ticket Hypothesis." class="img-fluid rounded z-depth-0" loading="eager" />
+      </div>
+  </div>
+  <div class="caption">Figure 1(c): The Lottery Ticket Hypothesis (LTH) proposes a solution to the sparse training problem by rewinding the weights of the remaining connections to their values from very early in training before retraining the sparse model. Unfortunately it does not address the issue of applying the mask to a new initialization, and has been shown to effectively relearn the same solution as the original dense model.</div>
+</div>
+
+The Lottery Ticket Hypothesis (LTH) <d-cite key="frankle2019lth"></d-cite> proposes a solution to the sparse training problem. It suggests we can re-use a sparse mask by rewinding the weights of the remaining connections to their values from very early in training before retraining the sparse model. The standard LTH methodology is:
 
 1.  Train a full, dense neural network.
 2.  Prune the connections with the smallest magnitude weights to get a sparse mask.
 3.  "Rewind" the weights of the remaining connections to their values from very early in training and train the sparse neural network again.
 
-This process can produce sparse models that match the performance of the original dense one <d-cite key="frankle2019lth"></d-cite>, however requires expensive dense pre-training from many early training checkpoints in practice to identify a "winning ticket". What if we could just use a winning ticket mask to train a sparse model from a _new_ random initialization? This is the heart of the **sparse training problem**. Unfortunately, naively applying this doesn't work well; the performance drops dramatically <d-cite key="frankle2019lth,adnan2025sparse"></d-cite>.
+This process can produce sparse models that match the performance of the original dense one <d-cite key="frankle2019lth"></d-cite>, however requires expensive dense pre-training from many early training checkpoints in practice to identify a "winning ticket". Rather than the sparse training problem being solved, i.e. **re-using a mask with a new random initialization**, the LTH sidesteps it by ensuring the mask is trained within the original solution basin<d-cite key="evci2022gradientflow"></d-cite>. In fact, it has been shown that the LTH does not learn new solutions, but rather relearns the same solution as the original dense model <d-cite key="evci2022gradientflow"></d-cite>.
+
+The motivation of the **sparse training problem** is to answer: **What if we could just use a winning ticket mask to train a sparse model from a _new_ random initialization?** Unfortunately, the LTH doesn't solve this, but does point the way in that it highlights the importance of the **coupling between the sparse mask and the original weight initialization**.
 
 ## It's All About Symmetry
 
