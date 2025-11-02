@@ -284,16 +284,16 @@ As shown in Table 1, an ensemble of permuted models shows higher diversity acros
 
 This investigation into aligning sparse masks reveals:
 
-1.  **Symmetry is the Culprit:** The failure of LTH masks to transfer to new initializations is not a fundamental flaw of sparsity, but a consequence of weight permutation symmetry and the resulting misalignment of optimization basins <d-cite key="adnan2025sparse"></d-cite>.
-2.  **Permutation is the Solution:** By explicitly finding and correcting for this misalignment—by permuting the sparse mask—we can successfully reuse a winning ticket to train a high-performing sparse model from a completely new random initialization <d-cite key="adnan2025sparse"></d-cite>.
-3.  **Diversity is a Feature:** This approach not only solves a practical problem with LTH but also opens the door to finding more functionally diverse sparse solutions than LTH alone, leading to more powerful ensembles <d-cite key="adnan2025sparse"></d-cite>.
-4.  **Wider Models Align Better:** The effectiveness of the permutation alignment increases with model width, correlating with a reduction in the loss barrier between symmetrically equivalent solutions <d-cite key="adnan2025sparse"></d-cite>.
+1.  **Symmetry is the Culprit:** The failure of LTH masks to transfer to new initializations is not a fundamental flaw of sparsity itself, but a consequence of re-using a mask naively, and the resulting misalignment of the optimization basins corresponding to a new initialization and the mask's original basin.
+2.  **Permutation is the Solution:** By explicitly finding and correcting for this misalignment—by permuting the sparse mask we can successfully reuse a sparse mask derived from pruning to train a high-performing sparse model from a completely new random initialization.
+3.  **Diversity is a Feature:** This approach not only solves a practical problem with LTH but also opens the door to finding more functionally diverse sparse solutions than the LTH alone.
+4.  **Wider Models Align Better:** The effectiveness of the permutation alignment increases with model width and sparsity, suggesting that wider models provide a richer structure for permutation matching to work effectively, and highlighting the interplay between model architecture and optimization geometry.
 
 ## Conclusion and Future Directions
 
-This work provides a new lens through which to view the sparse training problem. The success of a lottery ticket isn't just about the mask's structure, but also its _alignment_ with the optimization landscape. While our method requires training two dense models to find the permutation and is thus a tool for insight rather than efficiency, it proves a crucial point: winning ticket masks are more portable than previously thought <d-cite key="adnan2025sparse"></d-cite>.
+This work provides a new lens through which to view the sparse training problem. The success of a lottery ticket isn't just about the mask's structure, but also its _alignment_ with the optimization landscape. While our method requires training two dense models to find the permutation, we also found that a models could be matched earlier in training. Regardless, our analysis is thus a tool for insight rather than efficiency, it proves a crucial point: it is possible to better align lottery ticket masks with new initializations.
 
-This opens up exciting new questions. Can we find these permutations more efficiently? Can we design initialization schemes that are "symmetry-aware" and land in a canonical basin by default? By showing that the barriers of sparse training can be overcome by understanding its underlying geometry, we hope to spur future work that makes training sparse models from scratch a practical and powerful reality <d-cite key="adnan2025sparse"></d-cite>.
+This opens up exciting new questions. By showing that the barriers of sparse training can be overcome by understanding its underlying geometry, we hope to spur future work that makes training sparse models from scratch a practical and powerful reality.
 
 ---
 
