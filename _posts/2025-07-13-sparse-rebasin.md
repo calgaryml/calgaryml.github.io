@@ -218,8 +218,6 @@ Across a wide range of experiments, our method demonstrates that aligning the ma
 
 ### Closing the Performance Gap
 
-When we compare the performance of the standard `LTH` solution, the `Naive` solution (un-permuted mask on a new init), and our `Permuted` solution, the results are clear. The `Permuted` approach consistently and significantly outperforms the `Naive` baseline, closing most of the performance gap to the original `LTH` solution. The effect is especially pronounced at higher sparsity levels, where the `Naive` method struggles most <d-cite key="adnan2025sparse"></d-cite>.
-
 <div class="container xl-screen">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
@@ -229,29 +227,56 @@ When we compare the performance of the standard `LTH` solution, the `Naive` solu
   <div class="caption">Figure 5: Test accuracy on CIFAR-10 for ResNet20 of varying widths (`w`) and sparsities. The permuted solution (blue) consistently outperforms the naive one (orange) and gets closer to the LTH baseline (green), especially as model width increases <d-cite key="adnan2025sparse"></d-cite>.</div>
 </div>
 
-### Wider is Better, and More Diverse
-
-We found that our method works even better on wider models. Wider networks have smoother loss landscapes, which allows the activation matching algorithm to find a more accurate permutation, reducing the loss barrier between basins <d-cite key="adnan2025sparse"></d-cite>.
-
 <div class="container xl-screen">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="/assets/img/sparse-rebasin/results_cifar100.svg"  alt="Table showing ensemble diversity metrics for different sparse models." class="img-fluid rounded z-depth-0" loading="eager" />
+          <img src="/assets/img/sparse-rebasin/results_cifar100.svg"  alt="Graphs showing test accuracy vs rewind points for ResNet20 on CIFAR-100 at different sparsity levels and widths." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
   <div class="caption">Figure 6: Test accuracy on CIFAR-100 for ResNet20 of varying widths (`w`) and sparsities. The permuted solution (blue) consistently outperforms the naive one (orange) and gets closer to the LTH baseline (green), especially as model width increases <d-cite key="adnan2025sparse"></d-cite>.</div>
 </div>
 
-Furthermore, by starting from different random initializations, our method can produce a more **diverse set of solutions** compared to LTH, which is known to be functionally very similar to the pruned model it came from <d-cite key="evci2022gradientflow"></d-cite>. This diversity is beneficial: an ensemble of our `permuted` models achieves significantly higher accuracy than an ensemble of `LTH` models, which are too similar to provide much of a boost <d-cite key="adnan2025sparse"></d-cite>.
-
-<div class="container l-screen">
+<div class="container">
   <div class="row justify-content-center align-items-center">
-      <div class="col-lg mt-3 mt-md-0 bg-white">
-          <img src="/assets/img/sparse-rebasin/results_vgg.svg"  alt="Table showing ensemble diversity metrics for different sparse models." class="img-fluid rounded z-depth-0" loading="eager" />
+      <div class="col-md mt-3 mt-md-0 bg-white">
+          <img src="/assets/img/sparse-rebasin/results_vgg.svg"  alt="Graphs showing test accuracy vs rewind points for VGG-11 on CIFAR-10 at different sparsity levels and widths." class="img-fluid rounded z-depth-0" loading="eager" />
       </div>
   </div>
-  <div class="caption">Figure 7: Test accuracy on CIFAR-10 for VGG-11 of varying widths (`w`) and sparsities. The permuted solution (blue) consistently outperforms the naive one (orange) and gets closer to the LTH baseline (green), especially as model width increases <d-cite key="adnan2025sparse"></d-cite>.
+  <div class="caption">Figure 7: Test accuracy on CIFAR-10 for VGG-11 of varying sparsities. The permuted solution (blue) consistently outperforms the naive one (orange) and gets closer to the LTH baseline (green), especially as model width increases <d-cite key="adnan2025sparse"></d-cite>.</div>
 </div>
+
+When we compare the performance of the standard `LTH` solution, the `Naive` solution (un-permuted mask on a new init), and our `Permuted` solution, the results are clear. The `Permuted` approach consistently and significantly outperforms the `Naive` baseline, closing most of the performance gap to the original `LTH` solution. The effect is especially pronounced for wider models and higher sparsity levels, where the `Naive` method struggles most.
+
+### Unlocking Diverse Solutions with a Single Mask
+
+<div class="container text-center align-items-center justify-content-center mx-auto" markdown=1>
+  <div class="caption">
+
+    Table 1: Ensemble Diversity Metrics for CIFAR-10/CIFAR-100: Although the mean test accuracy of LTH is higher, the ensemble of permuted models achieves better test accuracy due to better functional diversity of permuted models. Here we compare several measurements of function space similarity between the models including disagreement, which measures prediction differences [citation], and Kullback–Leibler (KL)/Jenson-Shannon (JS) divergence, which quantify how much the output distributions of different models differ [citation]. As shown, the permuted masks achieve similar diversity as computational expensive IMP solutions, also resulting in ensembles with a similar increase in generalization.
+
+  </div>
+
+| Mask                       | Test Accuracy (%) | Ensemble Acc. (%) | Disagreement | KL        | JS        |
+| :------------------------- | :---------------- | :---------------- | :----------- | :-------- | :-------- |
+| **ResNet20x{1}/CIFAR-10**  |                   |                   |              |           |           |
+| none (dense)               | 92.76 ± 0.106     | -                 | -            | -         | -         |
+| IMP                        | 91.09 ± 0.041     | 93.25             | 0.093        | 0.352     | 0.130     |
+| LTH                        | **91.15 ± 0.163** | 91.43             | 0.035        | 0.038     | 0.011     |
+| permuted                   | 89.38 ± 0.170     | **91.75**         | 0.107        | **0.273** | **0.091** |
+| naive                      | 88.68 ± 0.205     | 91.07             | **0.113**    | 0.271     | 0.089     |
+| **ResNet20x{4}/CIFAR-100** |                   |                   |              |           |           |
+| none (dense)               | 78.37 ± 0.059     | -                 | -            | -         | -         |
+| IMP                        | 74.46 ± 0.321     | 79.27             | 0.259        | 1.005     | 0.372     |
+| LTH                        | **75.35 ± 0.204** | 75.99             | 0.117        | 0.134     | 0.038     |
+| permuted                   | 72.48 ± 0.356     | **77.85**         | 0.278        | 0.918     | 0.327     |
+| naive                      | 71.05 ± 0.366     | 76.15             | **0.290**    | **0.970** | **0.348** |
+
+</div>
+
+A limitation of LTH is that it consistently converges to very similar solutions to the original pruned model <d-cite key="evci2022gradientflow"></d-cite>, and it is concluded that this occurs because the LTH is always trained with the same initialization/rewind point, and effectively relearns the same solution. Our hypothesis is that permuted LTH masks, trained with distinct initialization/rewind points and subject to approximation errors in permutation matching, may learn more diverse functions than the LTH itself.
+
+We analyze the diversity of sparse models trained at 90% sparsity, with either a permuted mask (permuted), the LTH mask (naive), LTH mask & init. and the original pruned solution (IMP) on which the LTH is based. We follow the same analysis as <d-cite key="evci2022gradientflow"></d-cite> and compare the diversity of the resulting models, over five different training runs, using disagreement score, KL divergence and JS divergence. We also compare with an ensemble of five models trained independently with different random seeds.
+As shown in Table 1, an ensemble of permuted models shows higher diversity across all the metrics than the LTH, showing that the permuted models learn a more diverse set of solutions. We provide additional details in the appendix.
 
 ---
 
