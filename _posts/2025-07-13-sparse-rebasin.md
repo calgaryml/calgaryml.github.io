@@ -236,10 +236,10 @@ Across a wide range of experiments, our method demonstrates that aligning the ma
   <div class="caption">Figure 6: Test accuracy on CIFAR-100 for ResNet20 of varying widths (`w`) and sparsities. The permuted solution (blue) consistently outperforms the naive one (orange) and gets closer to the LTH baseline (green), especially as model width increases <d-cite key="adnan2025sparse"></d-cite>.</div>
 </div>
 
-<div class="container">
-  <div class="row justify-content-center align-items-center">
-      <div class="col-md mt-3 mt-md-0 bg-white">
-          <img src="/assets/img/sparse-rebasin/results_vgg.svg"  alt="Graphs showing test accuracy vs rewind points for VGG-11 on CIFAR-10 at different sparsity levels and widths." class="img-fluid rounded z-depth-0" loading="eager" />
+<div class="container xl-screen">
+  <div class="row">
+      <div class="col-lg mt-3 mt-md-0 bg-white">
+          <img src="/assets/img/sparse-rebasin/results_vgg.svg"  alt="Graphs showing test accuracy vs rewind points for VGG-11 on CIFAR-10 at different sparsity levels and widths." class="img-fluid rounded z-depth-0 mx-auto d-block" loading="eager"/>
       </div>
   </div>
   <div class="caption">Figure 7: Test accuracy on CIFAR-10 for VGG-11 of varying sparsities. The permuted solution (blue) consistently outperforms the naive one (orange) and gets closer to the LTH baseline (green), especially as model width increases <d-cite key="adnan2025sparse"></d-cite>.</div>
