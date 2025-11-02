@@ -220,7 +220,7 @@ Across a wide range of experiments, our method demonstrates that aligning the ma
 
 When we compare the performance of the standard `LTH` solution, the `Naive` solution (un-permuted mask on a new init), and our `Permuted` solution, the results are clear. The `Permuted` approach consistently and significantly outperforms the `Naive` baseline, closing most of the performance gap to the original `LTH` solution. The effect is especially pronounced at higher sparsity levels, where the `Naive` method struggles most <d-cite key="adnan2025sparse"></d-cite>.
 
-<div class="container l-screen">
+<div class="container xl-screen">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
           <img src="/assets/img/sparse-rebasin/results_cifar10.svg" alt="Graphs showing test accuracy vs rewind points for ResNet20 on CIFAR-10 at different sparsity levels and widths." class="img-fluid rounded z-depth-0" loading="eager" />
@@ -233,7 +233,7 @@ When we compare the performance of the standard `LTH` solution, the `Naive` solu
 
 We found that our method works even better on wider models. Wider networks have smoother loss landscapes, which allows the activation matching algorithm to find a more accurate permutation, reducing the loss barrier between basins <d-cite key="adnan2025sparse"></d-cite>.
 
-<div class="container l-screen">
+<div class="container xl-screen">
   <div class="row justify-content-center align-items-center">
       <div class="col-lg mt-3 mt-md-0 bg-white">
           <img src="/assets/img/sparse-rebasin/results_cifar100.svg"  alt="Table showing ensemble diversity metrics for different sparse models." class="img-fluid rounded z-depth-0" loading="eager" />
