@@ -3,15 +3,12 @@ layout: page
 firstname: Manuel
 lastname: Zamudio Lopez
 pronouns: he/him
-description: PhD Student<br/>
+description: PhD Student
 img: assets/img/people/mzl.jpg
 redirect: www.linkedin.com/in/manuel-zamudio
 orcid_id: 0009-0009-7460-8178
 linkedin_username: manuel-zamudio
-github: <optional>
-email: <optional>
 scholar_userid: 4eW8V0YAAAAJ
-twitter_username: <optional>
 category: PhD Student
 show: true
 ---
