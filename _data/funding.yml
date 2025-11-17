@@ -17,3 +17,11 @@
 - logo: /assets/img/drac-logo.svg
   url: https://alliancecan.ca
   name: "Digital Research Alliance of Canada (DRAC)"
+
+- logo: /assets/img/ivado-rgb_logo-full-degrade.png
+  url: https://ivado.ca/en/
+  name: "IVADO"
+
+- logo: /assets/img/ANR-logo-2021-sigle.jpg
+  url: https://anr.fr/en/
+  name: "Agence Nationale de la Recherche (ANR)"
