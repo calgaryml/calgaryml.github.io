@@ -219,4 +219,56 @@
   {% if sameaslinks != blank %}
     {% assign sameaslinks = sameaslinks | split: '' %}
   {% endif %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ResearchOrganization",
+    "name": "Calgary Machine Learning Lab",
+    "alternateName": ["Calgary ML", "CML", "Calgary ML Lab"],
+    "url": "https://www.calgaryml.com/",
+    "logo": "https://www.calgaryml.com/assets/img/ucmllogo-text.svg",
+    "description": "The Calgary Machine Learning Lab is a research group within the Schulich School of Engineering at the University of Calgary, focusing on Deep Neural Network (DNN) training, sparse networks, and efficient deep learning methods.",
+    "foundingDate": "2021",
+    "founder": {
+      "@type": "Person",
+      "name": "Yani Ioannou",
+      "jobTitle": "Assistant Professor",
+      "url": "https://www.yani.ai"
+    },
+    "parentOrganization": {
+      "@type": "EducationalOrganization",
+      "name": "University of Calgary",
+      "url": "https://ucalgary.ca/"
+    },
+    "department": {
+      "@type": "Organization",
+      "name": "Schulich School of Engineering"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2500 University Drive NW",
+      "addressLocality": "Calgary",
+      "addressRegion": "AB",
+      "postalCode": "T2N 1N4",
+      "addressCountry": "CA"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "yani.ioannou@ucalgary.ca",
+      "contactType": "research inquiries",
+      "availableLanguage": ["English"]
+    },
+    "sameAs": [
+      "https://github.com/calgaryml",
+      "https://twitter.com/UCalgaryML"
+    ],
+    "knowsAbout": [
+      "Machine Learning",
+      "Deep Learning",
+      "Computer Vision",
+      "Sparse Neural Networks",
+      "Artificial Intelligence"
+    ]
+  }
+</script>
 {% endif %}
