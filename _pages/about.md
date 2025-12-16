@@ -30,9 +30,9 @@ is a research group led by [Yani Ioannou](https://yani.ai) within the [Schulich 
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/labphotos/icml2025.jpg" title="ICML 2025" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/labphotos/lab_schulich_crop_dec2025.jpg" title="Schulich School of Engineering, University of Calgary" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    CML had <a href="https://www.calgaryml.com/assets/pdf/cml_icml_2025.pdf">6 different works being presented by 5 students</a> at one of the top machine learning conferences, <a href="https://icml.cc/Conferences/2025">International Conference on Machine Learning (ICML) 2025</a>, across the workshops and main conference.
+    A photo of many of CML members from December 2025 in the Schulich School of Engineering. CML had <a href="https://www.calgaryml.com/assets/pdf/cml_icml_2025.pdf">6 different works presented by 5 students</a> at one of the top machine learning conferences, <a href="https://icml.cc/Conferences/2025">International Conference on Machine Learning (ICML) 2025</a>.
 </div>
