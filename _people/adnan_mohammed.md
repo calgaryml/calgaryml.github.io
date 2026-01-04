@@ -3,7 +3,7 @@ layout: page
 firstname: Adnan
 lastname: Mohammed
 description: PhD Student (Winter 2022 - Present)<br/>
-img: assets/img/people/adnanmohd.jpg
+img: assets/img/people/adnan_headshot.jpeg
 redirect: https://adnan1306.github.io
 linkedin_username: mohd-adnan-iitg
 github_username: adnan1306
