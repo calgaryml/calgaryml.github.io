@@ -2,7 +2,7 @@
 ---
 layout: page
 firstname: Qiangqiang
-lastname:  Mao
+lastname: Mao
 description: PhD @ Univeristy of British Columbia (started 2022 Winter) / Visiting Student Researcher (Jan., 2026-Dec., 2026)
 img: assets/img/people/qiangqiang_mao.jpg
 redirect: https://maoqiangqiang.github.io/
