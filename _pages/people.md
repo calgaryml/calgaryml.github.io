@@ -16,17 +16,23 @@ horizontal: false
       <div class="col-sm mt-3 mt-md-0">
           {% include figure.liquid path="assets/img/labphotos/lab_schulich_dec2025.jpg" title="Schulich School of Engineering, University of Calgary" class="img-fluid rounded z-depth-1" %}
           <div class="caption">
-              Schulich School of Engineering, University of Calgary (December 2025)
+              Schulich School of Engineering, University of Calgary (Dec. 2025)
           </div>
       </div>
       <div class="col-sm mt-3 mt-md-0">
           {% include figure.liquid path="assets/img/labphotos/lab_schulich_april2024.jpg" title="Schulich School of Engineering, University of Calgary" class="img-fluid rounded z-depth-1" %}
           <div class="caption">
-              Schulich School of Engineering, University of Calgary (April 2024)
+              Schulich School of Engineering, University of Calgary (Apr. 2024)
           </div>
       </div>
     </div>
     <div class="col-sm">
+      <div class="col-sm mt-3 mt-md-0">
+          {% include figure.liquid path="assets/img/labphotos/iclr2026.jpg" title="ICLR 2026" class="img-fluid rounded z-depth-1" %}
+          <div class="caption">
+              ICLR 2026, Rio de Janeiro, Brazil (Apr. 2026)
+          </div>
+      </div>
       <div class="col-sm mt-3 mt-md-0">
           {% include figure.liquid path="assets/img/labphotos/icml2025.jpg" title="ICML 2025" class="img-fluid rounded z-depth-1" %}
           <div class="caption">
@@ -36,13 +42,13 @@ horizontal: false
       <div class="col-sm mt-3 mt-md-0">
           {% include figure.liquid path="assets/img/labphotos/neurips2024.jpg" title="NeurIPS 2024" class="img-fluid rounded z-depth-1" %}
           <div class="caption">
-              NeurIPS 2024, Vancouver, BC, Canada (December 2024)
+              NeurIPS 2024, Vancouver, BC, Canada (Dec. 2024)
           </div>
       </div>
       <div class="col-sm mt-3 mt-md-0">
           {% include figure.liquid path="assets/img/labphotos/peyto2023.jpg" title="Peyto Lake, Banff National Park" class="img-fluid rounded z-depth-1" %}
           <div class="caption">
-              Peyto Lake, Banff National Park, AB, Canada (August 2023)
+              Peyto Lake, Banff National Park, AB, Canada (Aug. 2023)
           </div>
       </div>
     </div>
