@@ -7,7 +7,7 @@ description: MSc Student co-supervised with <a href="https://lib.engineer">Geoff
 img: assets/img/people/madhu_selvaraj.jpg
 redirect: https://github.com/madhuselvarajj
 linkedin_username: madhu-selvaraj
-github: madhuselvarajj
+github_username: madhuselvarajj
 email: madhumitha.selvaraj@ucalgary.ca
 scholar_userid: lpR7YpoAAAAJ
 category: Alumni
