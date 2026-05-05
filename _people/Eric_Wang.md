@@ -6,6 +6,7 @@ description: <a href="https://www.nserc-crsng.gc.ca/students-etudiants/ug-pc/usr
 img: assets/img/people/Eric_Wang.jpg
 redirect: https://github.com/erichob1234
 linkedin_username: eric-wang-39a92027b
+github_username: erichob1234
 category: Undergraduates
 show: true
 ---
