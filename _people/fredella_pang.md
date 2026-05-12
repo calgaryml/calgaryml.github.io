@@ -3,7 +3,7 @@ layout: page
 firstname: Fredella
 lastname: Pang
 description: Undergraduate Research Student (Summer 2026)
-img: assets/img/people/firstname_lastname.jpg
+img: assets/img/people/fredella_pang.webp
 redirect: https://www.linkedin.com/in/fredella-pang/
 linkedin_username: fredella-pang
 github: fredellapang
