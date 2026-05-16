@@ -14,6 +14,12 @@ horizontal: false
 <div class="row align-items-center">
     <div class="col-sm">
       <div class="col-sm mt-3 mt-md-0">
+          {% include figure.liquid path="assets/img/labphotos/schulich_may2026.jpg" title="Schulich School of Engineering, University of Calgary" class="img-fluid rounded z-depth-1" %}
+          <div class="caption">
+              Schulich School of Engineering, University of Calgary (May. 2026)
+          </div>
+      </div>
+      <div class="col-sm mt-3 mt-md-0">
           {% include figure.liquid path="assets/img/labphotos/lab_schulich_dec2025.jpg" title="Schulich School of Engineering, University of Calgary" class="img-fluid rounded z-depth-1" %}
           <div class="caption">
               Schulich School of Engineering, University of Calgary (Dec. 2025)
