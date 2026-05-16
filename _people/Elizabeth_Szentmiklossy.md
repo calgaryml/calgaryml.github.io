@@ -7,7 +7,7 @@ description: Research Assistant (Summer 2025), Undergraduate Thesis Student (Fal
 img: assets/img/people/Elizabeth_Szentmiklossy.jpg
 redirect: https://www.linkedin.com/in/elizabeth-szentmiklossy/
 linkedin_username: elizabeth-szentmiklossy
-github: elizabethszent
+github_username: elizabethszent
 category: Undergraduates
 show: true
 ---
