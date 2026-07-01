@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Yani Ioannou started as an Assistant Professor at the University of Calgary.
+Yani Ioannou started as an Associate Professor at the University of Calgary.
