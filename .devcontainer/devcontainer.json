@@ -12,8 +12,12 @@
     "ghcr.io/devcontainers-extra/features/prettier:1": {}
   },
 
+  "forwardPorts": [8080, 35729],
+
+  "postCreateCommand": "bundle install",
+
   // Optionally: run jekyll serve automatically on container entering using the Docker entrypoint
-  "postAttachCommand": "./bin/entry_point.sh",
+  "postAttachCommand": "bash ./bin/entry_point.sh",
 
   "customizations": {
     "vscode": {
