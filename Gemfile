@@ -24,3 +24,5 @@ group :other_plugins do
     gem 'feedjira'
     gem 'httparty'
 end
+
+gem 'minitest', '< 6'
