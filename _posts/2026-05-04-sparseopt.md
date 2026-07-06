@@ -40,10 +40,10 @@ related_posts: true
 
 Dynamic Sparse Training (DST) methods like RigL <d-cite key="Evci2020RigL"></d-cite> and SET <d-cite key="Mocanu2018SET"></d-cite> can match the generalization of dense networks at high sparsity, but they suffer from notoriously slow convergence — often requiring five times as many training epochs as dense training. Our ICML 2026 paper, **"SparseOpt: Addressing Normalization-induced Gradient Skew in Sparse Training"**, identifies Batch Normalization (BN) as a previously overlooked culprit and proposes a fix. Key findings:
 
-* **BN amplifies gradients non-uniformly in sparse layers.** Because neurons in a sparse layer have heterogeneous fan-in (different numbers of incoming connections), BN's normalization scale varies per neuron. This amplifies the gradient of neuron $i$ by a factor of $(1 - s_i)^{-1/2}$, where $s_i$ is the neuron's sparsity. This *skews* (rotates and scales) the overall gradient direction.
-* **DST mask updates make this worse.** Every time the sparse mask is updated during training, neuron-wise sparsities change abruptly, causing discontinuous jumps in gradient direction. This destabilizes training and slows convergence.
-* **SparseOpt fixes the skew with a simple diagonal preconditioner.** By rescaling each neuron's gradient by $\sqrt{1 - s_i}$, the BN-induced distortion is corrected. This can be wrapped around any existing optimizer (SGD, HAM, etc.) with minimal computational overhead.
-* **Consistent improvements across architectures and datasets.** On ResNet50/ImageNet and ResNet20/CIFAR-100, SparseOpt achieves higher accuracy than the baseline under the same training budget, with the largest gains at higher sparsity levels.
+- **BN amplifies gradients non-uniformly in sparse layers.** Because neurons in a sparse layer have heterogeneous fan-in (different numbers of incoming connections), BN's normalization scale varies per neuron. This amplifies the gradient of neuron $i$ by a factor of $(1 - s_i)^{-1/2}$, where $s_i$ is the neuron's sparsity. This _skews_ (rotates and scales) the overall gradient direction.
+- **DST mask updates make this worse.** Every time the sparse mask is updated during training, neuron-wise sparsities change abruptly, causing discontinuous jumps in gradient direction. This destabilizes training and slows convergence.
+- **SparseOpt fixes the skew with a simple diagonal preconditioner.** By rescaling each neuron's gradient by $\sqrt{1 - s_i}$, the BN-induced distortion is corrected. This can be wrapped around any existing optimizer (SGD, HAM, etc.) with minimal computational overhead.
+- **Consistent improvements across architectures and datasets.** On ResNet50/ImageNet and ResNet20/CIFAR-100, SparseOpt achieves higher accuracy than the baseline under the same training budget, with the largest gains at higher sparsity levels.
 
 ---
 
@@ -60,7 +60,7 @@ Modern deep networks are growing rapidly in size, making efficiency at training 
   <div class="caption">Figure 1: While standard Dynamic Sparse Training (DST, orange) eventually matches the accuracy of dense training (blue), it requires up to 5× as many epochs. Our proposed method, SparseOpt (green), corrects the normalization-induced gradient skew to achieve drastically faster convergence, closely matching the dense baseline.</div>
 </div>
 
-Despite this promise, DST has a well-known weakness: **it converges much more slowly than dense training**, often requiring as many as five times more epochs to reach the same accuracy <d-cite key="Evci2020RigL"></d-cite>. This means DST methods offer little to no reduction in actual training time, even accounting for the per-step computation savings from sparsity. For sparse training to be *practically* useful, this convergence gap must be closed.
+Despite this promise, DST has a well-known weakness: **it converges much more slowly than dense training**, often requiring as many as five times more epochs to reach the same accuracy <d-cite key="Evci2020RigL"></d-cite>. This means DST methods offer little to no reduction in actual training time, even accounting for the per-step computation savings from sparsity. For sparse training to be _practically_ useful, this convergence gap must be closed.
 
 A natural question is: **why does DST converge so slowly?** Prior work has focused on sparse topology exploration, gradient flow, and initialization <d-cite key="Evci2022GradientFlow"></d-cite>. But one major component of modern networks — **normalization layers** — has been largely overlooked in the context of sparse training. This paper takes a close look at Batch Normalization and finds it is a significant, previously unidentified source of training instability in DST.
 
@@ -72,7 +72,7 @@ Batch Normalization <d-cite key="Ioffe2015BN"></d-cite> stabilizes training by n
 
 $$\hat{x}_i^{(b)} = \frac{x_i^{(b)} - \mu_i}{\sigma_i}, \qquad y_i^{(b)} = \gamma_i \hat{x}_i^{(b)} + \beta_i.$$
 
-The standard deviation $\sigma_i$ plays a key role in the *backward pass* too. Applying the chain rule to the BN equations, the gradient with respect to the pre-activation $x_i^{(b)}$ is scaled inversely by the standard deviation:
+The standard deviation $\sigma_i$ plays a key role in the _backward pass_ too. Applying the chain rule to the BN equations, the gradient with respect to the pre-activation $x_i^{(b)}$ is scaled inversely by the standard deviation:
 
 $$\frac{\partial L}{\partial x_i^{(b)}} = \frac{1}{\sigma_i} \cdot C_i^{(b)}$$
 
@@ -82,9 +82,9 @@ where $C_i^{(b)}$ is a correction term that depends only on the normalized pre-a
 
 ## The Problem: Heterogeneous Fan-in in Sparse Layers
 
-In a sparse layer, neurons do **not** all have the same number of incoming connections. Neuron $i$ may have far fewer active weights than neuron $j$. This difference in active connections is known as **heterogeneous fan-in**. 
+In a sparse layer, neurons do **not** all have the same number of incoming connections. Neuron $i$ may have far fewer active weights than neuron $j$. This difference in active connections is known as **heterogeneous fan-in**.
 
-Specifically, let $s_i \in [0, 1)$ denote the *sparsity* of neuron $i$ — the fraction of its incoming connections that are zero. If we assume the weights and incoming activations are independent, zero-mean random variables, the pre-activation variance is scaled by its number of active inputs:
+Specifically, let $s_i \in [0, 1)$ denote the _sparsity_ of neuron $i$ — the fraction of its incoming connections that are zero. If we assume the weights and incoming activations are independent, zero-mean random variables, the pre-activation variance is scaled by its number of active inputs:
 
 $$\text{Var}[x_i'^{(b)}] = (1 - s_i) \cdot \text{Var}[x_i^{(b)}]$$
 
@@ -119,7 +119,7 @@ In other words, **BN amplifies the gradient of sparse neurons by a factor of $(1
   <div class="caption text-center mt-2">Figure 2: Batch Normalization causes gradient skew in sparse layers. Because sparse neurons have differing numbers of active connections (fan-in), their activation variances differ. This scales each neuron's gradient component differently, rotating the overall gradient vector away from the optimal descent path.</div>
 </div>
 
-Because different neurons in the same layer will generally have *different* sparsities $s_i$, these amplification factors are non-uniform across neurons. **This non-uniform scaling changes the relative magnitude of different gradient components, thereby rotating the gradient direction** — not just its overall magnitude (Figure 2c). The optimizer is no longer descending in the true loss gradient direction; it is descending along a skewed version of it.
+Because different neurons in the same layer will generally have _different_ sparsities $s_i$, these amplification factors are non-uniform across neurons. **This non-uniform scaling changes the relative magnitude of different gradient components, thereby rotating the gradient direction** — not just its overall magnitude (Figure 2c). The optimizer is no longer descending in the true loss gradient direction; it is descending along a skewed version of it.
 
 ### Empirical Confirmation
 
@@ -181,8 +181,8 @@ The overhead is minimal — it only requires computing sparsity statistics (whic
 
 We validate SparseOpt on two standard benchmarks for sparse training:
 
-* **ResNet50 / ImageNet** with RigL and SET at sparsities $s \in \{0.90, 0.95, 0.97\}$, with training schedules of 90, 180, and 270 epochs.
-* **ResNet20 / CIFAR-100** with RigL and SET at the same sparsities, with training schedules of 100, 200, 300, and 500 epochs.
+- **ResNet50 / ImageNet** with RigL and SET at sparsities $s \in \{0.90, 0.95, 0.97\}$, with training schedules of 90, 180, and 270 epochs.
+- **ResNet20 / CIFAR-100** with RigL and SET at the same sparsities, with training schedules of 100, 200, 300, and 500 epochs.
 
 ### Faster Convergence on ImageNet
 
@@ -222,38 +222,38 @@ The quantitative results on ImageNet / ResNet50 are shown in the table below. Sp
 
 <div class="table-wrapper" markdown="block">
 
-| Sparsity | Method   | DST      | 90 epochs | 180 epochs | 270 epochs |
-|----------|----------|----------|-----------|------------|------------|
-| 90%      | **Ours** | RigL     | **74.41** | **75.06**  | **75.26**  |
-|          | Baseline | RigL     | 73.88     | 74.99      | **75.26**  |
-|          | **Ours** | SET      | **74.15** | **74.81**  | 74.85      |
-|          | Baseline | SET      | 73.69     | **74.83**  | **75.17**  |
-| 95%      | **Ours** | RigL     | **72.93** | **73.62**  | **73.95**  |
-|          | Baseline | RigL     | 72.33     | 73.36      | 73.62      |
-|          | **Ours** | SET      | **72.59** | **73.75**  | 73.79      |
-|          | Baseline | SET      | 71.84     | 73.51      | **73.82**  |
-| 97%      | **Ours** | RigL     | **71.15** | **72.65**  | **72.66**  |
-|          | Baseline | RigL     | 69.94     | 72.00      | 72.35      |
-|          | **Ours** | SET      | **71.43** | **72.40**  | **72.73**  |
-|          | Baseline | SET      | 70.12     | 72.17      | 72.65      |
+| Sparsity | Method   | DST  | 90 epochs | 180 epochs | 270 epochs |
+| -------- | -------- | ---- | --------- | ---------- | ---------- |
+| 90%      | **Ours** | RigL | **74.41** | **75.06**  | **75.26**  |
+|          | Baseline | RigL | 73.88     | 74.99      | **75.26**  |
+|          | **Ours** | SET  | **74.15** | **74.81**  | 74.85      |
+|          | Baseline | SET  | 73.69     | **74.83**  | **75.17**  |
+| 95%      | **Ours** | RigL | **72.93** | **73.62**  | **73.95**  |
+|          | Baseline | RigL | 72.33     | 73.36      | 73.62      |
+|          | **Ours** | SET  | **72.59** | **73.75**  | 73.79      |
+|          | Baseline | SET  | 71.84     | 73.51      | **73.82**  |
+| 97%      | **Ours** | RigL | **71.15** | **72.65**  | **72.66**  |
+|          | Baseline | RigL | 69.94     | 72.00      | 72.35      |
+|          | **Ours** | SET  | **71.43** | **72.40**  | **72.73**  |
+|          | Baseline | SET  | 70.12     | 72.17      | 72.65      |
 
 </div>
 <div class="caption">Table 1: Top-1 test accuracy on ImageNet / ResNet50. SparseOpt consistently achieves better generalization than the baseline, especially with smaller training budgets. Bold denotes the best result per setting.</div>
 
 ### Consistent Gains on CIFAR-100
 
-Similar improvements hold on CIFAR-100 / ResNet20 with both RigL and SET. The results are most pronounced at shorter training schedules (100–200 epochs), where the faster convergence of SparseOpt translates to meaningful accuracy gains. 
+Similar improvements hold on CIFAR-100 / ResNet20 with both RigL and SET. The results are most pronounced at shorter training schedules (100–200 epochs), where the faster convergence of SparseOpt translates to meaningful accuracy gains.
 
 <div class="table-wrapper" markdown="block">
 
-| Sparsity | Method | 100 epochs | 200 epochs | 300 epochs | 500 epochs |
-| :--- | :--- | :---: | :---: | :---: | :---: |
-| **90%** | **Ours (SparseOpt)** | **$61.34 \pm 0.35$** | **$63.12 \pm 0.39$** | **$64.30 \pm 0.08$** | **$65.22 \pm 0.40$** |
-| | Baseline | $60.66 \pm 0.43$ | $62.93 \pm 0.17$ | $63.77 \pm 0.35$ | $64.66 \pm 0.17$ |
-| **95%** | **Ours (SparseOpt)** | **$56.80 \pm 0.49$** | **$59.91 \pm 0.45$** | **$60.67 \pm 0.63$** | **$61.74 \pm 0.35$** |
-| | Baseline | $55.80 \pm 0.73$ | $59.22 \pm 0.55$ | $60.00 \pm 0.54$ | $61.45 \pm 0.65$ |
-| **97%** | **Ours (SparseOpt)** | **$53.95 \pm 0.40$** | **$57.01 \pm 0.19$** | **$57.62 \pm 0.59$** | **$58.35 \pm 0.34$** |
-| | Baseline | $52.53 \pm 0.35$ | $54.87 \pm 0.78$ | $56.50 \pm 0.33$ | $57.32 \pm 0.16$ |
+| Sparsity | Method               |      100 epochs      |      200 epochs      |      300 epochs      |      500 epochs      |
+| :------- | :------------------- | :------------------: | :------------------: | :------------------: | :------------------: |
+| **90%**  | **Ours (SparseOpt)** | **$61.34 \pm 0.35$** | **$63.12 \pm 0.39$** | **$64.30 \pm 0.08$** | **$65.22 \pm 0.40$** |
+|          | Baseline             |   $60.66 \pm 0.43$   |   $62.93 \pm 0.17$   |   $63.77 \pm 0.35$   |   $64.66 \pm 0.17$   |
+| **95%**  | **Ours (SparseOpt)** | **$56.80 \pm 0.49$** | **$59.91 \pm 0.45$** | **$60.67 \pm 0.63$** | **$61.74 \pm 0.35$** |
+|          | Baseline             |   $55.80 \pm 0.73$   |   $59.22 \pm 0.55$   |   $60.00 \pm 0.54$   |   $61.45 \pm 0.65$   |
+| **97%**  | **Ours (SparseOpt)** | **$53.95 \pm 0.40$** | **$57.01 \pm 0.19$** | **$57.62 \pm 0.59$** | **$58.35 \pm 0.34$** |
+|          | Baseline             |   $52.53 \pm 0.35$   |   $54.87 \pm 0.78$   |   $56.50 \pm 0.33$   |   $57.32 \pm 0.16$   |
 
 </div>
 <div class="caption">Table 2: Test accuracy on CIFAR-100 / ResNet20 using RigL. SparseOpt consistently improves accuracy over the baseline, particularly when training epochs are constrained.</div>
@@ -301,12 +301,12 @@ Empirically, **SparseOpt + HAM consistently outperforms either method alone** ac
 
 <div class="table-wrapper" markdown="block">
 
-| Sparsity | Method | 100 epochs | 200 epochs | 300 epochs | 500 epochs |
-| :--- | :--- | :---: | :---: | :---: | :---: |
-| **95%** | **SparseOpt + HAM (Ours)** | **$57.31 \pm 0.54$** | **$60.41 \pm 0.28$** | **$60.91 \pm 0.45$** | **$62.20 \pm 0.38$** |
-| | SparseOpt alone | $56.80 \pm 0.49$ | $59.91 \pm 0.45$ | $60.67 \pm 0.63$ | $61.74 \pm 0.35$ |
-| | Baseline (w/ HAM) | $56.72 \pm 0.40$ | $58.76 \pm 0.60$ | $60.38 \pm 0.23$ | $61.66 \pm 0.26$ |
-| | Baseline (SGD) | $55.80 \pm 0.73$ | $59.22 \pm 0.55$ | $60.00 \pm 0.54$ | $61.45 \pm 0.65$ |
+| Sparsity | Method                     |      100 epochs      |      200 epochs      |      300 epochs      |      500 epochs      |
+| :------- | :------------------------- | :------------------: | :------------------: | :------------------: | :------------------: |
+| **95%**  | **SparseOpt + HAM (Ours)** | **$57.31 \pm 0.54$** | **$60.41 \pm 0.28$** | **$60.91 \pm 0.45$** | **$62.20 \pm 0.38$** |
+|          | SparseOpt alone            |   $56.80 \pm 0.49$   |   $59.91 \pm 0.45$   |   $60.67 \pm 0.63$   |   $61.74 \pm 0.35$   |
+|          | Baseline (w/ HAM)          |   $56.72 \pm 0.40$   |   $58.76 \pm 0.60$   |   $60.38 \pm 0.23$   |   $61.66 \pm 0.26$   |
+|          | Baseline (SGD)             |   $55.80 \pm 0.73$   |   $59.22 \pm 0.55$   |   $60.00 \pm 0.54$   |   $61.45 \pm 0.65$   |
 
 </div>
 <div class="caption">Table 3: Test accuracy on CIFAR-100 / ResNet20. Combining SparseOpt with HAM consistently yields the highest generalization performance.</div>
@@ -315,7 +315,7 @@ Empirically, **SparseOpt + HAM consistently outperforms either method alone** ac
 
 ## A Note on Gradient Direction vs. Gradient Magnitude
 
-Our proposed correction modifies both the direction and the magnitude of the gradient. To isolate the contribution of the *directional* correction, we run an ablation where we additionally apply gradient renormalization (gradient clipping to unit norm) after the SparseOpt correction. This ensures any improvement comes purely from the corrected descent direction, not from any change in step size.
+Our proposed correction modifies both the direction and the magnitude of the gradient. To isolate the contribution of the _directional_ correction, we run an ablation where we additionally apply gradient renormalization (gradient clipping to unit norm) after the SparseOpt correction. This ensures any improvement comes purely from the corrected descent direction, not from any change in step size.
 
 Even with renormalization, SparseOpt consistently outperforms the baseline — confirming that the **gradient direction correction is the primary source of improvement**. The corrected gradient direction points more accurately toward useful descent directions, enabling faster and more stable convergence.
 
