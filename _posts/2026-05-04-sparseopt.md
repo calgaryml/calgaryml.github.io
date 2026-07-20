@@ -38,7 +38,7 @@ related_posts: true
 
 ## TL;DR
 
-Dynamic Sparse Training (DST) methods like RigL <d-cite key="Evci2020RigL"></d-cite> and SET <d-cite key="Mocanu2018SET"></d-cite> can match the generalization of dense networks at high sparsity, but they suffer from notoriously slow convergence — often requiring five times as many training epochs as dense training. Our ICML 2026 paper, **"SparseOpt: Addressing Normalization-induced Gradient Skew in Sparse Training"**, identifies Batch Normalization (BN) as a previously overlooked culprit and proposes a fix. Key findings:
+Dynamic Sparse Training (DST) methods like RigL <d-cite key="Evci2020RigL"></d-cite> and SET <d-cite key="Mocanu2018SET"></d-cite> can match the generalization of dense networks at high sparsity; however, due to low convergence rate, they often require five times as many training epochs as dense training. Our ICML 2026 paper, **"SparseOpt: Addressing Normalization-induced Gradient Skew in Sparse Training"**, identifies Normalization Layers as a potential cause of the low convergence rate. Our work shows that: 
 
 - **BN amplifies gradients non-uniformly in sparse layers.** Because neurons in a sparse layer have heterogeneous fan-in (different numbers of incoming connections), BN's normalization scale varies per neuron. This amplifies the gradient of neuron $i$ by a factor of $(1 - s_i)^{-1/2}$, where $s_i$ is the neuron's sparsity. This _skews_ (rotates and scales) the overall gradient direction.
 - **DST mask updates make this worse.** Every time the sparse mask is updated during training, neuron-wise sparsities change abruptly, causing discontinuous jumps in gradient direction. This destabilizes training and slows convergence.
@@ -49,7 +49,7 @@ Dynamic Sparse Training (DST) methods like RigL <d-cite key="Evci2020RigL"></d-c
 
 ## The Convergence Problem in Sparse Training
 
-Modern deep networks are growing rapidly in size, making efficiency at training and inference time increasingly important. Sparse neural networks — networks with many zero weights — offer a compelling path to reduced computation, especially through Dynamic Sparse Training (DST), which learns sparse topologies directly during training without any dense pretraining <d-cite key="Evci2020RigL,Mocanu2018SET,Lasby2024SRigL"></d-cite>.
+Modern deep networks are growing rapidly in size, making efficiency at training and inference time increasingly important. Sparse neural networks, which use sparse matrices instead of dense matrices, offer a compelling path to reduced computation, especially through Dynamic Sparse Training (DST), which learns sparse topologies directly during training without any dense pretraining <d-cite key="Evci2020RigL,Mocanu2018SET,Lasby2024SRigL"></d-cite>.
 
 <div class="container text-center">
   <div class="row justify-content-center">
@@ -186,7 +186,7 @@ We validate SparseOpt on two standard benchmarks for sparse training:
 
 ### Faster Convergence on ImageNet
 
-We display the ImageNet training and test trajectories for RigL across our evaluation configurations below.
+We show the ImageNet training and test trajectories for RigL across our evaluation configurations below.
 
 <div class="container text-center">
   <div class="row justify-content-center">
