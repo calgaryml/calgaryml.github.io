@@ -1,7 +1,7 @@
 ---
 layout: page
-firstname: Lee
-lastname: Jinhyeong
+firstname: Jinhyeong
+lastname: Lee
 pronouns: he/him
 description: Visiting MSc Student Researcher (Summer 2026)
 img: assets/img/people/jinhyeong.jpg
