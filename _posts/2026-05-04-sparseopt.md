@@ -2,9 +2,9 @@
 layout: distill
 title: "SparseOpt: Why Normalization Hurts Sparse Training (And How to Fix It)"
 description: "Normalization layers are ubiquitous in modern deep networks — but we show they can skew gradients in sparse layers, causing slow convergence in Dynamic Sparse Training. We identify this problem analytically and propose a simple sparsity-aware optimizer to fix it."
-date: 2026-05-04
-last_updated: 2026-05-04
-post_author: Yani Ioannou
+date: 2026-07-27
+last_updated: 2026-07-27
+post_author: Yani Ioannou, Mohammed Adnan
 authors:
   - name: Mohammed Adnan
     affiliations:
