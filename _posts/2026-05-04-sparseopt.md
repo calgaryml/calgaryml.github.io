@@ -38,7 +38,7 @@ related_posts: true
 
 ## TL;DR
 
-Dynamic Sparse Training (DST) methods like RigL <d-cite key="Evci2020RigL"></d-cite> and SET <d-cite key="Mocanu2018SET"></d-cite> can match the generalization of dense networks at high sparsity; however, due to low convergence rate, they often require five times as many training epochs as dense training. Our ICML 2026 paper, **"SparseOpt: Addressing Normalization-induced Gradient Skew in Sparse Training"**, identifies Normalization Layers as a potential cause of the low convergence rate. Our work shows that: 
+Dynamic Sparse Training (DST) methods like RigL <d-cite key="Evci2020RigL"></d-cite> and SET <d-cite key="Mocanu2018SET"></d-cite> can match the generalization of dense networks at high sparsity; however, due to low convergence rate, they often require five times as many training epochs as dense training. Our ICML 2026 paper, **"SparseOpt: Addressing Normalization-induced Gradient Skew in Sparse Training"**, identifies Normalization Layers as a potential cause of the low convergence rate. Our work shows that:
 
 - **BN amplifies gradients non-uniformly in sparse layers.** Because neurons in a sparse layer have heterogeneous fan-in (different numbers of incoming connections), BN's normalization scale varies per neuron. This amplifies the gradient of neuron $i$ by a factor of $(1 - s_i)^{-1/2}$, where $s_i$ is the neuron's sparsity. This _skews_ (rotates and scales) the overall gradient direction.
 - **DST mask updates make this worse.** Every time the sparse mask is updated during training, neuron-wise sparsities change abruptly, causing discontinuous jumps in gradient direction. This destabilizes training and slows convergence.
