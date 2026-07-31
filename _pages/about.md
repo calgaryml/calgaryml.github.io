@@ -26,7 +26,8 @@ latest_posts:
 ---
 
 The **Calgary Machine Learning Lab**
-is a research group led by [Yani Ioannou](https://yani.ai) within the [Schulich School of Engineering](https://schulich.ucalgary.ca) at the [University of Calgary](https://www.ucalgary.ca). The lab has a research focus on improving Deep Neural Network (DNN) training and models. Topics of research include: Sparse Neural Network Training, Bias and Robustness of Efficient Deep Learning methods and Efficient Inference with Large Language Models.
+is a research group led by [Yani Ioannou](https://yani.ai) within the [Schulich School of Engineering](https://schulich.ucalgary.ca) at the [University of Calgary](https://www.ucalgary.ca).
+Our research is driven by the overarching goal of advancing efficient, trustworthy, and accessible Artificial Intelligence (AI).
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -36,3 +37,9 @@ is a research group led by [Yani Ioannou](https://yani.ai) within the [Schulich 
 <div class="caption">
     Lab photo from May 2026 outside the ICT building at the University of Calgary.
 </div>
+Central to our work is the concept of sparse neural network training and inference, which we pursue with four key motivations:
+
+- **Democratize AI**: removing redundant computation, making state-of-the-art models accessible to all
+- **Sustainable and Trustworthy AI**: by fundamentally reducing the carbon footprint of these models while rigorously auditing how compression impacts algorithmic bias, we are working to ensure that real-world deployment of next-generation AI is both sustainable and safer
+- **Learning Structure in Neural Networks**: automatically learn neural network topologies tailored for novel data domains
+- **Understanding the Mechanics of Neural Network Training**: sparse neural network training provides a unique theoretical lens to **better understand** the underlying principles of neural network training, and it is remarkably effective
