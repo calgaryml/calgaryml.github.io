@@ -258,6 +258,7 @@ exclude:
   - assets/plotly/
   - assets/plotly/demo.html
   - assets/html/relativity.html
+  - assets/jupyter/
   - projects/
   - repositories/
   - teaching/
