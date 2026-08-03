@@ -26,7 +26,7 @@
       <source
         class="responsive-img-srcset"
         {% if ext == 'jpg' or ext == 'jpeg' or ext == 'png' or ext == 'tiff' or ext == 'gif' %}
-          srcset="{% for i in site.imagemagick.widths %}{{ img_path | relative_url }}-{{ i }}.webp {{i}}w,{% endfor %}"
+          srcset="{% for i in site.imagemagick.widths %}{{ img_path | relative_url }}-{{ i }}.webp {{i}}w{% unless forloop.last %},{% endunless %}{% endfor %}"
           type="image/webp"
         {% else %}
           srcset="{{ include.path | relative_url }}"
