@@ -4,4 +4,3 @@ permalink: /people/
 title: people
 redirect: /labmembers/
 ---
-
