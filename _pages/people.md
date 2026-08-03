@@ -33,6 +33,13 @@ horizontal: false
       </div>
     </div>
     <div class="col-sm">
+
+      <div class="col-sm mt-3 mt-md-0">
+          {% include figure.liquid path="assets/img/labphotos/icml2026.jpg" title="ICML 2026" class="img-fluid rounded z-depth-1" %}
+          <div class="caption">
+              ICML 2026, Seoul, South Korea (July 2026)
+          </div>
+      </div>
       <div class="col-sm mt-3 mt-md-0">
           {% include figure.liquid path="assets/img/labphotos/iclr2026.jpg" title="ICLR 2026" class="img-fluid rounded z-depth-1" %}
           <div class="caption">
@@ -58,6 +65,7 @@ horizontal: false
           </div>
       </div>
     </div>
+
 </div>
 
 # Lab Members
