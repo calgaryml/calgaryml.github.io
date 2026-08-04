@@ -83,6 +83,9 @@
       {% elsif site.lazy_loading_images %}
         loading="lazy"
       {% endif %}
+      {% if include.fetchpriority %}
+        fetchpriority="{{ include.fetchpriority }}"
+      {% endif %}
       onerror="this.onerror=null; $(this).parent().find('.responsive-img-srcset').remove();"
     >
   </picture>

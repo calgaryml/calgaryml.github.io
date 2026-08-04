@@ -6,6 +6,10 @@
 // Dimensions
 $max-content-width: {{ site.max_width }};
 
+// Font Display Optimization
+$fa-font-display: swap;
+$ti-font-display: swap;
+
 @import
   "variables",
   "themes",
