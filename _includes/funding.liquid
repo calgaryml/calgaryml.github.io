@@ -6,7 +6,12 @@
       {%- for funder in sorted_funding -%}
         <div class="col-sm-4 height=50px p-y-5">
           <a href="{{ funder.url }}">
-            <img class="img-fluid mx-auto d-block" src="{{ funder.logo }}" alt="{{ funder.name }}">
+            {% if funder.logo contains '.svg' %}
+              <img class="img-fluid mx-auto d-block" src="{{ funder.logo | relative_url }}" alt="{{ funder.name }}">
+            {% else %}
+              {% assign logo_path = funder.logo | remove_first: '/' %}
+              {% include figure.liquid path=logo_path alt=funder.name class="img-fluid mx-auto d-block" sizes="200px" %}
+            {% endif %}
           </a>
         </div>
       {%- endfor %}
