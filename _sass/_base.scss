@@ -285,6 +285,16 @@ ul.task-list input[type="checkbox"] {
 
   .navbar-brand {
     color: var(--global-text-color);
+
+    img {
+      max-height: 32px;
+      width: auto;
+
+      @media (max-width: 767px) {
+        max-height: 28px;
+        max-width: 140px;
+      }
+    }
   }
 
   .navbar-nav .nav-item .nav-link {
@@ -309,6 +319,15 @@ ul.task-list input[type="checkbox"] {
     padding-bottom: 0;
     padding-top: 0;
     font-size: 1.7rem;
+
+    @media (max-width: 767px) {
+      font-size: 1.7rem;
+      margin-right: 0.25rem;
+    }
+
+    @media (max-width: 360px) {
+      display: none !important;
+    }
 
     a {
       i::before {
