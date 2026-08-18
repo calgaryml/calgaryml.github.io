@@ -8,6 +8,6 @@ img: assets/img/people/Elizabeth_Szentmiklossy.jpg
 redirect: https://www.linkedin.com/in/elizabeth-szentmiklossy/
 linkedin_username: elizabeth-szentmiklossy
 github_username: elizabethszent
-category: Undergraduates
+category: Alumni
 show: true
 ---
