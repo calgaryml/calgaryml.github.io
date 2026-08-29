@@ -1,13 +1,14 @@
 <!-- _includes/persons.html -->
 <div class="grid-item">
-  {% if person.redirect -%}
-    <a href="{{ person.redirect }}">
-  {%- else -%}
-    <a href="{{ person.url | relative_url }}">
-  {%- endif %}
-    <div class="card hoverable">
+  <div class="card hoverable">
+    {% if person.redirect -%}
+      <a href="{{ person.redirect }}">
+    {%- else -%}
+      <a href="{{ person.url | relative_url }}">
+    {%- endif %}
       {%- if person.img %}
         {%- include figure.liquid
+          loading="eager"
           path=person.img
           alt="Portrait"
           class="img-fluid rounded-circle z-depth-0"
@@ -22,7 +23,8 @@
           {{ person.pronouns }}
         </h3>
       {%- endif -%}
-      <div class="card-icons">
+    </a>
+    <div class="card-icons">
         {%- if person.email -%}
           <a href="mailto:{{ person.email | encode_email }}" title="e-mail">
             <i class="icon mr-1 p-0 fas fa-envelope"></i>
@@ -123,5 +125,4 @@
         <h3 class="card-text mt-1">{{ person.description }}</h3>
       </div>
     </div>
-  </a>
 </div>
