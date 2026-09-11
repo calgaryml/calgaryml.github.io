@@ -2,7 +2,7 @@
 layout: page
 firstname: Lawrence
 lastname: Francis
-description: MSc (Fall 2026 - Present)
+description: MSc Student (Fall 2026 - Present)
 img: assets/img/people/lawrence_francis.jpg
 redirect: https://github.com/ldfrancis
 linkedin_username: ldfrancis
