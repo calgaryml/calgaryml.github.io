@@ -7,6 +7,6 @@ img: assets/img/people/Eric_Wang.jpg
 redirect: https://github.com/erichob1234
 linkedin_username: eric-wang-39a92027b
 github_username: erichob1234
-category: Undergraduates
+category: Alumni
 show: true
 ---

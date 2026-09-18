@@ -8,6 +8,6 @@ redirect: https://www.linkedin.com/in/fredella-pang/
 linkedin_username: fredella-pang
 github_username: fredellapang
 email: fredella.pang@ucalgary.ca
-category: Undergraduates
+category: Alumni
 show: true
 ---
