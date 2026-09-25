@@ -93,6 +93,7 @@ git checkout -b $DEPLOY_BRANCH
 export JEKYLL_ENV=production
 
 # Build site
+ruby bin/generate_coauthors.rb
 bundle exec jekyll build
 
 # Purge unused css
