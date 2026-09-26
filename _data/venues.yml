@@ -2,42 +2,43 @@
 # $uc-gold-color: #ffcd00 !default;
 # $uc-light-orange-color: #ffa300 !default;
 # $uc-dark-orange-color: #ff671f !default;
+# $uc-burnt-orange-color: #cc4a14 !default; (dark orange with 4.5:1 contrast for white text)
 # $uc-rubine-color: #ed0a72 !default;
 # $uc-berry-color: #9c0534 !default;
 
 "CVPR":
   url: https://openaccess.thecvf.com/menu
-  color: "#ff671f"
+  color: "#cc4a14"
 "NeurIPS":
   url: https://proceedings.neurips.cc
-  color: "#ff671f"
+  color: "#cc4a14"
 "NeurIPS Workshops":
   url: https://proceedings.neurips.cc
   color: "#9c0534"
 "ICLR":
   url: https://iclr.cc
-  color: "#ff671f"
+  color: "#cc4a14"
 "ICLR Workshops":
   url: https://iclr.cc
   color: "#9c0534"
 "ICML":
   url: https://icml.cc
-  color: "#ff671f"
+  color: "#cc4a14"
 "ICML Workshops":
   url: https://icml.cc
   color: "#9c0534"
 "AAAI":
   url: https://www.aaai.org/Library/AAAI/aaai-library.php
-  color: "#ff671f"
+  color: "#cc4a14"
 "MICCAI":
   url: http://www.miccai.org
-  color: "#ff671f"
+  color: "#cc4a14"
 "TMLR":
   url: https://jmlr.org/tmlr/
-  color: "#ff671f"
+  color: "#cc4a14"
 "CANAI":
   url: https://www.caiac.ca/en/conferences/
-  color: "#ff671f"
+  color: "#cc4a14"
 "CPAL Spotlight":
   url: https://cpal.cc
   color: "#9c0534"
@@ -47,6 +48,7 @@
 "SEGAN":
   url: https://www.sciencedirect.com/journal/sustainable-energy-grids-and-networks
   color: "#ffcd00"
+  text_color: "#000000"
 "arXiv preprint":
   url: https://arxiv.org
   color: "#d6001c"

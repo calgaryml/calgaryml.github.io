@@ -2,6 +2,7 @@
 layout: post
 date: 2022-01-12 13:24:00-0500
 inline: true
+sitemap: false
 related_posts: false
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 date: 2026-04-30 00:00:00-0700
 inline: true
+sitemap: false
 ---
 
 [Adnan Mohammed's](/labmembers/) paper, "SparseOpt: Addressing Normalization-induced Gradient Skew in Sparse Training" {% cite adnan2026sparseopt %}, has been accepted at the [International Conference on Machine Learning (ICML), 2026](https://icml.cc/Conferences/2026).

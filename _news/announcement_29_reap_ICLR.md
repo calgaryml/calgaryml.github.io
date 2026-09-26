@@ -2,6 +2,7 @@
 layout: post
 date: 2026-01-26 00:00:00-0700
 inline: true
+sitemap: false
 ---
 
 [Mike Lasby's](/labmembers/) collaborative work with Cerebras, "REAP the experts: Why pruning prevails for one-shot moe compression" {% cite lasby2025reapexpertspruningprevails %}, has been accepted at the [International Conference on Learning Representations (ICLR), 2026](https://iclr.cc/Conferences/2026).

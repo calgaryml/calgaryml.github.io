@@ -878,7 +878,7 @@ footer.sticky-bottom {
   }
 
   h2.bibliography {
-    color: var(--global-divider-color);
+    color: var(--global-text-color-light);
     border-top: 1px solid var(--global-divider-color);
     padding-top: 1rem;
     margin-top: 2rem;
@@ -902,7 +902,7 @@ footer.sticky-bottom {
         abbr {
           width: 7em;
           display: inline-block;
-          background-color: var(--global-theme-color);
+          background-color: var(--global-badge-bg-color);
           margin-bottom: 0.5rem;
 
           a {
