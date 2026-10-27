@@ -14,85 +14,79 @@ display_categories: [Lab Director, PhD Students, MSc Students, Undergraduates]
 # first) and, within a year, ordered by category in this order. A visitor's home position/institution
 # goes in the role's `affiliation` (e.g. "PhD Student, University of British Columbia")
 alumni_categories: [Postdoctoral Fellows, PhD Students, MSc Students, Undergraduates, High School Students]
+# Lab photos, most recent first. lab_photos_layout is either
+#   slideshow: all photos in a slideshow at the top of the page
+#   banner:    the first photo at the top, the rest in a Lab Photos gallery at the bottom
+# (images.slider loads the slideshow library; it's only needed for the slideshow layout)
+lab_photos_layout: slideshow
+images:
+  slider: true
+lab_photos:
+  - path: assets/img/labphotos/icml2026.jpg
+    caption: ICML 2026, Seoul, South Korea (July 2026)
+  - path: assets/img/labphotos/schulich_may2026.jpg
+    caption: Schulich School of Engineering, University of Calgary (May 2026)
+  - path: assets/img/labphotos/iclr2026.jpg
+    caption: ICLR 2026, Rio de Janeiro, Brazil (Apr. 2026)
+  - path: assets/img/labphotos/lab_schulich_dec2025.jpg
+    caption: Schulich School of Engineering, University of Calgary (Dec. 2025)
+  - path: assets/img/labphotos/icml2025.jpg
+    caption: ICML 2025, Vancouver, BC, Canada (July 2025)
+  - path: assets/img/labphotos/neurips2024.jpg
+    caption: NeurIPS 2024, Vancouver, BC, Canada (Dec. 2024)
+  - path: assets/img/labphotos/lab_schulich_april2024.jpg
+    caption: Schulich School of Engineering, University of Calgary (Apr. 2024)
+  - path: assets/img/labphotos/peyto2023.jpg
+    caption: Peyto Lake, Banff National Park, AB, Canada (Aug. 2023)
 horizontal: false
 ---
 
-<div class="row align-items-center">
-    <div class="col-sm">
-      <div class="col-sm mt-3 mt-md-0">
-          {% include figure.liquid path="assets/img/labphotos/schulich_may2026.jpg" loading="eager" fetchpriority="high" title="Schulich School of Engineering, University of Calgary" class="img-fluid rounded z-depth-1" %}
-          <div class="caption">
-              Schulich School of Engineering, University of Calgary (May. 2026)
-          </div>
-      </div>
-      <div class="col-sm mt-3 mt-md-0">
-          {% include figure.liquid path="assets/img/labphotos/lab_schulich_dec2025.jpg" title="Schulich School of Engineering, University of Calgary" class="img-fluid rounded z-depth-1" %}
-          <div class="caption">
-              Schulich School of Engineering, University of Calgary (Dec. 2025)
-          </div>
-      </div>
-      <div class="col-sm mt-3 mt-md-0">
-          {% include figure.liquid path="assets/img/labphotos/lab_schulich_april2024.jpg" title="Schulich School of Engineering, University of Calgary" class="img-fluid rounded z-depth-1" %}
-          <div class="caption">
-              Schulich School of Engineering, University of Calgary (Apr. 2024)
-          </div>
-      </div>
-    </div>
-    <div class="col-sm">
+{%- if page.lab_photos_layout == 'slideshow' %}
 
-      <div class="col-sm mt-3 mt-md-0">
-          {% include figure.liquid path="assets/img/labphotos/icml2026.jpg" title="ICML 2026" class="img-fluid rounded z-depth-1" %}
-          <div class="caption">
-              ICML 2026, Seoul, South Korea (July 2026)
-          </div>
-      </div>
-      <div class="col-sm mt-3 mt-md-0">
-          {% include figure.liquid path="assets/img/labphotos/iclr2026.jpg" title="ICLR 2026" class="img-fluid rounded z-depth-1" %}
-          <div class="caption">
-              ICLR 2026, Rio de Janeiro, Brazil (Apr. 2026)
-          </div>
-      </div>
-      <div class="col-sm mt-3 mt-md-0">
-          {% include figure.liquid path="assets/img/labphotos/icml2025.jpg" title="ICML 2025" class="img-fluid rounded z-depth-1" %}
-          <div class="caption">
-              ICML 2025, Vancouver, BC, Canada (July 2025)
-          </div>
-      </div>
-      <div class="col-sm mt-3 mt-md-0">
-          {% include figure.liquid path="assets/img/labphotos/neurips2024.jpg" title="NeurIPS 2024" class="img-fluid rounded z-depth-1" %}
-          <div class="caption">
-              NeurIPS 2024, Vancouver, BC, Canada (Dec. 2024)
-          </div>
-      </div>
-      <div class="col-sm mt-3 mt-md-0">
-          {% include figure.liquid path="assets/img/labphotos/peyto2023.jpg" title="Peyto Lake, Banff National Park" class="img-fluid rounded z-depth-1" %}
-          <div class="caption">
-              Peyto Lake, Banff National Park, AB, Canada (Aug. 2023)
-          </div>
-      </div>
-    </div>
+{% include lab_photos_slideshow.liquid %}
 
+{%- else %}
+{%- assign group_photo = page.lab_photos | first -%}
+
+<div class="lab-group-photo">
+  {%-
+    include figure.liquid
+    path=group_photo.path
+    loading="eager"
+    fetchpriority="high"
+    alt=group_photo.caption
+    caption=group_photo.caption
+    class="img-fluid rounded z-depth-1"
+    sizes="(min-width: 930px) 900px, 95vw"
+  -%}
 </div>
+{%- endif %}
 
 # Lab Members
 
 <!-- pages/people.md -->
 <div class="people">
   {%- assign people = site.people | where: "show", true | sort: "lastname" -%}
-  <!-- Display categorized people -->
-  {%- for category in page.display_categories %}
-  <h2 class="category">{{ category }}</h2>
-  <!-- Generate cards for each person's current role(s) in this category -->
-  <div class="grid">
-    {%- for person in people -%}
-      {%- for role in person.roles -%}
-        {%- if role.end_year == nil and role.category == category -%}
-          {% include people.liquid %}
-        {%- endif -%}
-      {%- endfor -%}
+  <!-- One block per category, sized to its people, so small categories sit side by side -->
+  <div class="category-groups">
+    {%- for category in page.display_categories %}
+      {%- capture cards -%}
+        {%- for person in people -%}
+          {%- for role in person.roles -%}
+            {%- if role.end_year == nil and role.category == category -%}
+              {% include people.liquid %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- if cards != "" %}
+        <section class="category-group">
+          <h2 class="category">{{ category }}</h2>
+          <div class="grid">{{ cards }}</div>
+        </section>
+      {%- endif -%}
     {%- endfor %}
   </div>
-  {% endfor %}
 </div>
 
 # Alumni
@@ -136,3 +130,24 @@ horizontal: false
   </div>
   {%- endfor %}
 </div>
+
+{% if page.lab_photos_layout != 'slideshow' %}
+
+# Lab Photos
+
+<div class="lab-photos">
+  {%- for photo in page.lab_photos offset: 1 %}
+    <a class="lab-photo" href="{{ photo.path | relative_url }}" title="{{ photo.caption }}">
+      {%-
+        include figure.liquid
+        path=photo.path
+        loading="lazy"
+        alt=photo.caption
+        caption=photo.caption
+        class="rounded z-depth-1"
+        sizes="(min-width: 930px) 300px, (min-width: 576px) 45vw, 95vw"
+      -%}
+    </a>
+  {%- endfor %}
+</div>
+{% endif %}

@@ -1,0 +1,42 @@
+<!-- _includes/lab_photos_slideshow.liquid: all page.lab_photos in a slideshow (needs images.slider: true on the page) -->
+<swiper-container
+  class="lab-slideshow"
+  navigation="true"
+  pagination="true"
+  pagination-clickable="true"
+  loop="true"
+  autoplay-delay="6000"
+  autoplay-pause-on-mouse-enter="true"
+  keyboard="true"
+>
+  {%- for photo in page.lab_photos %}
+    {%- if forloop.first -%}
+      {%- assign loading = 'eager' -%}
+    {%- else -%}
+      {%- assign loading = 'lazy' -%}
+    {%- endif -%}
+    {%- comment -%}
+      Each photo is shown whole in a fixed 3:2 frame; the space around it is filled with a blurred copy
+      (the small 480px version imagemagick generates, or the original if that's disabled)
+    {%- endcomment -%}
+    {%- if site.imagemagick.enabled -%}
+      {%- assign parts = photo.path | split: '.' -%}
+      {%- assign extension = '.' | append: parts.last -%}
+      {%- assign background = photo.path | remove: extension | append: '-480.webp' -%}
+    {%- else -%}
+      {%- assign background = photo.path -%}
+    {%- endif %}
+    <swiper-slide>
+      <div class="lab-slide-frame rounded z-depth-1" style="--lab-slide-bg: url('{{ background | relative_url }}')">
+        {%-
+          include figure.liquid
+          path=photo.path
+          loading=loading
+          alt=photo.caption
+          sizes="(min-width: 930px) 900px, 95vw"
+        -%}
+      </div>
+      <p class="caption">{{ photo.caption }}</p>
+    </swiper-slide>
+  {%- endfor %}
+</swiper-container>

@@ -715,6 +715,8 @@ footer.sticky-bottom {
 // Alumni (compact list at the bottom of the people page)
 
 .people.alumni {
+  margin-bottom: 2.5rem;
+
   .alumni-intro {
     color: var(--global-text-color-light);
   }
@@ -869,7 +871,15 @@ footer.sticky-bottom {
   .grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
+  }
+
+  // Categories sit side by side, each block as wide as its cards, wrapping as needed
+  .category-groups {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
     margin-bottom: 2rem;
   }
 
@@ -889,6 +899,11 @@ footer.sticky-bottom {
       text-align: center;
       color: var(--global-text-color);
     }
+    h2.card-title {
+      font-size: 1.15rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
     .card-icons {
       text-align: center;
       color: var(--global-text-color);
@@ -906,14 +921,15 @@ footer.sticky-bottom {
     }
     .card-text {
       text-align: center;
-      font-size: larger;
+      font-size: 0.95rem;
     }
     .card-pronouns {
       text-align: center;
-      font-size: larger;
+      font-size: 0.9rem;
     }
     .card-affiliation {
       text-align: center;
+      color: var(--global-text-color-light);
       font-size: 0.95rem;
       margin-bottom: 0.25rem;
     }
@@ -928,6 +944,7 @@ footer.sticky-bottom {
     }
     .card-body {
       flex: 1 1 auto;
+      padding: 0.5rem 0 0;
     }
   }
 
@@ -941,20 +958,104 @@ footer.sticky-bottom {
     }
   }
 
+  // Five cards (plus gaps) fit across the 930px page
   .grid-item {
-    width: 15em;
-    margin-bottom: 0.5em;
+    width: 10em;
     display: flex;
   }
 
   h2.category {
     color: var(--global-text-color-light);
     border-bottom: 2px solid var(--global-divider-color);
-    padding-top: 0.5rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    text-align: right;
+    font-size: 1.25rem;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.75rem;
     width: 100%;
+  }
+}
+
+// Lab photos on the people page: one group photo at the top, a gallery at the bottom
+
+// Slideshow alternative to the banner + gallery (lab_photos_layout: slideshow)
+.lab-slideshow {
+  margin-bottom: 1rem;
+  --swiper-pagination-bottom: 0px;
+
+  // Room under the captions for the pagination dots
+  swiper-slide {
+    padding-bottom: 1.25rem;
+  }
+
+  // Fixed 3:2 frame showing the whole photo, with a blurred copy of it filling the space around
+  .lab-slide-frame {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -2rem; // past the edges so the blur doesn't fade out at the border
+      background: var(--lab-slide-bg) center / cover no-repeat;
+      filter: blur(1.5rem) brightness(0.85);
+    }
+
+    figure,
+    picture {
+      position: relative;
+      display: block;
+      height: 100%;
+      margin: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .caption {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+// Cropped to a wide banner so it doesn't push the people below the fold
+.lab-group-photo {
+  margin-bottom: 1rem;
+
+  img {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    object-position: 50% 60%;
+  }
+}
+
+.lab-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+
+  .lab-photo {
+    color: var(--global-text-color);
+    text-decoration: none;
+
+    &:hover .caption {
+      color: var(--global-theme-color);
+    }
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .caption {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
   }
 }
 
