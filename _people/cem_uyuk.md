@@ -9,5 +9,8 @@ redirect: https://github.com/cemuyuk
 linkedin_username: cem-uyuk
 github_username: cemuyuk
 category: Alumni
+current_position: Senior AI Engineer, Libra by Wolters Kluwer
+alumni_category: MSc Students
+end_year: 2024
 show: true
 ---

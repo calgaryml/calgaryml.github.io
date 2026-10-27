@@ -9,5 +9,7 @@ linkedin_username: fredella-pang
 github_username: fredellapang
 email: fredella.pang@ucalgary.ca
 category: Alumni
+alumni_category: Undergraduates
+end_year: 2026
 show: true
 ---

@@ -9,5 +9,7 @@ linkedin_username: adeeb-hossain
 github_username: AdeebHossain
 email: adeebhossain2004@gmail.com
 category: Alumni
+alumni_category: Undergraduates
+end_year: 2024
 show: true
 ---

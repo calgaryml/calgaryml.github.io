@@ -10,5 +10,8 @@ redirect: https://github.com/matharg7
 email: muhammadathar.ganaie@ucalgary.ca
 scholar_userid: HHh9JMkAAAAJ
 category: Alumni
+alumni_category: MSc Students
+end_year: 2026
+current_position: Machine Learning Resident, Alberta Machine Intelligence Institute (AMII)
 show: true
 ---

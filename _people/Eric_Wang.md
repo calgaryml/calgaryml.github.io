@@ -8,5 +8,7 @@ redirect: https://github.com/erichob1234
 linkedin_username: eric-wang-39a92027b
 github_username: erichob1234
 category: Alumni
+alumni_category: Undergraduates
+end_year: 2026
 show: true
 ---

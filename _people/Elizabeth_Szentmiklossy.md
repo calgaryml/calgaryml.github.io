@@ -9,5 +9,7 @@ redirect: https://www.linkedin.com/in/elizabeth-szentmiklossy/
 linkedin_username: elizabeth-szentmiklossy
 github_username: elizabethszent
 category: Alumni
+alumni_category: Undergraduates
+end_year: 2026
 show: true
 ---

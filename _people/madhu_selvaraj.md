@@ -11,5 +11,8 @@ github_username: madhuselvarajj
 email: madhumitha.selvaraj@ucalgary.ca
 scholar_userid: lpR7YpoAAAAJ
 category: Alumni
+alumni_category: MSc Students
+end_year: 2026
+current_position: Data Analyst, Mercator AI
 show: true
 ---

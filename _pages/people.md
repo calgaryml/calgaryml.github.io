@@ -7,7 +7,10 @@ nav: true
 nav_order: 3
 # display_categories: [Lab Director, Postdoctoral Fellows, PhD Students, MSc Students, Research Associates, Undergraduates, Collaborators, Alumni]
 # display_categories: [Lab Director, PhD Students, MSc Students, Research Assistants, Undergraduates, High School, Alumni]
-display_categories: [Lab Director, PhD Students, MSc Students, Undergraduates, Alumni]
+display_categories: [Lab Director, PhD Students, MSc Students, Undergraduates]
+# Alumni are listed compactly at the bottom, grouped by their alumni_category (role while in the lab)
+# and sorted by end_year (year they finished), most recent first
+alumni_categories: [Postdoctoral Fellows, PhD Students, MSc Students, Undergraduates, High School Students]
 horizontal: false
 ---
 
@@ -86,4 +89,41 @@ horizontal: false
     {%- endfor %}
   </div>
   {% endfor %}
+</div>
+
+# Alumni
+
+<div class="people alumni">
+  <p class="alumni-intro">Former lab members, grouped by their role in the lab and the year they finished.</p>
+  {%- assign alumni = site.people | where: "category", "Alumni" | where: "show", true -%}
+  {%- for category in page.alumni_categories %}
+  {%- assign categorized_alumni = alumni | where: "alumni_category", category | sort: "lastname" -%}
+  {%- if categorized_alumni.size > 0 %}
+  <h2 class="category">{{ category }}</h2>
+  {%- comment -%} Grouped by end_year, most recent first, then by last name; anyone without an end_year goes last {%- endcomment -%}
+  {%- assign end_years = categorized_alumni | map: "end_year" | compact | uniq | sort | reverse -%}
+  {%- for year in end_years %}
+  <div class="alumni-year-group">
+    <h3 class="alumni-year">{{ year }}</h3>
+    <ul class="alumni-list">
+      {%- assign year_alumni = categorized_alumni | where: "end_year", year -%}
+      {%- for person in year_alumni -%}
+        {% include alumni.liquid %}
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endfor %}
+  {%- assign undated_alumni = categorized_alumni | where_exp: "person", "person.end_year == nil" -%}
+  {%- if undated_alumni.size > 0 %}
+  <div class="alumni-year-group">
+    <h3 class="alumni-year">Other</h3>
+    <ul class="alumni-list">
+      {%- for person in undated_alumni -%}
+        {% include alumni.liquid %}
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endif %}
+  {%- endif %}
+  {%- endfor %}
 </div>

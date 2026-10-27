@@ -1,0 +1,34 @@
+<!-- _includes/alumni.liquid: compact list entry for a lab alumnus -->
+<li class="alumni-item">
+  <div class="alumni-photo">
+    {%- if person.img %}
+      {%- include figure.liquid
+        loading="lazy"
+        path=person.img
+        alt=person.firstname
+        class="rounded-circle"
+        width="40"
+        sizes="40px"
+      -%}
+    {%- endif %}
+  </div>
+  <div class="alumni-main">
+    <span class="alumni-name">
+      {%- if person.redirect -%}
+        <a href="{{ person.redirect }}">{{ person.firstname }} {{ person.lastname }}</a>
+      {%- else -%}
+        {{ person.firstname }} {{ person.lastname }}
+      {%- endif -%}
+    </span>
+    {%- if person.pronouns %}
+      <span class="alumni-pronouns">({{ person.pronouns }})</span>
+    {%- endif %}
+    <span class="alumni-role">{{ person.description }}</span>
+    {%- if person.current_position %}
+      <div class="alumni-now"><span class="alumni-now-label">Now</span> {{ person.current_position }}</div>
+    {%- endif %}
+  </div>
+  <div class="alumni-icons">
+    {% include people_icons.liquid %}
+  </div>
+</li>

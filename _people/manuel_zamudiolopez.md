@@ -10,5 +10,8 @@ orcid_id: 0009-0009-7460-8178
 linkedin_username: manuel-zamudio
 scholar_userid: 4eW8V0YAAAAJ
 category: Alumni
+alumni_category: PhD Students
+end_year: 2026
+current_position: Market Fundamentals Analyst, Alberta Electric System Operator (AESO)
 show: true
 ---
