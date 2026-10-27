@@ -2,7 +2,8 @@
 <li class="alumni-item">
   <div class="alumni-photo">
     {%- if person.img %}
-      {%- include figure.liquid
+      {%-
+        include figure.liquid
         loading="lazy"
         path=person.img
         alt=person.firstname
@@ -15,9 +16,13 @@
   <div class="alumni-main">
     <span class="alumni-name">
       {%- if person.redirect -%}
-        <a href="{{ person.redirect }}">{{ person.firstname }} {{ person.lastname }}</a>
+        <a href="{{ person.redirect }}">
+          {{- person.firstname }}
+          {{ person.lastname -}}
+        </a>
       {%- else -%}
-        {{ person.firstname }} {{ person.lastname }}
+        {{ person.firstname }}
+        {{ person.lastname }}
       {%- endif -%}
     </span>
     {%- if person.pronouns %}
@@ -33,7 +38,7 @@
       {%- endif %}
     </div>
     {%- comment -%} Someone still in the lab is "now" in their current role {%- endcomment -%}
-    {%- assign current_role = person.roles | where_exp: "r", "r.end_year == nil" | first -%}
+    {%- assign current_role = person.roles | where_exp: 'r', 'r.end_year == nil' | first -%}
     {%- if current_role %}
       <div class="alumni-now"><span class="alumni-now-label">Now</span> {{ current_role.description }}, Calgary ML Lab</div>
     {%- elsif person.current_position %}

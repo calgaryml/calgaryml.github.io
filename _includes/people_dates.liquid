@@ -1,15 +1,15 @@
 <!-- _includes/people_dates.liquid: time in a lab role from its start/end terms and years (no end = Present, or the expected end) -->
 {%- if role.start_year -%}
-  {%- assign start = role.start_term | append: " " | append: role.start_year | strip -%}
+  {%- assign start = role.start_term | append: ' ' | append: role.start_year | strip -%}
   {%- if role.end_year -%}
-    {%- assign end = role.end_term | append: " " | append: role.end_year | strip -%}
+    {%- assign end = role.end_term | append: ' ' | append: role.end_year | strip -%}
     {%- if end == start -%}
       {{ start }}
     {%- else -%}
       {{ start }} – {{ end }}
     {%- endif -%}
   {%- elsif role.expected_end_year -%}
-    {%- assign expected_end = role.expected_end_term | append: " " | append: role.expected_end_year | strip -%}
+    {%- assign expected_end = role.expected_end_term | append: ' ' | append: role.expected_end_year | strip -%}
     {{ start }} – {{ expected_end }} (expected)
   {%- else -%}
     {{ start }} – Present
