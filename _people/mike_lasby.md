@@ -3,11 +3,14 @@ layout: page
 firstname: Michael
 lastname: Lasby
 pronouns: he/him
-description: PhD Student (Summer 2022 - Present)
 img: assets/img/people/mikelasby.jpg
 redirect: https://www.linkedin.com/in/mike-lasby-779b4388/
 linkedin_username: mike-lasby-779b4388
 github_username: mklasby
-category: PhD Students
 show: true
+roles:
+  - description: PhD Student
+    category: PhD Students
+    start_term: Summer
+    start_year: 2022
 ---

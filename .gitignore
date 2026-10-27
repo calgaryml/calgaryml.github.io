@@ -12,3 +12,6 @@ node_modules/
 vendor
 .idea
 .devcontainer/devcontainer-lock.json
+
+# Claude Code session transcripts (contain private conversation; see .claude/sessions/save.sh)
+.claude/sessions/

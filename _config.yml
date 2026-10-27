@@ -231,6 +231,19 @@ kramdown:
     block:
       line_numbers: false
       start_line: 1
+# Alumni current positions (see _plugins/alumni-positions.rb)
+# Fetched at build time from Google Scholar / GitHub; a manual `current_position`
+# in a person's front matter always wins (use it for LinkedIn-only info).
+alumni_positions:
+  enabled: true
+  cache_days: 7 # how long fetched values are reused in local builds
+  timeout: 10 # seconds per request
+  stale_patterns: # fetched values matching these are treated as out of date
+    - "University of Calgary"
+    - "UCalgary"
+    - "Schulich"
+
+# -----------------------------------------------------------------------------
 
 # Includes & excludes
 include: ["_pages"]
