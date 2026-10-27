@@ -2,7 +2,7 @@ require 'json'
 require 'nokogiri'
 require 'open-uri'
 
-# Populates `current_position` for lab alumni (people with `category: Alumni`)
+# Populates `current_position` for lab alumni (people whose roles all have an `end_year`)
 # at build time, so the alumni list can show where they are now.
 #
 # Precedence, first non-empty wins:
@@ -39,7 +39,9 @@ module Jekyll
 
       people.docs.each do |person|
         data = person.data
-        next unless data['category'] == 'Alumni'
+        # Only people who have left: every role finished (has an end_year)
+        roles = Array(data['roles'])
+        next if roles.empty? || !roles.all? { |role| role['end_year'] }
         next if data['current_position'].to_s.strip != ''
         next if data['current_position_auto'] == false
 

@@ -719,18 +719,13 @@ footer.sticky-bottom {
     color: var(--global-text-color-light);
   }
 
-  // Smaller than the current-member headings so the two sections are easy to tell apart
-  h2.category {
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
-  }
-
   // Year sits in a left-hand column beside its group (stacked on narrow screens)
   .alumni-year-group {
     display: grid;
     grid-template-columns: 4rem 1fr;
     column-gap: 1rem;
-    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    border-top: 2px solid var(--global-divider-color);
 
     @media (max-width: 575.98px) {
       grid-template-columns: 1fr;
@@ -800,9 +795,17 @@ footer.sticky-bottom {
     font-size: 0.9em;
   }
 
-  .alumni-role::before {
-    content: "— ";
+  .alumni-role {
+    font-size: 0.95em;
+  }
+
+  .alumni-dates {
     color: var(--global-text-color-light);
+    white-space: nowrap;
+
+    &::before {
+      content: "· ";
+    }
   }
 
   .alumni-now {
@@ -904,6 +907,12 @@ footer.sticky-bottom {
     .card-pronouns {
       text-align: center;
       font-size: larger;
+    }
+    .card-dates {
+      text-align: center;
+      color: var(--global-text-color-light);
+      font-size: 0.95rem;
+      margin-bottom: 0;
     }
     .icon {
       font-size: larger;

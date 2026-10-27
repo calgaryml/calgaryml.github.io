@@ -8,8 +8,10 @@ nav_order: 3
 # display_categories: [Lab Director, Postdoctoral Fellows, PhD Students, MSc Students, Research Associates, Undergraduates, Collaborators, Alumni]
 # display_categories: [Lab Director, PhD Students, MSc Students, Research Assistants, Undergraduates, High School, Alumni]
 display_categories: [Lab Director, PhD Students, MSc Students, Undergraduates]
-# Alumni are listed compactly at the bottom, grouped by their alumni_category (role while in the lab)
-# and sorted by end_year (year they finished), most recent first
+# Each person in _people/ has a `roles` list; a role is shown under its `category` while current
+# (no end_year; a planned end goes in expected_end_term/expected_end_year), and once it has an
+# end_year it moves to the compact Alumni list at the bottom, grouped by end_year (most recent
+# first) and, within a year, ordered by category in this order
 alumni_categories: [Postdoctoral Fellows, PhD Students, MSc Students, Undergraduates, High School Students]
 horizontal: false
 ---
@@ -75,17 +77,18 @@ horizontal: false
 
 <!-- pages/people.md -->
 <div class="people">
+  {%- assign people = site.people | where: "show", true | sort: "lastname" -%}
   <!-- Display categorized people -->
   {%- for category in page.display_categories %}
   <h2 class="category">{{ category }}</h2>
-  {%- assign categorized_people = site.people | where: "category", category -%}
-  {%- assign sorted_people = categorized_people | sort: "lastname" %}
-  <!-- Generate cards for each person -->
+  <!-- Generate cards for each person's current role(s) in this category -->
   <div class="grid">
-    {%- for person in sorted_people -%}
-      {%- if person.show -%}
-        {% include people.liquid %}
-      {%- endif -%}
+    {%- for person in people -%}
+      {%- for role in person.roles -%}
+        {%- if role.end_year == nil and role.category == category -%}
+          {% include people.liquid %}
+        {%- endif -%}
+      {%- endfor -%}
     {%- endfor %}
   </div>
   {% endfor %}
@@ -94,36 +97,41 @@ horizontal: false
 # Alumni
 
 <div class="people alumni">
-  <p class="alumni-intro">Former lab members, grouped by their role in the lab and the year they finished.</p>
-  {%- assign alumni = site.people | where: "category", "Alumni" | where: "show", true -%}
-  {%- for category in page.alumni_categories %}
-  {%- assign categorized_alumni = alumni | where: "alumni_category", category | sort: "lastname" -%}
-  {%- if categorized_alumni.size > 0 %}
-  <h2 class="category">{{ category }}</h2>
-  {%- comment -%} Grouped by end_year, most recent first, then by last name; anyone without an end_year goes last {%- endcomment -%}
-  {%- assign end_years = categorized_alumni | map: "end_year" | compact | uniq | sort | reverse -%}
+  <p class="alumni-intro">Former lab members, by the year they finished.</p>
+  {%- comment -%}
+    One entry per finished role (one with an end_year), grouped by end_year, most recent first.
+    Within a year, roles are ordered by page.alumni_categories (any other category last), then last name.
+  {%- endcomment -%}
+  {%- assign end_years = "" -%}
+  {%- for person in people -%}
+    {%- for role in person.roles -%}
+      {%- if role.end_year -%}
+        {%- assign end_years = end_years | append: role.end_year | append: "," -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+  {%- assign end_years = end_years | split: "," | uniq | sort | reverse -%}
+  {%- assign category_order = page.alumni_categories | push: "*" -%}
   {%- for year in end_years %}
   <div class="alumni-year-group">
     <h3 class="alumni-year">{{ year }}</h3>
     <ul class="alumni-list">
-      {%- assign year_alumni = categorized_alumni | where: "end_year", year -%}
-      {%- for person in year_alumni -%}
-        {% include alumni.liquid %}
-      {%- endfor %}
+      {%- for category in category_order -%}
+        {%- for person in people -%}
+          {%- for role in person.roles -%}
+            {%- comment -%} Current roles have no end_year, so they never match {%- endcomment -%}
+            {%- assign role_year = role.end_year | append: "" -%}
+            {%- if role_year != year -%}{%- continue -%}{%- endif -%}
+            {%- if category == "*" -%}
+              {%- if page.alumni_categories contains role.category -%}{%- continue -%}{%- endif -%}
+            {%- elsif role.category != category -%}
+              {%- continue -%}
+            {%- endif -%}
+            {% include alumni.liquid %}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endfor -%}
     </ul>
   </div>
-  {%- endfor %}
-  {%- assign undated_alumni = categorized_alumni | where_exp: "person", "person.end_year == nil" -%}
-  {%- if undated_alumni.size > 0 %}
-  <div class="alumni-year-group">
-    <h3 class="alumni-year">Other</h3>
-    <ul class="alumni-list">
-      {%- for person in undated_alumni -%}
-        {% include alumni.liquid %}
-      {%- endfor %}
-    </ul>
-  </div>
-  {%- endif %}
-  {%- endif %}
   {%- endfor %}
 </div>

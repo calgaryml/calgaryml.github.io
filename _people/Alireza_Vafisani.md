@@ -2,13 +2,15 @@
 layout: page
 firstname: Alireza
 lastname: Vafisani
-description: <a href="https://suuofc.campuslabs.ca/engage/organization/women-in-science-and-engineering">PURE</a> Undergraduate Research Intern (2024)
 img: assets/img/people/Alireza_vafisani.jpg
 linkedin_username: alireza-vafisani
 github_username: alirezavafisani
-category: Alumni
-current_position: BSc Computer Science student, University of Calgary
-alumni_category: Undergraduates
-end_year: 2024
 show: true
+roles:
+  - description: <a href="https://www.ucalgary.ca/experiential-learning/undergraduate-research/pure">PURE</a> Undergraduate Research Intern
+    category: Undergraduates
+    start_term: Summer
+    start_year: 2024
+    end_term: Summer
+    end_year: 2024
 ---
