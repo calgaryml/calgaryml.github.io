@@ -9,7 +9,8 @@ github_username: maoqiangqiang
 email: maoq@student.ubc.ca
 show: true
 roles:
-  - description: PhD Student @ University of British Columbia / Visiting Student Researcher
+  - description: Visiting Student Researcher
+    affiliation: PhD Student, University of British Columbia
     category: PhD Students
     start_term: Winter
     start_year: 2026

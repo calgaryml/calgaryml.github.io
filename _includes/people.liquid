@@ -29,6 +29,9 @@
       </div>
       <div class="card-body">
         <h3 class="card-text mt-1">{{ role.description }}</h3>
+        {%- if role.affiliation %}
+          <p class="card-affiliation">{{ role.affiliation }}</p>
+        {%- endif %}
         {%- if role.start_year %}
           <p class="card-dates">{% include people_dates.liquid %}</p>
         {%- endif %}

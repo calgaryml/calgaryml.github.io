@@ -11,7 +11,8 @@ display_categories: [Lab Director, PhD Students, MSc Students, Undergraduates]
 # Each person in _people/ has a `roles` list; a role is shown under its `category` while current
 # (no end_year; a planned end goes in expected_end_term/expected_end_year), and once it has an
 # end_year it moves to the compact Alumni list at the bottom, grouped by end_year (most recent
-# first) and, within a year, ordered by category in this order
+# first) and, within a year, ordered by category in this order. A visitor's home position/institution
+# goes in the role's `affiliation` (e.g. "PhD Student, University of British Columbia")
 alumni_categories: [Postdoctoral Fellows, PhD Students, MSc Students, Undergraduates, High School Students]
 horizontal: false
 ---

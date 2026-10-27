@@ -799,6 +799,10 @@ footer.sticky-bottom {
     font-size: 0.95em;
   }
 
+  .alumni-affiliation::before {
+    content: "· ";
+  }
+
   .alumni-dates {
     color: var(--global-text-color-light);
     white-space: nowrap;
@@ -907,6 +911,11 @@ footer.sticky-bottom {
     .card-pronouns {
       text-align: center;
       font-size: larger;
+    }
+    .card-affiliation {
+      text-align: center;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
     }
     .card-dates {
       text-align: center;

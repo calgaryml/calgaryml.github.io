@@ -25,6 +25,9 @@
     {%- endif %}
     <div class="alumni-role">
       {{ role.description }}
+      {%- if role.affiliation %}
+        <span class="alumni-affiliation">{{ role.affiliation }}</span>
+      {%- endif %}
       {%- if role.start_year %}
         <span class="alumni-dates">{% include people_dates.liquid %}</span>
       {%- endif %}

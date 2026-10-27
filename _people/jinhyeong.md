@@ -9,7 +9,8 @@ linkedin_username: jinhyeong-lee-57a360400
 github_username: JH-LEE1999
 show: true
 roles:
-  - description: MSc Student @ Hanyang University | Visiting Student Researcher
+  - description: Visiting Student Researcher
+    affiliation: MSc Student, Hanyang University
     category: MSc Students
     start_term: Summer
     start_year: 2026

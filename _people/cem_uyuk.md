@@ -10,7 +10,8 @@ github_username: cemuyuk
 current_position: Senior AI Engineer, Libra by Wolters Kluwer
 show: true
 roles:
-  - description: Visiting MSc Student Researcher
+  - description: Visiting Student Researcher
+    affiliation: MSc Student, Technical University of Munich
     category: MSc Students
     start_term: Summer
     start_year: 2024
