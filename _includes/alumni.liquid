@@ -42,7 +42,7 @@
     {%- if current_role %}
       <div class="alumni-now"><span class="alumni-now-label">Now</span> {{ current_role.description }}, Calgary ML Lab</div>
     {%- elsif person.current_position %}
-      <div class="alumni-now"><span class="alumni-now-label">Now</span> {{ person.current_position }}</div>
+      <div class="alumni-now"><span class="alumni-now-label">Now</span> {{ person.current_position | escape }}</div>
     {%- endif %}
   </div>
   <div class="alumni-icons">
