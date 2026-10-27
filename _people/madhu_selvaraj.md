@@ -12,7 +12,7 @@ scholar_userid: lpR7YpoAAAAJ
 current_position: Data Analyst, Mercator AI
 show: true
 roles:
-  - description: MSc Student co-supervised with <a href="https://lib.engineer">Geoffrey Messier</a>
+  - description: MSc Student co-supervised with <a href="https://lib.engineer">Dr. Geoffrey Messier</a>
     category: MSc Students
     start_term: Fall
     start_year: 2023
