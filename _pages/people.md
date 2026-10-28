@@ -11,8 +11,9 @@ display_categories: [Lab Director, PhD Students, MSc Students, Undergraduates]
 # Each person in _people/ has a `roles` list; a role is shown under its `category` while current
 # (no end_year; a planned end goes in expected_end_term/expected_end_year), and once it has an
 # end_year it moves to the compact Alumni list at the bottom, grouped by end_year (most recent
-# first) and, within a year, ordered by category in this order. A visitor's home position/institution
-# goes in the role's `affiliation` (e.g. "PhD Student, University of British Columbia")
+# first) and, within a year, by end_term (most recent first) then by category in this order.
+# A visitor's home position/institution goes in the role's `affiliation`
+# (e.g. "PhD Student, University of British Columbia")
 alumni_categories: [Postdoctoral Fellows, PhD Students, MSc Students, Undergraduates, High School Students]
 # Lab photos, most recent first. lab_photos_layout is either
 #   slideshow: all photos in a slideshow at the top of the page
@@ -92,10 +93,11 @@ horizontal: false
 # Alumni
 
 <div class="people alumni">
-  <p class="alumni-intro">Former lab members, by the year they finished.</p>
+  <p class="alumni-intro">Former lab members, ordered by term and year they finished.</p>
   {%- comment -%}
     One entry per finished role (one with an end_year), grouped by end_year, most recent first.
-    Within a year, roles are ordered by page.alumni_categories (any other category last), then last name.
+    Within a year, roles are ordered by end_term, most recent first (any without one last), then by
+    page.alumni_categories (any other category last), then last name.
   {%- endcomment -%}
   {%- assign end_years = "" -%}
   {%- for person in people -%}
@@ -107,22 +109,39 @@ horizontal: false
   {%- endfor -%}
   {%- assign end_years = end_years | split: "," | uniq | sort | reverse -%}
   {%- assign category_order = page.alumni_categories | push: "*" -%}
+  {%- assign term_order = "Fall,Summer,Spring,Winter" | split: "," -%}
+  {%- assign terms = term_order | push: "*" -%}
   {%- for year in end_years %}
   <div class="alumni-year-group">
     <h3 class="alumni-year">{{ year }}</h3>
     <ul class="alumni-list">
-      {%- for category in category_order -%}
-        {%- for person in people -%}
-          {%- for role in person.roles -%}
-            {%- comment -%} Current roles have no end_year, so they never match {%- endcomment -%}
-            {%- assign role_year = role.end_year | append: "" -%}
-            {%- if role_year != year -%}{%- continue -%}{%- endif -%}
-            {%- if category == "*" -%}
-              {%- if page.alumni_categories contains role.category -%}{%- continue -%}{%- endif -%}
-            {%- elsif role.category != category -%}
-              {%- continue -%}
-            {%- endif -%}
-            {% include alumni.liquid %}
+      {%- assign shown_term = nil -%}
+      {%- for term in terms -%}
+        {%- for category in category_order -%}
+          {%- for person in people -%}
+            {%- for role in person.roles -%}
+              {%- comment -%} Current roles have no end_year, so they never match {%- endcomment -%}
+              {%- assign role_year = role.end_year | append: "" -%}
+              {%- if role_year != year -%}{%- continue -%}{%- endif -%}
+              {%- if term == "*" -%}
+                {%- if term_order contains role.end_term -%}{%- continue -%}{%- endif -%}
+              {%- elsif role.end_term != term -%}
+                {%- continue -%}
+              {%- endif -%}
+              {%- if category == "*" -%}
+                {%- if page.alumni_categories contains role.category -%}{%- continue -%}{%- endif -%}
+              {%- elsif role.category != category -%}
+                {%- continue -%}
+              {%- endif -%}
+              {%- comment -%} The term is labelled once, on its first entry {%- endcomment -%}
+              {%- if term != shown_term -%}
+                {%- assign show_term = true -%}
+                {%- assign shown_term = term -%}
+              {%- else -%}
+                {%- assign show_term = false -%}
+              {%- endif -%}
+              {% include alumni.liquid %}
+            {%- endfor -%}
           {%- endfor -%}
         {%- endfor -%}
       {%- endfor -%}

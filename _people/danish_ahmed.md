@@ -14,6 +14,6 @@ roles:
     category: Undergraduates
     start_term: Summer
     start_year: 2026
-    expected_end_term: Fall
-    expected_end_year: 2026
+    end_term: Fall
+    end_year: 2026
 ---

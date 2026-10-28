@@ -761,6 +761,15 @@ footer.sticky-bottom {
     }
   }
 
+  // Term the role finished in, labelled on the first entry of each term (grey, beside the year)
+  .alumni-term {
+    flex: 0 0 4rem;
+    padding-top: 0.25rem;
+    color: var(--global-text-color-light);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
   .alumni-photo {
     flex: 0 0 40px;
 
@@ -847,10 +856,10 @@ footer.sticky-bottom {
       color: var(--global-theme-color);
     }
 
-    // On narrow screens the icons wrap under the text, aligned past the photo
+    // On narrow screens the icons wrap under the text, kept on the right
     @media (max-width: 575.98px) {
       flex-basis: 100%;
-      padding-left: calc(40px + 0.75rem);
+      text-align: right;
     }
   }
 }
