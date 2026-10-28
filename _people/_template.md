@@ -49,7 +49,7 @@ roles:
     expected_end_term: Summer
     expected_end_year: 2028
   # A finished role, e.g. a summer internship before starting your MSc:
-  - description: <a href="https://www.nserc-crsng.gc.ca/students-etudiants/ug-pc/usra-brpc_eng.asp">NSERC USRA</a> Research Intern
+  - description: <a href="https://nserc-crsng.canada.ca/en/funding-opportunity/undergraduate-student-research-awards">NSERC USRA</a> Research Intern
     category: Undergraduates
     start_term: Summer
     start_year: 2025

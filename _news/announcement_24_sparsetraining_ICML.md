@@ -1,5 +1,6 @@
 ---
 layout: post
+title: "Sparse Training from Random Initialization accepted at ICML 2025"
 date: 2025-05-01 00:00:00-0700
 inline: true
 sitemap: false

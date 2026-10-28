@@ -768,6 +768,16 @@ footer.sticky-bottom {
     color: var(--global-text-color-light);
     font-size: 0.95rem;
     font-weight: 600;
+
+    // On narrow screens the term sits above its first entry, like the year, rather than taking a column
+    @media (max-width: 575.98px) {
+      flex-basis: 100%;
+      padding-top: 0;
+
+      &:empty {
+        display: none;
+      }
+    }
   }
 
   .alumni-photo {
@@ -1027,6 +1037,30 @@ footer.sticky-bottom {
   .caption {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+  }
+}
+
+.lab-slideshow-controls {
+  margin: -0.75rem 0 1rem;
+  text-align: right;
+
+  .lab-slideshow-toggle {
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 0.25rem;
+    background: none;
+    color: var(--global-text-color-light);
+    font-size: 0.85rem;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--global-theme-color);
+      border-color: var(--global-theme-color);
+    }
+
+    i {
+      margin-right: 0.25rem;
+    }
   }
 }
 

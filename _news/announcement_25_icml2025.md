@@ -1,5 +1,6 @@
 ---
 layout: post
+title: "Six works at ICML 2025"
 date: 2025-07-09 00:00:00-0700
 inline: true
 sitemap: false

@@ -1,5 +1,6 @@
 ---
 layout: post
+title: "What's Left After Distillation? accepted at TMLR"
 date: 2025-02-05 00:00:00-0700
 inline: true
 sitemap: false

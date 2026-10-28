@@ -1,5 +1,6 @@
 ---
 layout: post
+title: "Monitoring shortcut learning paper accepted at an ICML 2022 workshop"
 date: 2022-06-13 00:00:00-0700
 inline: true
 sitemap: false

@@ -1,0 +1,12 @@
+<!-- _includes/press_archive_note.liquid: notice at the top of a copy of an external article (see _pages/press/) -->
+<p class="press-archive-note">
+  {%- if include.excerpt %}
+    An excerpt from
+  {%- else %}
+    An archived copy of
+  {%- endif %}
+  {{ include.description }}
+  {%- if include.author %}, by {{ include.author }}{% endif %},
+  {% if include.date %}published {{ include.date }}{% else %}as of {{ include.archived }}{% endif %}. The original is at
+  <a href="{{ include.url }}">{{ include.url | split: '/' | slice: 2 | first }}</a>.
+</p>

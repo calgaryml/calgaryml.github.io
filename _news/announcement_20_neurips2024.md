@@ -1,5 +1,6 @@
 ---
 layout: post
+title: "Five works at NeurIPS 2024"
 date: 2024-12-05 00:00:00-0700
 inline: true
 sitemap: false

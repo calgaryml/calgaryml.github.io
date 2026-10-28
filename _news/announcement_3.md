@@ -1,5 +1,6 @@
 ---
 layout: post
+title: "Gradient flow in sparse neural networks paper accepted as an oral at AAAI 2022"
 date: 2022-01-12 13:24:00-0500
 inline: true
 sitemap: false

@@ -1,5 +1,6 @@
 <!-- _includes/lab_photos_slideshow.liquid: all page.lab_photos in a slideshow (needs images.slider: true on the page) -->
 <swiper-container
+  id="lab-slideshow"
   class="lab-slideshow"
   navigation="true"
   pagination="true"
@@ -40,3 +41,32 @@
     </swiper-slide>
   {%- endfor %}
 </swiper-container>
+<!-- Pause/play for the autoplay, for keyboard and touch users (WCAG 2.2.2); autoplay starts paused if reduced motion is preferred -->
+<div class="lab-slideshow-controls">
+  <button type="button" class="lab-slideshow-toggle" aria-controls="lab-slideshow">
+    <i class="fa-solid fa-pause" aria-hidden="true"></i>
+    <span class="lab-slideshow-toggle-label">Pause slideshow</span>
+  </button>
+</div>
+<script>
+  (() => {
+    const slideshow = document.getElementById('lab-slideshow');
+    const button = slideshow.nextElementSibling.querySelector('.lab-slideshow-toggle');
+    const icon = button.querySelector('i');
+    const label = button.querySelector('.lab-slideshow-toggle-label');
+    const show = (playing) => {
+      icon.className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+      label.textContent = playing ? 'Pause slideshow' : 'Play slideshow';
+    };
+    // Swiper also stops autoplay itself, e.g. when someone uses the arrows, so follow its events
+    slideshow.addEventListener('swiperautoplaystart', () => show(true));
+    slideshow.addEventListener('swiperautoplaystop', () => show(false));
+    customElements.whenDefined('swiper-container').then(() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) slideshow.swiper.autoplay.stop();
+    });
+    button.addEventListener('click', () => {
+      const autoplay = slideshow.swiper.autoplay;
+      autoplay.running ? autoplay.stop() : autoplay.start();
+    });
+  })();
+</script>

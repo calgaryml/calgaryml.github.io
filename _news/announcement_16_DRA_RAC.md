@@ -1,5 +1,6 @@
 ---
 layout: post
+title: "GPU compute awarded by the Digital Research Alliance of Canada"
 date: 2024-04-01 00:00:00-0700
 inline: true
 sitemap: false
