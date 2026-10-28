@@ -565,7 +565,7 @@ footer.sticky-bottom {
   font-weight: 700;
 }
 
-.news tr.news-year:first-child th {
+.news tbody:first-of-type .news-year th {
   padding-top: 0.5rem;
 }
 
