@@ -556,6 +556,36 @@ footer.sticky-bottom {
   }
 }
 
+// Year headings on the full news list (_includes/news.liquid), styled like the alumni years
+.news .news-year th {
+  padding-top: 1.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--global-divider-color);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.news tr.news-year:first-child th {
+  padding-top: 0.5rem;
+}
+
+// Dates there are just month and day, so a narrow column leaves more room for the items
+.news .news-date {
+  width: 5.5rem;
+  white-space: nowrap;
+}
+
+// Dates are lighter than the year headings and the news itself
+.news th[scope="row"] {
+  color: var(--global-text-color-light);
+  font-weight: normal;
+}
+
+// Space between a year's divider and its first item
+.news tr.news-year + tr > * {
+  padding-top: 0.75rem;
+}
+
 // Blog
 
 .tag-category-list {

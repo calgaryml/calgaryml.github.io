@@ -14,9 +14,31 @@
         {% else %}
           {% assign news_limit = news_size %}
         {% endif %}
+        {% assign current_year = null %}
         {% for item in news limit: news_limit %}
+          {% comment %} On the full list, a divider and heading for each year, as on the alumni list {% endcomment %}
+          {% assign item_year = item.date | date: '%Y' %}
+          {% if include.limit != true and item_year != current_year %}
+            <tr class="news-year">
+              <th colspan="2" scope="rowgroup">{{ item_year }}</th>
+            </tr>
+            {% assign current_year = item_year %}
+          {% endif %}
           <tr>
-            <th scope="row" style="width: 20%">{{ item.date | date: '%b %d, %Y' }}</th>
+            <th
+              scope="row"
+              {% if include.limit %}
+                style="width: 20%"
+              {% else %}
+                class="news-date"
+              {% endif %}
+            >
+              {%- if include.limit -%}
+                {{ item.date | date: '%b %d, %Y' }}
+              {%- else -%}
+                {{ item.date | date: '%b %d' }}
+              {%- endif -%}
+            </th>
             <td>
               {% if item.inline %}
                 {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
