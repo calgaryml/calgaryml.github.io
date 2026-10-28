@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Yani Ioannou featured in UToday"
+title: "Yani Ioannou Featured in UToday"
 date: 2023-02-02 00:00:00-0700
 inline: true
 sitemap: false

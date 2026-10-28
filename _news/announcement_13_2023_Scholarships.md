@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mike Lasby and Adnan Mohammed awarded graduate scholarships"
+title: "Mike Lasby and Adnan Mohammed Awarded Graduate Scholarships"
 date: 2023-12-06 00:00:00-0700
 inline: true
 sitemap: false

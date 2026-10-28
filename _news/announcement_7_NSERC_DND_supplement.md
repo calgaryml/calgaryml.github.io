@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NSERC/DND Discovery Grant Supplement awarded"
+title: "NSERC/DND Discovery Grant Supplement Awarded"
 date: 2022-08-30 00:00:00-0700
 inline: true
 sitemap: false

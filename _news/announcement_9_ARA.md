@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Amazon Research Award for dynamic sparse training and catastrophic forgetting"
+title: "Amazon Research Award for Dynamic Sparse Training and Catastrophic Forgetting"
 date: 2022-10-11 00:00:00-0700
 inline: true
 sitemap: false

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Second Alberta Innovates Advance and NSERC Alliance grant awarded"
+title: "Second Alberta Innovates Advance and NSERC Alliance Grant Awarded"
 date: 2024-12-01 00:00:00-0700
 inline: true
 sitemap: false

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SparseOpt accepted at ICML 2026"
+title: "SparseOpt Accepted at ICML 2026"
 date: 2026-04-30 00:00:00-0700
 inline: true
 sitemap: false

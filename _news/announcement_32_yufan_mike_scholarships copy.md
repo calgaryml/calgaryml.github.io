@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Yufan Feng and Mike Lasby awarded graduate scholarships"
+title: "Yufan Feng and Mike Lasby Awarded Graduate Scholarships"
 date: 2026-08-18 00:00:00-0700
 inline: true
 sitemap: false

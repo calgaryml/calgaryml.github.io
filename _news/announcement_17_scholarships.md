@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mike Lasby awarded the Faculty of Graduate Studies Doctoral Scholarship"
+title: "Mike Lasby Awarded the Faculty of Graduate Studies Doctoral Scholarship"
 date: 2024-07-02 00:00:00-0700
 inline: true
 sitemap: false

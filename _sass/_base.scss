@@ -529,19 +529,34 @@ footer.sticky-bottom {
   }
 }
 
-// Blog
-
-.header-bar {
+// Page headings (layouts/page.liquid and the blog page): centred, in the theme colour, above a divider
+.page-header {
   border-bottom: 1px solid var(--global-divider-color);
   text-align: center;
-  padding-top: 2rem;
-  padding-bottom: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
 
-  h1 {
+  .post-title {
     color: var(--global-theme-color);
-    font-size: 5rem;
+    font-size: 3.5rem;
+
+    @media (max-width: 575.98px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  .post-description {
+    margin-bottom: 0;
+    font-size: 1.05rem;
+
+    &:empty {
+      display: none;
+    }
   }
 }
+
+// Blog
 
 .tag-category-list {
   border-bottom: 1px solid var(--global-divider-color);

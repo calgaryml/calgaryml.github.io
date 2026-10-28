@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Invited talk at the ICLR 2023 Sparsity in Neural Networks workshop"
+title: "Invited Talk at the ICLR 2023 Sparsity in Neural Networks Workshop"
 date: 2023-05-05 00:00:00-0700
 inline: true
 sitemap: false

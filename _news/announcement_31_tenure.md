@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Yani Ioannou promoted to Associate Professor with tenure"
+title: "Yani Ioannou Promoted to Associate Professor with Tenure"
 date: 2026-07-01 00:00:00-0700
 inline: true
 sitemap: false

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Alberta Innovates Advance and NSERC Alliance grant awarded"
+title: "Alberta Innovates Advance and NSERC Alliance Grant Awarded"
 date: 2022-11-25 00:00:00-0700
 inline: true
 sitemap: false

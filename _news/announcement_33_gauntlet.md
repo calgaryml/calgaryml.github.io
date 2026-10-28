@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The lab featured in the Gauntlet"
+title: "The Lab Featured in the Gauntlet"
 date: 2026-09-25 00:00:00-0700
 inline: true
 sitemap: false

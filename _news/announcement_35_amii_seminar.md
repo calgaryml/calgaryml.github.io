@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Invited talk at the Amii AI Seminar Series"
+title: "Invited Talk at the Amii AI Seminar Series"
 date: 2025-11-21 00:00:00-0700
 inline: true
 sitemap: false

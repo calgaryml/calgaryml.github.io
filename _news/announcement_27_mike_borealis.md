@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mike Lasby named an RBC Borealis AI Fellow"
+title: "Mike Lasby Named an RBC Borealis AI Fellow"
 date: 2025-11-19 00:00:00-0700
 inline: true
 sitemap: false

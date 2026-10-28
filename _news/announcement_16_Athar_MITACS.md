@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Muhammad Athar Ganaie awarded a Mitacs Globalink Graduate Fellowship"
+title: "Muhammad Athar Ganaie Awarded a Mitacs Globalink Graduate Fellowship"
 date: 2024-03-01 00:00:00-0700
 inline: true
 sitemap: false

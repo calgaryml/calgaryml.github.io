@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Sparsity in LLMs workshop at ICLR 2025"
+title: "Sparsity in LLMs Workshop at ICLR 2025"
 date: 2025-04-27 00:00:00-0700
 inline: true
 sitemap: false

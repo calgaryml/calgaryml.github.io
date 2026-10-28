@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Adnan Mohammed awarded an NSERC Doctoral Fellowship"
+title: "Adnan Mohammed Awarded an NSERC Doctoral Fellowship"
 date: 2024-07-24 00:00:00-0700
 inline: true
 sitemap: false

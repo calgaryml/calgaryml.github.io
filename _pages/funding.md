@@ -1,8 +1,8 @@
 ---
 layout: page
-title: funding
+title: Funding
 permalink: /funding/
-description:
+description: The organizations that generously support our research
 nav: true
 nav_order: 6
 horizontal: false

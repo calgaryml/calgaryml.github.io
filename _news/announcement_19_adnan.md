@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Adnan Mohammed awarded an RBC Borealis AI Fellowship"
+title: "Adnan Mohammed Awarded an RBC Borealis AI Fellowship"
 date: 2024-11-24 00:00:00-0700
 inline: true
 sitemap: false

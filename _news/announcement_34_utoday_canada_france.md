@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Canada-France AI research collaboration featured in UToday"
+title: "Canada-France AI Research Collaboration Featured in UToday"
 date: 2025-12-17 00:00:00-0700
 inline: true
 sitemap: false

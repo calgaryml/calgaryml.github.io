@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Tejas Pote awarded an Alberta Innovates Graduate Student Scholarship"
+title: "Tejas Pote Awarded an Alberta Innovates Graduate Student Scholarship"
 date: 2025-12-01 00:00:00-0700
 inline: true
 sitemap: false

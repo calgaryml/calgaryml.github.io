@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Yufan Feng awarded an Alberta Graduate Excellence Scholarship"
+title: "Yufan Feng Awarded an Alberta Graduate Excellence Scholarship"
 date: 2025-02-24 00:00:00-0700
 inline: true
 sitemap: false

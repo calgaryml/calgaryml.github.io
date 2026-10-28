@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NSERC/ANR Canada-France AI Research Grant awarded"
+title: "NSERC/ANR Canada-France AI Research Grant Awarded"
 date: 2025-11-01 00:00:00-0700
 inline: true
 sitemap: false

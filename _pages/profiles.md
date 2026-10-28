@@ -1,6 +1,6 @@
 ---
 layout: default
 permalink: /people/
-title: people
+title: People
 redirect: /labmembers/
 ---

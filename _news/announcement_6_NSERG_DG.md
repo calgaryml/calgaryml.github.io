@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NSERC Discovery Grant and Discovery Launch Supplement awarded"
+title: "NSERC Discovery Grant and Discovery Launch Supplement Awarded"
 date: 2022-06-25 00:00:00-0700
 inline: true
 sitemap: false

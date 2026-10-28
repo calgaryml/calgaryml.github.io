@@ -1,8 +1,8 @@
 ---
 layout: page
-title: people
+title: People
 permalink: /labmembers/
-# description: Lab Members
+description: Current members and alumni of the Calgary Machine Learning Lab
 nav: true
 nav_order: 3
 # display_categories: [Lab Director, Postdoctoral Fellows, PhD Students, MSc Students, Research Associates, Undergraduates, Collaborators, Alumni]

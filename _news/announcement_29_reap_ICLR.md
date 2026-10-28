@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "REAP the Experts accepted at ICLR 2026"
+title: "REAP the Experts Accepted at ICLR 2026"
 date: 2026-01-26 00:00:00-0700
 inline: true
 sitemap: false
