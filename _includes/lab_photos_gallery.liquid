@@ -1,0 +1,16 @@
+<!-- _includes/lab_photos_gallery.liquid: page.lab_photos after the first (the banner) in a grid, each linking to the full photo -->
+<div class="lab-photos">
+  {%- for photo in page.lab_photos offset: 1 %}
+    <a class="lab-photo" href="{{ photo.path | relative_url }}" title="{{ photo.caption }}">
+      {%-
+        include figure.liquid
+        path=photo.path
+        loading="lazy"
+        alt=photo.caption
+        caption=photo.caption
+        class="rounded z-depth-1"
+        sizes="(min-width: 930px) 300px, (min-width: 576px) 45vw, 95vw"
+      -%}
+    </a>
+  {%- endfor %}
+</div>
