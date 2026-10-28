@@ -16,7 +16,11 @@ sitemap: false
 
 The lab's awards in the [NSERC-Alberta Innovates Advance Grants - Stream II](https://nserc-crsng.canada.ca/en/funding-opportunity/nserc-alberta-innovates-advance-grants-stream-ii) results:
 
+<div class="table-responsive" markdown="1">
+
 | Year | Recipient     | Title                                                                       | Institution           | Area                                                                       | Amount ($) | Partner                     |
 | ---- | ------------- | --------------------------------------------------------------------------- | --------------------- | -------------------------------------------------------------------------- | ---------- | --------------------------- |
 | 2022 | Ioannou, Yani | Learning deep neural network architectures for novel data domains           | University of Calgary | Information and communication services; Information systems and technology | 100,000    | Alberta Innovates - Advance |
 | 2024 | Ioannou, Yani | Enhancing cybersecurity through advanced reasoning in large language models | University of Calgary | Computer software                                                          | 100,000    | Alberta Innovates - Advance |
+
+</div>

@@ -16,7 +16,11 @@ sitemap: false
 
 The two 2022 awards, from NSERC's [Discovery Grants program (individual)](https://nserc-crsng.canada.ca/en/funding-decisions/result/939) and [Discovery Launch Supplements](https://nserc-crsng.canada.ca/en/funding-decisions/result/934) results:
 
+<div class="table-responsive" markdown="1">
+
 | Year | Province | Institution           | Program                      | Recipient     | Type  | Title                                        | Department                          | Years | Amount ($) |
 | ---- | -------- | --------------------- | ---------------------------- | ------------- | ----- | -------------------------------------------- | ----------------------------------- | ----- | ---------- |
 | 2022 | Alberta  | University of Calgary | Computer Sciences            | Ioannou, Yani | RGPIN | Training Unstructured Sparse Neural Networks | Electrical and Software Engineering | 5     | 25,000     |
 | 2022 | Alberta  | University of Calgary | Discovery Launch Supplements | Ioannou, Yani | DGECR | Training Unstructured Sparse Neural Networks | Electrical and Software Engineering | 1     | 12,500     |
+
+</div>
