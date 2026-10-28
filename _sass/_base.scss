@@ -586,6 +586,17 @@ footer.sticky-bottom {
   padding-top: 0.75rem;
 }
 
+// Home page lab photo: below the floated logo rather than squeezed beside it
+.about-photo {
+  clear: both;
+  padding-top: 1rem;
+  margin-bottom: 1.5rem;
+
+  figure {
+    margin-bottom: 0;
+  }
+}
+
 // Blog
 
 .tag-category-list {

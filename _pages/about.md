@@ -29,14 +29,11 @@ The **Calgary Machine Learning Lab**
 is a research group led by [Yani Ioannou](https://yani.ai) within the [Schulich School of Engineering](https://schulich.ucalgary.ca) at the [University of Calgary](https://www.ucalgary.ca).
 Our research is driven by the overarching goal of advancing efficient, trustworthy, and accessible Artificial Intelligence.
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/labphotos/ictbuilding_may2026.jpg" loading="eager" fetchpriority="high" title="Schulich School of Engineering, University of Calgary" class="img-fluid rounded z-depth-1" %}
-    </div>
+<!-- Clears the floated logo so the photo spans the page, with its caption directly beneath it -->
+<div class="about-photo">
+  {% include figure.liquid path="assets/img/labphotos/ictbuilding_may2026.jpg" loading="eager" fetchpriority="high" alt="The Calgary ML Lab outside the ICT building at the University of Calgary" caption="Lab photo from May 2026 outside the ICT building at the University of Calgary." class="img-fluid rounded z-depth-1" sizes="(min-width: 930px) 900px, 95vw" %}
 </div>
-<div class="caption">
-    Lab photo from May 2026 outside the ICT building at the University of Calgary.
-</div>
+
 Central to our work is the concept of sparse neural network training and inference, which we pursue with four key motivations:
 
 - **Democratize AI**: removing redundant computation, making state-of-the-art models accessible to all
