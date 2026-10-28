@@ -6,4 +6,4 @@ inline: true
 sitemap: false
 ---
 
-[Yani Ioannou](/labmembers/) gave an invited talk in the [Amii AI Seminar Series](https://sites.google.com/ualberta.ca/ai-seminar/past-seminars/2025) at the University of Alberta, on [Adnan Mohammed and Rohan Jain's](/labmembers/) work, "Sparse Training from Random Initialization: Aligning Lottery Ticket Masks using Weight Symmetry" {% cite mohammed2025sparsetraining %} ([video](https://youtu.be/WW1ksk-O5c0), [archived excerpt](/press/amii-seminar-2025/)).
+[Yani Ioannou](/labmembers/) gave an invited talk in the [Amii AI Seminar Series](https://sites.google.com/ualberta.ca/ai-seminar/past-seminars/2025) at the University of Alberta, on [Adnan Mohammed and Rohan Jain's](/labmembers/) work, "Sparse Training from Random Initialization: Aligning Lottery Ticket Masks using Weight Symmetry" {% cite mohammed2025sparsetraining %} ([slides](https://yani.ai/presentations/amiinov2025talk.pdf), [video](https://youtu.be/WW1ksk-O5c0), [archived excerpt](/press/amii-seminar-2025/)).
