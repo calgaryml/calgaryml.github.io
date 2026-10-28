@@ -1,6 +1,6 @@
 ---
 layout: page
-title: calgary
+title: Calgary
 permalink: /places/
 description: Calgary & The Canadian Rockies
 nav: true

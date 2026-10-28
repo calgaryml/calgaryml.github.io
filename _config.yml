@@ -141,7 +141,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: Research # blog_name will be displayed in your blog page
+blog_name: Research # not shown on the blog page any more: it uses the page title, like the other pages
 blog_description: Short articles on our research and topics in machine learning
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts

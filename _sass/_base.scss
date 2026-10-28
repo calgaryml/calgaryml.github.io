@@ -529,19 +529,64 @@ footer.sticky-bottom {
   }
 }
 
-// Blog
-
-.header-bar {
+// Page headings (layouts/page.liquid and the blog page): centred, in the theme colour, above a divider
+.page-header {
   border-bottom: 1px solid var(--global-divider-color);
   text-align: center;
-  padding-top: 2rem;
-  padding-bottom: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
 
-  h1 {
+  .post-title {
     color: var(--global-theme-color);
-    font-size: 5rem;
+    font-size: 3.5rem;
+
+    @media (max-width: 575.98px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  .post-description {
+    margin-bottom: 0;
+    font-size: 1.05rem;
+
+    &:empty {
+      display: none;
+    }
   }
 }
+
+// Year headings on the full news list (_includes/news.liquid), styled like the alumni years
+.news .news-year th {
+  padding-top: 1.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--global-divider-color);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.news tbody:first-of-type .news-year th {
+  padding-top: 0.5rem;
+}
+
+// Dates there are just month and day, so a narrow column leaves more room for the items
+.news .news-date {
+  width: 5.5rem;
+  white-space: nowrap;
+}
+
+// Dates are lighter than the year headings and the news itself
+.news th[scope="row"] {
+  color: var(--global-text-color-light);
+  font-weight: normal;
+}
+
+// Space between a year's divider and its first item
+.news tr.news-year + tr > * {
+  padding-top: 0.75rem;
+}
+
+// Blog
 
 .tag-category-list {
   border-bottom: 1px solid var(--global-divider-color);
@@ -715,6 +760,8 @@ footer.sticky-bottom {
 // Alumni (compact list at the bottom of the people page)
 
 .people.alumni {
+  margin-bottom: 2.5rem;
+
   .alumni-intro {
     color: var(--global-text-color-light);
   }
@@ -756,6 +803,25 @@ footer.sticky-bottom {
 
     &:last-child {
       border-bottom: none;
+    }
+  }
+
+  // Term the role finished in, labelled on the first entry of each term (grey, beside the year)
+  .alumni-term {
+    flex: 0 0 4rem;
+    padding-top: 0.25rem;
+    color: var(--global-text-color-light);
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    // On narrow screens the term sits above its first entry, like the year, rather than taking a column
+    @media (max-width: 575.98px) {
+      flex-basis: 100%;
+      padding-top: 0;
+
+      &:empty {
+        display: none;
+      }
     }
   }
 
@@ -845,10 +911,10 @@ footer.sticky-bottom {
       color: var(--global-theme-color);
     }
 
-    // On narrow screens the icons wrap under the text, aligned past the photo
+    // On narrow screens the icons wrap under the text, kept on the right
     @media (max-width: 575.98px) {
       flex-basis: 100%;
-      padding-left: calc(40px + 0.75rem);
+      text-align: right;
     }
   }
 }
@@ -869,7 +935,15 @@ footer.sticky-bottom {
   .grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
+  }
+
+  // Categories sit side by side, each block as wide as its cards, wrapping as needed
+  .category-groups {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
     margin-bottom: 2rem;
   }
 
@@ -889,6 +963,11 @@ footer.sticky-bottom {
       text-align: center;
       color: var(--global-text-color);
     }
+    h2.card-title {
+      font-size: 1.15rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
     .card-icons {
       text-align: center;
       color: var(--global-text-color);
@@ -906,14 +985,15 @@ footer.sticky-bottom {
     }
     .card-text {
       text-align: center;
-      font-size: larger;
+      font-size: 0.95rem;
     }
     .card-pronouns {
       text-align: center;
-      font-size: larger;
+      font-size: 0.9rem;
     }
     .card-affiliation {
       text-align: center;
+      color: var(--global-text-color-light);
       font-size: 0.95rem;
       margin-bottom: 0.25rem;
     }
@@ -928,6 +1008,7 @@ footer.sticky-bottom {
     }
     .card-body {
       flex: 1 1 auto;
+      padding: 0.5rem 0 0;
     }
   }
 
@@ -941,20 +1022,128 @@ footer.sticky-bottom {
     }
   }
 
+  // Five cards (plus gaps) fit across the 930px page
   .grid-item {
-    width: 15em;
-    margin-bottom: 0.5em;
+    width: 10em;
     display: flex;
   }
 
   h2.category {
     color: var(--global-text-color-light);
     border-bottom: 2px solid var(--global-divider-color);
-    padding-top: 0.5rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    text-align: right;
+    font-size: 1.25rem;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.75rem;
     width: 100%;
+  }
+}
+
+// Lab photos on the people page: one group photo at the top, a gallery at the bottom
+
+// Slideshow alternative to the banner + gallery (lab_photos_layout: slideshow)
+.lab-slideshow {
+  margin-bottom: 1rem;
+  --swiper-pagination-bottom: 0px;
+
+  // Room under the captions for the pagination dots
+  swiper-slide {
+    padding-bottom: 1.25rem;
+  }
+
+  // Fixed 3:2 frame showing the whole photo, with a blurred copy of it filling the space around
+  .lab-slide-frame {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -2rem; // past the edges so the blur doesn't fade out at the border
+      background: var(--lab-slide-bg) center / cover no-repeat;
+      filter: blur(1.5rem) brightness(0.85);
+    }
+
+    figure,
+    picture {
+      position: relative;
+      display: block;
+      height: 100%;
+      margin: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .caption {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.lab-slideshow-controls {
+  margin: -0.75rem 0 1rem;
+  text-align: right;
+
+  .lab-slideshow-toggle {
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 0.25rem;
+    background: none;
+    color: var(--global-text-color-light);
+    font-size: 0.85rem;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--global-theme-color);
+      border-color: var(--global-theme-color);
+    }
+
+    i {
+      margin-right: 0.25rem;
+    }
+  }
+}
+
+// Cropped to a wide banner so it doesn't push the people below the fold
+.lab-group-photo {
+  margin-bottom: 1rem;
+
+  img {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    object-position: 50% 60%;
+  }
+}
+
+.lab-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+
+  .lab-photo {
+    color: var(--global-text-color);
+    text-decoration: none;
+
+    &:hover .caption {
+      color: var(--global-theme-color);
+    }
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .caption {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
   }
 }
 

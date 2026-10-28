@@ -1,5 +1,8 @@
 <!-- _includes/alumni.liquid: compact list entry for one finished lab role (person + role) -->
 <li class="alumni-item">
+  <div class="alumni-term">
+    {%- if show_term and role.end_term %}{{ role.end_term }}{% endif -%}
+  </div>
   <div class="alumni-photo">
     {%- if person.img %}
       {%-

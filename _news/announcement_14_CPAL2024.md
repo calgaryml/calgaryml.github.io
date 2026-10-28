@@ -1,5 +1,6 @@
 ---
 layout: post
+title: "Classification Bias on a Data Diet Accepted at CPAL 2024"
 date: 2023-11-30 00:00:00-0700
 inline: true
 sitemap: false

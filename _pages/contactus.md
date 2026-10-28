@@ -1,8 +1,8 @@
 ---
 layout: page
 permalink: /contactus/
-title: contact
-description:
+title: Contact
+description: Where to find the lab, and how to get in touch
 nav: true
 nav_order: 100
 ---

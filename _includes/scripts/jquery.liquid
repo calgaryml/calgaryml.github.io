@@ -1,6 +1,9 @@
 <!-- jQuery -->
+<!--
+  Not deferred: no_defer.js, the progress bar and the distill overrides use $ as soon as they run.
+  It loads at the end of the body, so deferring it gains little.
+-->
 <script
-  defer
   src="{{ site.third_party_libraries.jquery.url.js }}"
   integrity="{{ site.third_party_libraries.jquery.integrity.js }}"
   crossorigin="anonymous"

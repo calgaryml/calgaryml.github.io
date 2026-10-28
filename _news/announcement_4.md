@@ -1,5 +1,6 @@
 ---
 layout: post
+title: "Condensed Sparsity Paper Accepted at the Sparsity in Neural Networks Workshop"
 date: 2022-07-13 00:00:00-0700
 inline: true
 sitemap: false

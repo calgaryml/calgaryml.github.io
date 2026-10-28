@@ -14,7 +14,7 @@ roles:
     start_year: 2026
     expected_end_term: Winter
     expected_end_year: 2027
-  - description: <a href="https://www.nserc-crsng.gc.ca/students-etudiants/ug-pc/usra-brpc_eng.asp">NSERC USRA</a> Research Intern
+  - description: <a href="https://nserc-crsng.canada.ca/en/funding-opportunity/undergraduate-student-research-awards">NSERC USRA</a> Research Intern
     category: Undergraduates
     start_term: Summer
     start_year: 2025

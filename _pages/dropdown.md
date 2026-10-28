@@ -1,7 +1,7 @@
 ---
 published: false
 layout: page
-title: submenus
+title: Submenus
 nav: false
 nav_order: 8
 dropdown: true

@@ -14,17 +14,49 @@
         {% else %}
           {% assign news_limit = news_size %}
         {% endif %}
-        {% for item in news limit: news_limit %}
-          <tr>
-            <th scope="row" style="width: 20%">{{ item.date | date: '%b %d, %Y' }}</th>
-            <td>
-              {% if item.inline %}
-                {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
-              {% else %}
-                <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
-              {% endif %}
-            </td>
-          </tr>
+        {% assign shown_news = news | slice: 0, news_limit %}
+        {% comment %}
+          On the full list, each year is its own <tbody> with a year heading (and divider, as on the
+          alumni list), so screen readers associate each entry with its year
+        {% endcomment %}
+        {% if include.limit %}
+          {% assign news_groups = shown_news | group_by_exp: 'item', '"all"' %}
+        {% else %}
+          {% assign news_groups = shown_news | group_by_exp: 'item', "item.date | date: '%Y'" %}
+        {% endif %}
+        {% for group in news_groups %}
+          <tbody>
+            {% unless include.limit %}
+              <tr class="news-year">
+                <th colspan="2" scope="rowgroup">{{ group.name }}</th>
+              </tr>
+            {% endunless %}
+            {% for item in group.items %}
+              <tr>
+                <th
+                  scope="row"
+                  {% if include.limit %}
+                    style="width: 20%"
+                  {% else %}
+                    class="news-date"
+                  {% endif %}
+                >
+                  {%- if include.limit -%}
+                    {{ item.date | date: '%b %d, %Y' }}
+                  {%- else -%}
+                    {{ item.date | date: '%b %d' }}
+                  {%- endif -%}
+                </th>
+                <td>
+                  {% if item.inline %}
+                    {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
+                  {% else %}
+                    <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
         {% endfor %}
       </table>
       {% if include.limit and page.announcements.scrollable and news_size > 3 %}
