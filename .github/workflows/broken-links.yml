@@ -49,4 +49,5 @@ jobs:
         with:
           fail: true
           # removed md files that include liquid tags
-          args: --user-agent 'curl/7.54' --exclude-path README.md --exclude-path _pages/404.md --exclude-path _pages/blog.md --exclude-path _posts/2018-12-22-distill.md --exclude-path _posts/2023-04-24-videos.md --exclude-path _people/_template.md --exclude www.nserc-crsng.gc.ca --exclude alliancecan.ca --exclude www.linkedin.com --verbose --no-progress './**/*.md' './**/*.html'
+          # accept: lychee's defaults plus 503, as some sites (e.g. NSERC) intermittently return 503 Service Unavailable
+          args: --user-agent 'curl/7.54' --accept '100..=103,200..=299,403,503' --exclude-path README.md --exclude-path _pages/404.md --exclude-path _pages/blog.md --exclude-path _posts/2018-12-22-distill.md --exclude-path _posts/2023-04-24-videos.md --exclude-path _people/_template.md --exclude www.nserc-crsng.gc.ca --exclude alliancecan.ca --exclude www.linkedin.com --verbose --no-progress './**/*.md' './**/*.html'
