@@ -71,7 +71,10 @@ pagination:
 <h3 class="card-title text-lowercase">{{ post.title }}</h3>
 <p class="card-text">{{ post.description }}</p>
 
-                    {% if post.external_source == blank %}
+                    {% comment %} Posts that link elsewhere (redirect) give the original's read_time {% endcomment %}
+                    {% if post.read_time %}
+                      {% assign read_time = post.read_time %}
+                    {% elsif post.external_source == blank %}
                       {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
                     {% else %}
                       {% assign read_time = post.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
@@ -106,7 +109,10 @@ pagination:
 
     {% for post in postlist %}
 
-    {% if post.external_source == blank %}
+    {% comment %} Posts that link elsewhere (redirect) give the original's read_time {% endcomment %}
+    {% if post.read_time %}
+      {% assign read_time = post.read_time %}
+    {% elsif post.external_source == blank %}
       {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
     {% else %}
       {% assign read_time = post.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
@@ -140,6 +146,9 @@ pagination:
         {{ post.date | date: '%B %d, %Y' }}
         {% if post.external_source %}
         &nbsp; &middot; &nbsp; {{ post.external_source }}
+        {% endif %}
+        {% if post.archive %}
+        (<a href="{{ post.archive | relative_url }}">archived</a>)
         {% endif %}
       </p>
       <p class="post-tags">
