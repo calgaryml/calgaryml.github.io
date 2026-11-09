@@ -223,6 +223,7 @@
     {
       "@context": "https://schema.org",
       "@type": "ResearchOrganization",
+      "@id": "https://www.calgaryml.com/#organization",
       "name": "Calgary Machine Learning Lab",
       "alternateName": ["Calgary ML", "CML", "Calgary ML Lab"],
       "url": "https://www.calgaryml.com/",
@@ -231,31 +232,32 @@
       "foundingDate": "2021",
       "founder": {
         "@type": "Person",
+        "@id": "https://yani.ai/#person",
         "name": "Yani Ioannou",
-        "jobTitle": "Associate Professor",
-        "url": "https://www.yani.ai",
+        "jobTitle": ["Associate Professor", "Schulich Research Chair"],
+        "url": "https://yani.ai/",
         "sameAs": [
-          "http://orcid.org/0000-0002-9797-5888",
+          "https://profiles.ucalgary.ca/yani-ioannou",
+          "https://orcid.org/0000-0002-9797-5888",
           "https://scholar.google.com/citations?user=Qy9yv44AAAAJ",
+          "https://www.linkedin.com/in/yanii",
           "https://x.com/yanii",
-          "https://linkedin.com/in/yanii",
-          "https://github.com/yanii/",
-          "http://www.researchgate.net/profile/Yani_Ioannou",
-          "http://arxiv.org/a/ioannou_y_1"
+          "https://github.com/yanii",
+          "https://www.researchgate.net/profile/Yani_Ioannou",
+          "https://arxiv.org/a/ioannou_y_1"
         ],
-        "affiliation": {
-          "@type": "EducationalOrganization",
-          "name": "University of Calgary"
-        }
+        "worksFor": { "@id": "https://www.ucalgary.ca/#organization" }
       },
       "parentOrganization": {
-        "@type": "EducationalOrganization",
-        "name": "University of Calgary",
-        "url": "https://ucalgary.ca/"
-      },
-      "department": {
         "@type": "Organization",
-        "name": "Schulich School of Engineering"
+        "name": "Schulich School of Engineering",
+        "url": "https://schulich.ucalgary.ca/",
+        "parentOrganization": {
+          "@type": "CollegeOrUniversity",
+          "@id": "https://www.ucalgary.ca/#organization",
+          "name": "University of Calgary",
+          "url": "https://www.ucalgary.ca/"
+        }
       },
       "address": {
         "@type": "PostalAddress",
