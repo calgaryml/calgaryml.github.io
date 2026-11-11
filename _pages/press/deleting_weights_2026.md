@@ -10,7 +10,7 @@ sitemap: false
 {% include press_archive_note.liquid
   description="the <a href='https://agenticlearning.ai'>Agentic Learning AI Lab</a> project page"
   author="Jack Lu, Zhenbang Yang, Mike Lasby, Tejas Pote, Yani Ioannou and Mengye Ren"
-  archived="November 7, 2026"
+  archived="November 11, 2026"
   url="https://agenticlearning.ai/deleting-weights/"
 %}
 
@@ -19,7 +19,7 @@ Jack Lu<sup>1\*</sup>, Zhenbang Yang<sup>1\*</sup>, Mike Lasby<sup>2</sup>, Teja
 
 _Advances in Neural Information Processing Systems 39 (NeurIPS 2026)_
 
-[PDF](https://openreview.net/pdf?id=9Z9V0zY5As) · [Poster](/assets/pdf/deleting_weights_poster_neurips2026.pdf) · [Code](https://github.com/agentic-learning-ai-lab/deleting-weights)
+[arXiv](https://arxiv.org/abs/2611.10866) · [PDF](https://arxiv.org/pdf/2611.10866) · [Poster](/assets/pdf/deleting_weights_poster_neurips2026.pdf) · [Code](https://github.com/agentic-learning-ai-lab/deleting-weights)
 
 **TL;DR:** Setting fewer than 0.05% of a pretrained LLM's weights to zero, with no other change, matches full fine-tuning at scale across reinforcement learning, supervised fine-tuning, and on-policy distillation.
 
@@ -54,7 +54,7 @@ $$
 \widehat{W} = W \odot \mathbf{1}[G > 0].
 $$
 
-We initialize the logits from [Wanda](https://arxiv.org/abs/2306.11695) pruning scores and set no sparsity target, so training decides how many weights to delete. Bit-packed and compressed with [zstd](https://www.rfc-editor.org/rfc/rfc8878), the hard mask takes only 1.0 MB for Llama1B and 8.4 MB for Llama8B, whose fully fine-tuned checkpoint takes 30,633 MB. This makes adapters cheap to store and to switch: changing tasks only loads a small bitmask and scatters zeros into the shared base weights, rather than loading a separate full model checkpoint.
+We initialize the logits from [Wanda](https://arxiv.org/abs/2306.11695) pruning scores and set no sparsity target, so training decides how many weights to delete. Bit-packed and compressed with [zstd](https://www.rfc-editor.org/rfc/rfc8878), the hard mask takes only 1.0 MB for Llama1B and 8.4 MB for Llama8B, whose fully fine-tuned checkpoint takes 30,633 MB. This makes adapters cheap to store and to switch: changing tasks loads only a small bitmask, applied to one shared copy of the base weights, rather than a separate full model checkpoint.
 
 ## Matching Full Fine-Tuning with Reinforcement Learning
 
