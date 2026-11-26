@@ -12,8 +12,8 @@ roles:
     category: MSc Students
     start_term: Fall
     start_year: 2024
-    # expected_end_term: Winter
-    # expected_end_year: 2026
+    end_term: Fall
+    end_year: 2026
   - description: <a href="https://www.mitacs.ca/our-programs/globalink-research-internship-students/">MITACs Globalink</a> Research Intern
     category: Undergraduates
     start_term: Summer
